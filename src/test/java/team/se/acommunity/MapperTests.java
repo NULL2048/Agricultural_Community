@@ -16,7 +16,7 @@ import java.util.Date;
 @ContextConfiguration(classes = AgriculturalCommunityApplication.class)
 public class MapperTests {
     @Autowired
-    private UserMapper userMapper;
+    private UserMapper userMapper; // 可能是版本问题
 
     @Test
     public void testSelectUser() {
