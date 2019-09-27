@@ -1,0 +1,15 @@
+<!--templates中存放的时动态界面，访问的时候也不用写templates路径，但是里面的demo包是需要写的-->
+<!DOCTYPE html>
+<!--根据MVC思想可知，动态界面是需要接收model模板的，而这个项目用的是Thymeleaf模板引擎来控制模板，所以要在开头写上模板的来源-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--用EL表达式取出数据-->
+    <p th:text="${name}"></p>
+    <p th:text="${age}"></p>
+
+</body>
+</html>

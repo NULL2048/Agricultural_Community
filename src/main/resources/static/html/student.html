@@ -1,0 +1,26 @@
+<!--static包里面存放的都是静态资源，比如html，给html单独创建一个文件夹全都放到里面，在访问这些静态资源时
+    浏览器地址栏除了项目根目录之外，后面不用谢static这一级路径，但是它下面的html文件夹这一级路径需要写，然后再写html文件名
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>增加学生</title>
+</head>
+<body>
+
+    <form method="post" action="/ac/alpha/student">
+        <p>
+            姓名：<input type="text" name="name">
+        </p>
+
+        <p>
+            年龄：<input type="text" name="age">
+        </p>
+
+        <p>
+            <input type="submit" value="保存">
+        </p>
+    </form>
+</body>
+</html>
