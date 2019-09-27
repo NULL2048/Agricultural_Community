@@ -16,7 +16,7 @@ import java.util.Date;
 @ContextConfiguration(classes = AgriculturalCommunityApplication.class)
 public class MapperTests {
     @Autowired
-    private UserMapper userMapper;
+    private UserMapper userMapper; // 测试一下分支
 
     @Test
     public void testSelectUser() {
