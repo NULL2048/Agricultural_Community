@@ -21,13 +21,13 @@
     <select id="getByName" resultType="User"> <!--本来这里写的返回值类型应该是类的完全路径，但是在application.properties配置文件中已经设置了用来存放实体类的包名，所以这里直接写类名就可以了-->
         select <include refid="selectFields"></include>
         from user
-        where id = #{username}
+        where username = #{username}
     </select>
 
     <select id="getByEmail" resultType="User"> <!--本来这里写的返回值类型应该是类的完全路径，但是在application.properties配置文件中已经设置了用来存放实体类的包名，所以这里直接写类名就可以了-->
         select <include refid="selectFields"></include>
         from user
-        where id = #{email}
+        where email = #{email}
     </select>
 
     <!--这个写的参数名是User，在后面要配置这个User对象中哪一个属性是对应着数据库中的主键，这个keyProperty的值代表的就是User对象中的id属性对应着数据库的主键，因为这个id字段是数据库自己生成的，在插入的时候这个user是没有id属性的，数据库会先生成id值，需要先在数据库中取得这个id值，然后再放入这个user对象中，然后再插入数据库-->
@@ -42,10 +42,10 @@
     </update>
 
     <update id="updateHeader">
-        update user set status = #{headerUrl} where id = #{id}
+        update user set header_url = #{headerUrl} where id = #{id}
     </update>
 
     <update id="updatePassword">
-        update user set status = #{password} where id = #{id}
+        update user set password = #{password} where id = #{id}
     </update>
 </mapper>
