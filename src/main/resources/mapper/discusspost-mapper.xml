@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.se.acommunity.dao.DiscussPostMapper">
+    <sql id="selectFields">
+        id, user_id, title, content, type, status, create_time, comment_count, score
+    </sql>
+
+    <select id="listDiscussPosts" resultType="DiscussPost">
+        select <include refid="selectFields"></include>
+        from discuss_post
+        where status != 2 -- 去掉加入黑名单的帖子
+        <!--通过if标签来判断如果userId传进来是0，就表示要显示全部帖子，如果不是零，表示要返回特定用户发表的帖子，就要把sql语句拼接过去-->
+        <if  test="userId!=0">
+            and user_id = #{userId}
+        </if>
+        order by type desc, create_time desc
+        limit #{offset}, #{limit}
+    </select>
+
+    <select id="getDiscussPostRows" resultType="int">
+        select count(id)
+        from discuss_post
+        where status != 2 -- 去掉加入黑名单的帖子
+        <!--通过if标签来判断如果userId传进来是0，就表示要显示全部帖子，如果不是零，表示要返回特定用户发表的帖子，就要把sql语句拼接过去-->
+        <if  test="userId!=0">
+            and user_id = #{userId}
+        </if>
+    </select>
+</mapper>

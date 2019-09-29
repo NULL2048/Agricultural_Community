@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import team.se.acommunity.dao.DiscussPostMapper;
 import team.se.acommunity.dao.UserMapper;
+import team.se.acommunity.entity.DiscussPost;
 import team.se.acommunity.entity.User;
 
 import java.util.Date;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -17,6 +20,9 @@ import java.util.Date;
 public class MapperTests {
     @Autowired
     private UserMapper userMapper; // 测试一下分支
+
+    @Autowired
+    private DiscussPostMapper discussPostMapper;
 
     @Test
     public void testSelectUser() {
@@ -54,6 +60,17 @@ public class MapperTests {
         System.out.println(rows);
 
         rows = userMapper.updatePassword(150, "hello");
+        System.out.println(rows);
+    }
+
+    @Test
+    public void testSelectPosts() {
+        List<DiscussPost> list = discussPostMapper.listDiscussPosts(0, 0, 10);
+        for (DiscussPost post : list) {
+            System.out.println(post);
+        }
+
+        int rows = discussPostMapper.getDiscussPostRows(0);
         System.out.println(rows);
     }
 }
