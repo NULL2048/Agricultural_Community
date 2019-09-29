@@ -16,7 +16,7 @@ import java.util.Date;
 @ContextConfiguration(classes = AgriculturalCommunityApplication.class)
 public class MapperTests {
     @Autowired
-    private UserMapper userMapper; // 可能是版本问题
+    private UserMapper userMapper; // 这里虽然是红色，但是不影响正常运行
 
     @Test
     public void testSelectUser() {
