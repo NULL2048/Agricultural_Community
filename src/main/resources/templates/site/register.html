@@ -1,18 +1,19 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="icon" href="https://static.nowcoder.com/images/logo_87_87.png"/>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
-	<link rel="stylesheet" href="../css/global.css" />
-	<link rel="stylesheet" href="../css/login.css" />
+	<!--这里是将原本的相对路径换成绝对路径，因为这里用的是框架，所以绝对路径里的/代表的路径含义已经不能用在这个用框架写的项目里面了，因为现在静态资源都放在了templates文件夹下面，所以这里要用一下thymeleaf声明一下，将其变成绝对路径，要用@{}括起来,这样最开始的/才能表示正确的templates文件夹路径了-->
+	<link rel="stylesheet" th:href="@{/css/global.css}" />
+	<link rel="stylesheet" th:href="@{/css/login.css}" />
 	<title>牛客网-注册</title>
 </head>
 <body>
 	<div class="nk-container">
-		<!-- 头部 -->
-		<header class="bg-dark sticky-top">
+		<!-- 头部 -->                     <!--比如在这个模板，我们想复用在index页面起了名字的标签，就可以在想要服用的位置，使用replace这个属性，内容就是要复用的界面访问路径::要复用模块起的名字-->
+		<header class="bg-dark sticky-top" th:replace="index::header">
 			<div class="container">
 				<!-- 导航 -->
 				<nav class="navbar navbar-expand-lg navbar-dark">
@@ -176,7 +177,7 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
-	<script src="../js/global.js"></script>
-	<script src="../js/register.js"></script>
+	<script th:src="@{/js/global.js}"></script>
+	<script th:src="@{/js/register.js}"></script>
 </body>
 </html>
