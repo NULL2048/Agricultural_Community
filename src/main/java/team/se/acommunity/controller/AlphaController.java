@@ -6,9 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import team.se.acommunity.service.AlphaService;
+import team.se.acommunity.util.CommunityConstant;
+import team.se.acommunity.util.CommunityUtil;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
@@ -153,5 +157,45 @@ public class AlphaController {
         list.add(empq);
         // 返回给服务器后，他就会把Java对象自动转换成JSON对象
         return list;
+    }
+
+    // cookie示例
+    @RequestMapping(path = "/cookie/set", method = RequestMethod.GET)
+    @ResponseBody
+    public String setCookie(HttpServletResponse resp) {
+        // 创建cookie
+        Cookie cookie = new Cookie("code", CommunityUtil.generateUUID());
+        // 设置cookie生效的范围
+        // 这个cookie只能在/ac/alpha这个路径及其子路径有效
+        cookie.setPath("/ac/alpha");
+
+        // 设置cookie生效的时间 单位:秒   本来cookie默认是存在内存中，关掉浏览器就消失的，但是设置了生效时间以后cookie就被存在了硬盘里
+        cookie.setMaxAge(60 * 10);
+
+        resp.addCookie(cookie);
+        return "set cookie";
+    }
+
+    @RequestMapping(path = "/cookie/get", method = RequestMethod.GET)
+    @ResponseBody          // 这个注解是通过利用cookie的key获取cookie的值
+    public String getCookie(@CookieValue("code") String code) {
+        System.out.println(code);
+        // 下面这个字符串会被传送回浏览器在页面上显示，实际上下面返回的内容就是访问/cookie/get这个路径时在浏览器上要现实的内容，可以是字符串，可以是HTML页面
+        return "get cookie";
+    }
+
+    @RequestMapping(path = "/session/set", method = RequestMethod.GET)
+    @ResponseBody          // spring MVC可以自动注入session，所以session不用和request一样还得自己取，这里直接用参数接收一下就可以了
+    public String setSession(HttpSession session) {
+        session.setAttribute("id", 1);
+        session.setAttribute("name", "test");
+        return "set session";
+    }
+
+    @RequestMapping(path = "/session/get", method = RequestMethod.GET)
+    @ResponseBody          // spring MVC可以自动注入session，所以session不用和request一样还得自己取，这里直接用参数接收一下就可以了
+    public String getSession(HttpSession session) {
+        System.out.println(session.getAttribute("name"));
+        return "get session";
     }
 }

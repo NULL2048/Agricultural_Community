@@ -8,7 +8,7 @@
 	<!--这里是将原本的相对路径换成绝对路径，因为这里用的是框架，所以绝对路径里的/代表的路径含义已经不能用在这个用框架写的项目里面了，因为现在静态资源都放在了templates文件夹下面，所以这里要用一下thymeleaf声明一下，将其变成绝对路径，要用@{}括起来,这样最开始的/才能表示正确的templates文件夹路径了-->
 	<link rel="stylesheet" th:href="@{/css/global.css}" />
 	<link rel="stylesheet" th:href="@{/css/login.css}" />
-	<title>牛客网-注册</title>
+	<title>惠农网-注册</title>
 </head>
 <body>
 	<div class="nk-container">
@@ -64,12 +64,16 @@
 		<div class="main">
 			<div class="container pl-5 pr-5 pt-3 pb-3 mt-3 mb-3">
 				<h3 class="text-center text-info border-bottom pb-3">注&nbsp;&nbsp;册</h3>
-				<form class="mt-5">
+				<form class="mt-5" method="post" th:action="@{/register}">
 					<div class="form-group row">
 						<label for="username" class="col-sm-2 col-form-label text-right">账号:</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="username" placeholder="请输入您的账号!" required>
-							<div class="invalid-feedback">
+						<div class="col-sm-10">				<!--这里要给文本框加入name，name必须和controller中user对象的属性名对应，如果不对应spring mvc根据同名原则自动把这些数据存储到user对象中-->
+							<!--这里需要动态判断，下面那个账号已存在div只有当这个input的class属性form-control后面加上is-invalid表示input的内容是非法的才会显示，所以在这里要动态去判断一下，根据判断来向form-control后面拼接字符串，在最前面加上|,这里面的字符串用''括起来-->
+							<input type="text"
+							th:class="|form-control ${usernameMsg!=null?'is-invalid':''}"
+								   th:value="${user!=null?user.username:''}"
+								   id="username" name="username" placeholder="请输入您的账号!" required>
+							<div class="invalid-feedback" th:text="${usernameMsg}">
 								该账号已存在!
 							</div>
 						</div>
@@ -77,8 +81,11 @@
 					<div class="form-group row mt-4">
 						<label for="password" class="col-sm-2 col-form-label text-right">密码:</label>
 						<div class="col-sm-10">
-							<input type="password" class="form-control" id="password" placeholder="请输入您的密码!" required>
-							<div class="invalid-feedback">
+							<input type="password"
+								   th:class="|form-control ${passwordMsg!=null?'is-invalid':''}"
+								   th:value="${user!=null?user.password:''}"
+								   id="password" name="password" placeholder="请输入您的密码!" required>
+							<div class="invalid-feedback" th:text="${passwordMsg}">
 								密码长度不能小于8位!
 							</div>							
 						</div>
@@ -86,7 +93,9 @@
 					<div class="form-group row mt-4">
 						<label for="confirm-password" class="col-sm-2 col-form-label text-right">确认密码:</label>
 						<div class="col-sm-10">
-							<input type="password" class="form-control" id="confirm-password" placeholder="请再次输入密码!" required>
+							<input type="password" class="form-control"
+								   th:value="${user!=null?user.password:''}"
+								   id="confirm-password" placeholder="请再次输入密码!" required>
 							<div class="invalid-feedback">
 								两次输入的密码不一致!
 							</div>
@@ -95,8 +104,11 @@
 					<div class="form-group row">
 						<label for="email" class="col-sm-2 col-form-label text-right">邮箱:</label>
 						<div class="col-sm-10">
-							<input type="email" class="form-control" id="email" placeholder="请输入您的邮箱!" required>
-							<div class="invalid-feedback">
+							<input type="email"
+								   th:class="|form-control ${emailMsg!=null?'is-invalid':''}"
+								   th:value="${user!=null?user.email:''}"
+								   id="email" name="email" placeholder="请输入您的邮箱!" required>
+							<div class="invalid-feedback" th:text="${emailMsg}">
 								该邮箱已注册!
 							</div>
 						</div>
