@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
+import team.se.acommunity.dao.LoginTicketMapper;
 import team.se.acommunity.dao.UserMapper;
+import team.se.acommunity.entity.LoginTicket;
 import team.se.acommunity.entity.User;
 import team.se.acommunity.util.CommunityConstant;
 import team.se.acommunity.util.CommunityUtil;
@@ -27,6 +29,10 @@ public class UserService implements CommunityConstant {
     // 注入模板引擎，用来给邮箱发送HTML网页
     @Autowired
     private TemplateEngine templateEngine;
+
+    @Autowired
+    private LoginTicketMapper loginTicketMapper;
+
     // 将域名给注入
     @Value("${community.path.domain}")
     private String domain;
@@ -121,5 +127,62 @@ public class UserService implements CommunityConstant {
         } else {
             return ACTIVATION_FAILURE;
         }
+    }
+
+    /**
+     * 登录业务层
+     * @param username 登录账号
+     * @param password 登陆密码
+     * @param expiredSeconds 生成登陆凭证有效时间
+     * @return
+     */
+    public Map<String, Object> login(String username, String password, int expiredSeconds) {
+        Map<String, Object> map = new HashMap<>();
+
+        // 空值处理
+        if (StringUtils.isBlank(username)) {
+            map.put("usernameMsg", "账号不能为空！");
+            return map;
+        }
+        if (StringUtils.isBlank(password)) {
+            map.put("passwordMsg", "密码不能为空！");
+            return map;
+        }
+
+        // 验证账号
+        User user = userMapper.getByName(username);
+        if (user == null) {
+            map.put("usernameMsg", "该账号不存在！");
+            return map;
+        }
+        // 验证状态
+        if (user.getStatus() == 0) {
+            map.put("usernameMsg", "该账号未激活！");
+            return map;
+        }
+        // 验证密码
+        password = CommunityUtil.md5(password + user.getSalt());
+        if (!user.getPassword().equals(password)) {
+            map.put("passwordMsg", "密码不正确！");
+            return map;
+        }
+
+        // 生成登陆凭证
+        LoginTicket loginTicket = new LoginTicket();
+        loginTicket.setUserId(user.getId());
+        // 添加登录凭证，通过随机生成字符串方法生成登录凭证
+        loginTicket.setTicket(CommunityUtil.generateUUID());
+        // 设置为有效凭证
+        loginTicket.setStatus(0);
+        loginTicket.setExpired(new Date(System.currentTimeMillis() + expiredSeconds * 1000));
+        loginTicketMapper.insertLoginTicket(loginTicket);
+        // 将登陆凭证传给controller
+        map.put("ticket", loginTicket.getTicket());
+        return map;
+    }
+    // 账号退出
+    public void logout(String ticket) {
+        // 将登陆凭证修改为无效
+        loginTicketMapper.updateStatus(ticket, 1);
     }
 }

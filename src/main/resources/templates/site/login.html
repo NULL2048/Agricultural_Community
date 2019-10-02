@@ -63,21 +63,25 @@
 		<div class="main">
 			<div class="container pl-5 pr-5 pt-3 pb-3 mt-3 mb-3">
 				<h3 class="text-center text-info border-bottom pb-3">登&nbsp;&nbsp;录</h3>
-				<form class="mt-5">				
+				<form class="mt-5" method="post" th:action="@{/login}">
 					<div class="form-group row">
 						<label for="username" class="col-sm-2 col-form-label text-right">账号:</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control is-invalid" id="username" placeholder="请输入您的账号!" required>
-							<div class="invalid-feedback">
+						<div class="col-sm-10">  <!--下面这个${param.username}用法就是EL表达式中学的用法，取得request里面的数据-->
+							<input type="text" th:class="|form-control ${usernameMsg!=null?'is-invalid':''}|"
+								   th:value="${param.username}"
+								   id="username" name="username" placeholder="请输入您的账号" required>
+							<div class="invalid-feedback" th:text="${usernameMsg}">
 								该账号不存在!
 							</div>
 						</div>
 					</div>
 					<div class="form-group row mt-4">
 						<label for="password" class="col-sm-2 col-form-label text-right">密码:</label>
-						<div class="col-sm-10">
-							<input type="password" class="form-control is-invalid" id="password" placeholder="请输入您的密码!" required>
-							<div class="invalid-feedback">
+						<div class="col-sm-10">                        <!--这些在界面中通过${}来取从controller层传过来的model对象中的属性-->
+							<input type="password" th:class="|form-control ${passwordMsg!=null?'is-invalid':''}|"
+								   th:value="${param.password}"
+								   id="password" name="password" placeholder="请输入您的密码" required>
+							<div class="invalid-feedback" th:text="${passwordMsg}">
 								密码长度不能小于8位!
 							</div>							
 						</div>
@@ -85,8 +89,9 @@
 					<div class="form-group row mt-4">
 						<label for="verifycode" class="col-sm-2 col-form-label text-right">验证码:</label>
 						<div class="col-sm-6">
-							<input type="text" class="form-control is-invalid" id="verifycode" placeholder="请输入验证码!">
-							<div class="invalid-feedback">
+							<input type="text" th:class="|form-control ${codeMsg!=null?'is-invalid':''}|"
+								   id="verifycode" name="code" placeholder="请输入验证码">
+							<div class="invalid-feedback" th:text="${codeMsg}">
 								验证码不正确!
 							</div>
 						</div>
@@ -94,12 +99,13 @@
 						<div class="col-sm-4"> <!--@{}的作用就是补充项目名/ac-->
 							<img th:src="@{/kaptcha}" id="kaptcha" style="width:100px;height:40px;" class="mr-2"/>
 							<a href="javascript:refresh_kaptcha();" class="font-size-12 align-bottom">刷新验证码</a>
-						</div>
+						</div> <!--每次点这个<a>标签，就会触发refresh_kaptcha()这个js方法-->
 					</div>				
 					<div class="form-group row mt-4">
 						<div class="col-sm-2"></div>
-						<div class="col-sm-10">
-							<input type="checkbox" id="remember-me" checked="checked">
+						<div class="col-sm-10"> <!--动态设置记住密码的默认勾选值-->
+							<input type="checkbox" id="remember-me" name="rememberme"
+								   th:checked="${param.rememberme}">
 							<label class="form-check-label" for="remember-me">记住我</label>
 							<a href="forget.html" class="text-danger float-right">忘记密码?</a>
 						</div>
@@ -179,11 +185,13 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
-	<script th:src="@{/js/global.js}"></script>
+	<script th:src="@{/js/global.js}"></script> <!--全局引用了这个js文件，所以我们在这个js文件中写一个常量，这样以后直接用就行了-->
 	<script>
 		function refresh_kaptcha() {
 			var path = CONTEXT_PATH + "/kaptcha?p=" + Math.random();
+			// 下面这个方法是把path写入到上面那个验证码标签的src中去
 			$("#kaptcha").attr("src", path);
+			// #后面是取的id，将这个id的标签中的src属性内容换成path的内容，path的路径就去访问LoginController中那个生成验证码的方法，它获取的
 		}
 	</script>
 </body>

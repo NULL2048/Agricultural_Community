@@ -7,8 +7,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import team.se.acommunity.dao.DiscussPostMapper;
+import team.se.acommunity.dao.LoginTicketMapper;
 import team.se.acommunity.dao.UserMapper;
 import team.se.acommunity.entity.DiscussPost;
+import team.se.acommunity.entity.LoginTicket;
 import team.se.acommunity.entity.User;
 
 import java.util.Date;
@@ -23,6 +25,9 @@ public class MapperTests {
 
     @Autowired
     private DiscussPostMapper discussPostMapper;
+
+    @Autowired
+    private LoginTicketMapper loginTicketMapper;
 
     @Test
     public void testSelectUser() {
@@ -73,4 +78,27 @@ public class MapperTests {
         int rows = discussPostMapper.getDiscussPostRows(0);
         System.out.println(rows);
     }
+
+    @Test
+    public void testInsertLoginTicket() {
+        LoginTicket loginTicket = new LoginTicket();
+        loginTicket.setUserId(101);
+        loginTicket.setTicket("abc");
+        loginTicket.setStatus(0);
+        // System.currentTimeMillis()表示的是当前时间，后面是加了多少毫秒，表示从当前时间开始 1000*60*10毫秒之后到期，也就十分钟后到期
+        loginTicket.setExpired(new Date(System.currentTimeMillis() + 1000 * 60 * 10));
+
+        loginTicketMapper.insertLoginTicket(loginTicket);
+    }
+
+    @Test
+    public void testSelectLoginTicket() {
+        LoginTicket loginTicket = loginTicketMapper.getByTicket("abc");
+        System.out.println(loginTicket);
+
+        loginTicketMapper.updateStatus("abc", 1);
+        loginTicket = loginTicketMapper.getByTicket("abc");
+        System.out.println(loginTicket);
+    }
+
 }

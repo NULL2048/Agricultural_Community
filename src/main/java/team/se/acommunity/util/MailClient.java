@@ -9,6 +9,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 // 下面这个注解也是表示将这个bean加入到spring容器中，这个注解是一个通用的bean，在哪一个层次都可以用
@@ -25,10 +26,19 @@ public class MailClient {
 
     public void sendMail(String to, String subject, String content){
         try {
+            // 后面这个是设置发件人昵称
+            String nick = null;
+            try {
+                nick = javax.mail.internet.MimeUtility.encodeText("惠农网");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message);
             // 设置邮件相关内容
-            helper.setFrom(from);
+            // 设置邮件来源的时候把邮箱地址用<>括起来，前面写上发件人昵称，这样发送的邮件发件人就可以显示自定义的昵称了
+            helper.setFrom(new InternetAddress(nick+" <"+from+">"));
             helper.setTo(to);
             helper.setSubject(subject);
             // 第二个参数是true，表示可以发送HTML，他会将HTML解析成网页发送
