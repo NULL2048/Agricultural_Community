@@ -185,4 +185,8 @@ public class UserService implements CommunityConstant {
         // 将登陆凭证修改为无效
         loginTicketMapper.updateStatus(ticket, 1);
     }
+
+    public LoginTicket getLoginTicket(String ticket) {
+        return loginTicketMapper.getByTicket(ticket);
+    }
 }
