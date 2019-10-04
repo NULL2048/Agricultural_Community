@@ -24,6 +24,7 @@ public class LoginTicketInterceptor implements HandlerInterceptor {
 
     /**
      * 因为登录之后可能随时会用到用户信息，所以要在每一次请求之前就要将User取到，以备后面有可能会用到
+     * 而且是每一次请求都会取数据库中取一次数据，取出来的数据只对当前这一次请求有效，这样就保证了如果用户更改了数据库信息，其他位置的信息也会实时的更新，不会出现读取脏数据的情况
      * @param request
      * @param response
      * @param handler

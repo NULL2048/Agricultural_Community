@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import team.se.acommunity.controller.interceptor.AlphaInterceptor;
+import team.se.acommunity.controller.interceptor.LoginRequiredInterceptor;
 import team.se.acommunity.controller.interceptor.LoginTicketInterceptor;
 
 @Configuration
@@ -15,6 +16,9 @@ public class WebMvcConfig  implements WebMvcConfigurer {
 
     @Autowired
     private LoginTicketInterceptor loginTicketInterceptor;
+
+    @Autowired
+    private LoginRequiredInterceptor loginRequiredInterceptor;
 
     /**
      * spring容器会把registry这个对象传给这个方法，然后再将注入的拦截器alphaInterceptor注册进这个registry这个对象就可以了
@@ -28,6 +32,9 @@ public class WebMvcConfig  implements WebMvcConfigurer {
                 .addPathPatterns("/register", "/login"); // 设置拦截器指定拦截那些路径
 
         registry.addInterceptor(loginTicketInterceptor)
+                .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg");
+
+        registry.addInterceptor(loginRequiredInterceptor)
                 .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg");
     }
 }
