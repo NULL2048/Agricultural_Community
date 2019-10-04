@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.thymeleaf.context.Context;
 import team.se.acommunity.entity.User;
 import team.se.acommunity.service.UserService;
 import team.se.acommunity.util.CommunityConstant;
@@ -19,11 +20,13 @@ import team.se.acommunity.util.CommunityConstant;
 import javax.imageio.ImageIO;
 import javax.jws.WebParam;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.reflect.Method;
 import java.util.Map;
 
 @Controller
@@ -116,7 +119,7 @@ public class LoginController implements CommunityConstant {
             OutputStream os = resp.getOutputStream();
             ImageIO.write(image, "png", os);
         } catch (IOException e) {
-            logger.error("相应验证码失败：" + e.getMessage());
+            logger.error("响应验证码失败：" + e.getMessage());
         }
     }
     // 两个方法的访问路径可以是一样的，但是后面的请求方式必须不同，如果请求方式也相同那就是冲突了
@@ -153,6 +156,7 @@ public class LoginController implements CommunityConstant {
             // 登录不成功返回错误信息
             model.addAttribute("usernameMsg", map.get("usernameMsg"));
             model.addAttribute("passwordMsg", map.get("passwordMsg"));
+            // 下面这种跳转其实就是请求转发，就是说将request和response对象都转给下一个界面，本次请求没有结束，上面那个是重定向，表示本次请求中止
             return "/site/login";
         }
     }
@@ -161,6 +165,60 @@ public class LoginController implements CommunityConstant {
                         // 通过cookieValue这个注解来获取cookie中的内容
     public String logout(@CookieValue("ticket") String ticket) {
         userService.logout(ticket);
+        return "redirect:/login";
+    }
+
+    @RequestMapping(path = "/forget", method = RequestMethod.GET)
+    public String getForgetPage(HttpServletRequest request) {
+        Class cla = null;
+        Method met = null;
+        try {
+            cla = Class.forName("team.se.acommunity.controller.LoginController");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            met = cla.getMethod("getCode", HttpSession.class);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+        request.setAttribute("codeAndMail", met);
+        return "/site/forget";
+    }
+
+    @RequestMapping(path = "/code", method = RequestMethod.POST)
+    public void getCode(HttpSession session) {
+        String text = kaptchaProducer.createText();
+        session.setAttribute("code", text);
+
+
+    }
+
+    @RequestMapping(path = "/forgetPwd", method = RequestMethod.POST)
+    public String forgetPwd(String email, String code, String pwd, Model model, HttpSession session) {
+        User user = userService.getUserByEmail(email);
+        if (user == null) {
+            model.addAttribute("emailMsg", "该邮箱未注册账户");
+            return "/site/forget";
+        }
+
+        if (code == null) {
+            model.addAttribute("codeMsg", "请输入验证码");
+            return "/site/forget";
+        }
+
+        if (!code.equals(session.getAttribute("code"))) {
+            model.addAttribute("codeMsg", "验证码错误");
+            return "/site/forget";
+        }
+
+
+        if (userService.updatePassword(user.getId(), pwd) == 0) {
+            model.addAttribute("pwdMsg", "修改密码失败");
+            return "/site/forget";
+        }
+
         return "redirect:/login";
     }
 }

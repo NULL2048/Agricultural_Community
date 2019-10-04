@@ -44,6 +44,14 @@ public class UserService implements CommunityConstant {
         return userMapper.getById(id);
     }
 
+    public User getUserByEmail(String email) {
+        return userMapper.getByEmail(email);
+    }
+
+    public int updatePassword(int id, String password) {
+        return userMapper.updatePassword(id, password);
+    }
+
     public Map<String, Object> register(User user) {
         Map<String, Object> map = new HashMap<>();
 
