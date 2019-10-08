@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta author="软工1702">
+	<title>登录 - 惠农 - </title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" th:href="@{/test/style/register-login.css}">
+	<link rel="stylesheet" th:href="@{/css/global.css}" />
+	<link rel="stylesheet" th:href="@{/css/login.css}" />
+</head>
+<body>
+<div id="box"></div>
+<div class="cent-box">
+	<div class="cent-box-header">
+		<h1 class="main-title hide">惠农</h1>
+		<h2 class="sub-title">惠农有网，农品共享</h2>
+	</div>
+
+	<div class="cont-main clearfix">
+		<div class="index-tab">
+			<div class="index-slide-nav">
+				<!--注意这里，转换html界面如果使用了@{}，就要用controller去获得界面，所以这里访问的是controller中设置路径的方法，不是直接访问静态资源中的HTML文件-->
+				<a th:href="@{/login}" class="active">登录</a>
+				<a th:href="@{/register}">注册</a>
+				<div class="slide-bar"></div>				
+			</div>
+		</div>
+
+		<form class="login form" method="post" th:action="@{/login}">
+			<div class="group">
+				<div class="group-ipt email">
+					<input type="text" name="username" id="email" th:class="|ipt ${usernameMsg!=null?'is-invalid':''}|"
+						   th:value="${param.username}"
+						   placeholder="请输入您的账号" required>
+					<div class="invalid-feedback" th:text="${usernameMsg}">
+						该账号不存在!
+					</div>
+				</div>
+				<div class="group-ipt password">
+					<input type="password" name="password" id="password" th:class="|ipt ${passwordMsg!=null?'is-invalid':''}|"
+						   th:value="${param.password}"
+						   placeholder="输入您的登录密码" required>
+					<div class="invalid-feedback" th:text="${passwordMsg}">
+						密码长度不能小于8位!
+					</div>
+				</div>
+				<div class="group-ipt verify">
+					<input type="text" name="code" id="verify" th:class="|ipt ${codeMsg!=null?'is-invalid':''}|"
+						   placeholder="输入验证码" required>
+					<div class="invalid-feedback" th:text="${codeMsg}">
+						验证码不正确!
+					</div>
+					<!--验证码图片-->
+					<a href="javascript:refresh_kaptcha();">
+						<img th:src="@{/kaptcha}" id="kaptcha" class="imgcode">
+					</a>
+
+				</div>
+			</div>
+
+
+			<div class="button">
+				<button type="submit" class="login-btn register-btn" id="button">登录</button>
+			</div>
+
+			<div class="remember clearfix">
+				<label class="remember-me"><span class="icon"><span class="zt"></span></span><input type="checkbox" name="remember-me" id="remember-me" class="remember-mecheck" checked>记住我</label>
+				<label class="forgot-password">
+					<a href="#">忘记密码？</a>
+				</label>
+			</div>
+		</form>
+
+	</div>
+</div>
+
+<div class="footer">
+	<p>惠农网</p>
+	<p>Designed By 软工1702 & <a href="https://github.com/NULL2048/Agricultural_Community">CY's GitHub</a></p>
+</div>
+
+<script th:src='@{/test/js/particles.js}' type="text/javascript"></script>
+<script th:src='@{/test/js/background.js}' type="text/javascript"></script>
+<script th:src='@{/test/js/jquery.min.js}' type="text/javascript"></script>
+<script th:src='@{/test/js/layer/layer.js}' type="text/javascript"></script>
+<script th:src='@{/test/js/index.js}' type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script>@{
+	$('.imgcode').hover(function(){
+		layer.tips("看不清？点击更换", '.verify', {
+        		time: 6000,
+        		tips: [2, "#3c3c3c"]
+    		})
+	},function(){
+		layer.closeAll('tips');
+	}).click(function(){
+		var path = CONTEXT_PATH + "/kaptcha?p=" + Math.random();
+		// 下面这个方法是把path写入到上面那个验证码标签的src中去
+		$(this).attr('src',path);
+		// #后面是取的id，将这个id的标签中的src属性内容换成path的内容，path的路径就去访问LoginController中那个生成验证码的方法，它获取的
+	});
+	$("#remember-me").click(function(){
+		var n = document.getElementById("remember-me").checked;
+		if(n){
+			$(".zt").show();
+		}else{
+			$(".zt").hide();
+		}
+	});
+</script>
+<script>
+	function refresh_kaptcha() {
+		var path = CONTEXT_PATH + "/kaptcha?p=" + Math.random();
+		// 下面这个方法是把path写入到上面那个验证码标签的src中去
+		$("#kaptcha").attr("src", path);
+		// #后面是取的id，将这个id的标签中的src属性内容换成path的内容，path的路径就去访问LoginController中那个生成验证码的方法，它获取的
+	}
+</script>
+</body>
+</html>

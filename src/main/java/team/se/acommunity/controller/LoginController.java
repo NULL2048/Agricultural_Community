@@ -45,13 +45,13 @@ public class LoginController implements CommunityConstant {
     @RequestMapping(path = "/register", method = RequestMethod.GET)
     public String getRegisterPage() {
         // 这个就是要返回这个controller操作要取得哪一个html页面，下面就写这个页面的路径就行，也是绝对路径，/表示templates文件夹，不用写.html后缀
-        return "/site/register";
+        return "/test/register";
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.GET)
     public String getLoginPage() {
         // 下面就是返回一个字符串给浏览器，浏览器就会根据这个字符串的路径去访问这个页面
-        return "/site/login";
+        return "/test/login";
     }
 
     @RequestMapping(path = "/register", method = RequestMethod.POST)
@@ -157,7 +157,7 @@ public class LoginController implements CommunityConstant {
             model.addAttribute("usernameMsg", map.get("usernameMsg"));
             model.addAttribute("passwordMsg", map.get("passwordMsg"));
             // 下面这种跳转其实就是请求转发，就是说将request和response对象都转给下一个界面，本次请求没有结束，上面那个是重定向，表示本次请求中止
-            return "/site/login";
+            return "/test/login";
         }
     }
 
