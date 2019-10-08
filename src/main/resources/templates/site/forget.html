@@ -178,7 +178,9 @@
 	<script th:src="@{/js/global.js}"></script>
 	<script>
 		function get_code() {
-			var path = CONTEXT_PATH + "/code?p=" + Math.random();
+			// 装载局部刷新返回的页面
+			$('#table_refresh').load("/refresh/local");
+
 			// 下面这个方法是把path写入到上面那个验证码标签的src中去
 			$("#kaptcha").attr("src", path);
 			// #后面是取的id，将这个id的标签中的src属性内容换成path的内容，path的路径就去访问LoginController中那个生成验证码的方法，它获取的

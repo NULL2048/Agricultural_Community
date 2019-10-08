@@ -170,29 +170,32 @@ public class LoginController implements CommunityConstant {
 
     @RequestMapping(path = "/forget", method = RequestMethod.GET)
     public String getForgetPage(HttpServletRequest request) {
-        Class cla = null;
-        Method met = null;
-        try {
-            cla = Class.forName("team.se.acommunity.controller.LoginController");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            met = cla.getMethod("getCode", HttpSession.class);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-
-        request.setAttribute("codeAndMail", met);
+//        Class cla = null;
+//        Method met = null;
+//        // 将要在页面调用的getCode方法放入request对象中
+//        try {
+//            cla = Class.forName("team.se.acommunity.controller.LoginController");
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            met = cla.getMethod("getCode", HttpSession.class);
+//        } catch (NoSuchMethodException e) {
+//            e.printStackTrace();
+//        }
+//        request.setAttribute("codeAndMail", met);
+        // 返回忘记密码界面
         return "/site/forget";
     }
 
-    @RequestMapping(path = "/code", method = RequestMethod.POST)
-    public void getCode(HttpSession session) {
+    @RequestMapping("/code")
+    public void getCode(HttpSession session, Model model) {
+        // 将验证码存入session中，用来以后和用户输入的内容比较验证
         String text = kaptchaProducer.createText();
         session.setAttribute("code", text);
 
-
+        // 发送验证码邮件
+        //userService.getUserByEmail(model)
     }
 
     @RequestMapping(path = "/forgetPwd", method = RequestMethod.POST)
