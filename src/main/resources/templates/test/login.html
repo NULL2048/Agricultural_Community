@@ -4,10 +4,10 @@
 	<meta charset="utf-8">
 	<meta author="软工1702">
 	<title>登录 - 惠农 - </title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+<!--	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">-->
 	<link rel="stylesheet" type="text/css" th:href="@{/test/style/register-login.css}">
 	<link rel="stylesheet" th:href="@{/css/global.css}" />
-	<link rel="stylesheet" th:href="@{/css/login.css}" />
+<!--	<link rel="stylesheet" th:href="@{/css/login.css}" />-->
 </head>
 <body>
 <div id="box"></div>
@@ -36,6 +36,7 @@
 					<div class="invalid-feedback" th:text="${usernameMsg}">
 						该账号不存在!
 					</div>
+
 				</div>
 				<div class="group-ipt password">
 					<input type="password" name="password" id="password" th:class="|ipt ${passwordMsg!=null?'is-invalid':''}|"
@@ -52,10 +53,7 @@
 						验证码不正确!
 					</div>
 					<!--验证码图片-->
-					<a href="javascript:refresh_kaptcha();">
-						<img th:src="@{/kaptcha}" id="kaptcha" class="imgcode">
-					</a>
-
+					<img th:src="@{/kaptcha}" id="kaptcha" class="imgcode">
 				</div>
 			</div>
 
@@ -88,7 +86,8 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script>@{
+
+<script>
 	$('.imgcode').hover(function(){
 		layer.tips("看不清？点击更换", '.verify', {
         		time: 6000,
@@ -97,10 +96,10 @@
 	},function(){
 		layer.closeAll('tips');
 	}).click(function(){
-		var path = CONTEXT_PATH + "/kaptcha?p=" + Math.random();
+		var path = "/ac" + "/kaptcha?p=" + Math.random();
 		// 下面这个方法是把path写入到上面那个验证码标签的src中去
 		$(this).attr('src',path);
-		// #后面是取的id，将这个id的标签中的src属性内容换成path的内容，path的路径就去访问LoginController中那个生成验证码的方法，它获取的
+		// #后面是取的id,这里的this就是表示的当前这个标签，将这个id的标签中的src属性内容换成path的内容，path的路径就去访问LoginController中那个生成验证码的方法，它获取的
 	});
 	$("#remember-me").click(function(){
 		var n = document.getElementById("remember-me").checked;
@@ -110,14 +109,6 @@
 			$(".zt").hide();
 		}
 	});
-</script>
-<script>
-	function refresh_kaptcha() {
-		var path = CONTEXT_PATH + "/kaptcha?p=" + Math.random();
-		// 下面这个方法是把path写入到上面那个验证码标签的src中去
-		$("#kaptcha").attr("src", path);
-		// #后面是取的id，将这个id的标签中的src属性内容换成path的内容，path的路径就去访问LoginController中那个生成验证码的方法，它获取的
-	}
 </script>
 </body>
 </html>

@@ -151,7 +151,7 @@ public class LoginController implements CommunityConstant {
             // 将cookie存到resp中传回给浏览器端
             resp.addCookie(cookie);
             // 重定向到主页
-            return "redirect:/test/index";
+            return "redirect:/index";
         } else {
             // 登录不成功返回错误信息
             model.addAttribute("usernameMsg", map.get("usernameMsg"));

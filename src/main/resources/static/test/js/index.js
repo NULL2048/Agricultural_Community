@@ -1,2 +1,2 @@
-console.log("欢迎大家关注我的微博：说Z先生爱你");
-console.log("欢迎大家关注我的个人网站：zrong.me");
+console.log("河北农业大学_信息科学与技术学院_软件工程1702班");
+console.log("惠农网项目");

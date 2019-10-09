@@ -32,8 +32,9 @@
         <!-- 未登录显示登录/注册/写文章 -->
         <a class="btn write-btn" target="_blank" href="javascript:;">
             <i class="iconfont ic-write"></i>写文章
-        </a> <a class="btn sign-up" href="javascript:;">注册</a>
-        <a class="btn log-in" href="javascript:;">登录</a>
+        </a>
+        <a class="btn sign-up" th:href="@{/register}">注册</a>
+        <a class="btn log-in" th:href="@{/login}">登录</a>
         <!-- 如果用户登录，显示下拉菜单 -->
         <div id="view-mode-ctrl">
         </div>
