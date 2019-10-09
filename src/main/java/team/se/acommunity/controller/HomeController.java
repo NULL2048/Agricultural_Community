@@ -29,7 +29,7 @@ public class HomeController {
         // 方法调用前，spring MVC会会自动实例化model和page，并将page注入model，因为这两个都是参数
         // 所以，在Thymeleaf中可以直接访问page对象中的数据，不需要手动将page添加到model了
         page.setRows(discussPostService.getDiscussPostRows(0));
-        page.setPath("/index"); // 页面的访问路径
+        page.setPath("/test/index"); // 页面的访问路径
 
         List<DiscussPost> list = discussPostService.listDiscussPost(0, page.getOffset(), page.getLimit());
         List<Map<String, Object>> discussPosts = new ArrayList<>();
@@ -48,6 +48,6 @@ public class HomeController {
         model.addAttribute("discussPosts", discussPosts);
         // 返回的是模板的路径，也就是主页的路径,就是想要把model对象中存储的数据传给哪一个界面
         // 注意区分下面这个/index和上面那个/index。上面那个是在浏览器访问的时候写index就访问了这个controller，然后这个controller处理了数据后，return给了index.html这个模板，界面就给跳转到了indext.html了，下面这个return写的是html模板的名字
-        return "/index";
+        return "/test/index";
     }
 }

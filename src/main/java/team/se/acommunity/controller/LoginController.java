@@ -134,7 +134,7 @@ public class LoginController implements CommunityConstant {
         String kaptcha = (String) session.getAttribute("kaptcha");      // 这个也是比较字符串是否相同的方法，但是这个方法是忽略大小写的，验证码都是忽略大小写的
         if (StringUtils.isBlank(kaptcha) || StringUtils.isBlank(code) || !kaptcha.equalsIgnoreCase(code)) {
             model.addAttribute("codeMsg", "验证码不正确");
-            return "/site/login";
+            return "/test/login";
         }
 
         // 验证账号，密码
@@ -151,7 +151,7 @@ public class LoginController implements CommunityConstant {
             // 将cookie存到resp中传回给浏览器端
             resp.addCookie(cookie);
             // 重定向到主页
-            return "redirect:/index";
+            return "redirect:/test/index";
         } else {
             // 登录不成功返回错误信息
             model.addAttribute("usernameMsg", map.get("usernameMsg"));

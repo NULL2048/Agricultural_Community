@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--[if IE 6]>
+<html class="ie lt-ie8"><![endif]-->
+<!--[if IE 7]>
+<html class="ie lt-ie8"><![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8"><![endif]-->
+<!--[if IE 9]>
+<html class="ie ie9"><![endif]-->
+<!--[if !IE]><!-->
+
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <!-- Start of Baidu Transcode -->
+    <!-- End of Baidu Transcode -->
+    <meta name="description" content="惠农是一个优质的农业分享社区，在这里，你可以分享一切关于农业的故事，美味的水果、耕种技巧、田间趣事、乡村美景……惠农有网，农品共享。">
+    <meta name="keywords" content="惠农,惠农官网,图文编辑软件,惠农下载,图文创作,创作软件,农业社区,种草,分享,视频,阅读">
+    <title>惠农--惠农有网，农品共享</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/test/assets/web-e7e403d2843dd1edd8db.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/test/assets/web/pages/home/index/entry-7642b94e17df29096c13.css}"/>
+</head>
+
+<body lang="zh-CN" class="reader-black-font">
+<!-- 全局顶部导航栏 -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="width-limit">
+        <!-- 左上方 Logo -->
+        <a class="logo" href="index.html"><img th:src="@{/test/assets/web/44.png}" alt="Logo"/></a>
+        <!-- 右上角 -->
+        <!-- 未登录显示登录/注册/写文章 -->
+        <a class="btn write-btn" target="_blank" href="javascript:;">
+            <i class="iconfont ic-write"></i>写文章
+        </a> <a class="btn sign-up" href="javascript:;">注册</a>
+        <a class="btn log-in" href="javascript:;">登录</a>
+        <!-- 如果用户登录，显示下拉菜单 -->
+        <div id="view-mode-ctrl">
+        </div>
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu"
+                        aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="javascript:;">
+                            <span class="menu-text">首页</span><i class="iconfont ic-navigation-discover menu-icon"></i>
+                        </a></li>
+                    <li class="">
+                        <a class="app-download-btn" href="javascript:;"><span class="menu-text">下载App</span><i
+                                class="iconfont ic-navigation-download menu-icon"></i></a>
+                    </li>
+                    <li class="search">
+                        <form target="_blank" action="/search" accept-charset="UTF-8" method="get"><input name="utf8"
+                                                                                                          type="hidden"
+                                                                                                          value="&#x2713;"/>
+                            <input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索"
+                                   class="search-input"/>
+                            <a class="search-btn" href="javascript:void(null)"><i class="iconfont ic-search"></i></a>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container index">
+    <div class="row">
+        <!-- Banner -->
+        <div id="indexCarousel" class="carousel slide">
+            <!--ol class="carousel-indicators">
+        <li data-target="#indexCarousel" data-slide-to="0"
+          class="active"></li>
+        <li data-target="#indexCarousel" data-slide-to="1"
+          class=""></li>
+        <li data-target="#indexCarousel" data-slide-to="2"
+          class=""></li>
+        <li data-target="#indexCarousel" data-slide-to="3"
+          class=""></li>
+        <li data-target="#indexCarousel" data-slide-to="4"
+          class=""></li>
+        <li data-target="#indexCarousel" data-slide-to="5"
+          class=""></li>
+    </ol-->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="banner">
+                        <a target="_blank" href="javascript:;"><img
+                                th:src="@{/test/assets/web/43c36d81b234dcb180d68d10bbee92cc84fe710d.jpg}" alt="540"/></a>
+                    </div>
+                </div>
+                <div class="item ">
+                    <div class="banner">
+                        <a target="_blank" href="javascript:;"><img
+                                th:src="@{/test/assets/web/33312bc2fc1afd9859031ebe9e87156e07ae6732.jpg}" alt="540"/></a>
+                    </div>
+                </div>
+                <div class="item ">
+                    <div class="banner">
+                        <a target="_blank" href="javascript:;"><img
+                                th:src="@{/test/assets/web/5180370877c7c635e2f84c5b36461cbc980160ca.jpg}" alt="540"/></a>
+                    </div>
+                </div>
+                <div class="item ">
+                    <div class="banner">
+                        <a target="_blank" href="javascript:;"><img
+                                th:src="@{/test/assets/web/a9c63ddd88841cedc6c3c33ee357e0969dc98e96.jpg}" alt="540"/></a>
+                    </div>
+                </div>
+                <div class="item ">
+                    <div class="banner">
+                        <a target="_blank" href="javascript:;"><img
+                                th:src="@{/test/assets/web/17191debd7cf4fbf8728879516128b9c9c464b11.jpg}" alt="540"/></a>
+                    </div>
+                </div>
+                <div class="item ">
+                    <div class="banner">
+                        <a target="_blank" href="javascript:;"><img
+                                th:src="@{/test/assets/web/77e069c0acb1baa0947f78efa8fc8b0044a39a5c.jpg}" alt="540"/></a>
+                    </div>
+                </div>
+            </div>
+            <a class="left carousel-control" href="#indexCarousel" role="button" data-slide="prev"><i
+                    class="iconfont ic-previous-s"></i></a>
+            <a class="right carousel-control" href="#indexCarousel" role="button" data-slide="next"><i
+                    class="iconfont ic-next-s"></i></a>
+        </div>
+        <!-- Banner -->  <!--19981226-->
+        <div class="col-xs-16 main">
+            <div class="recommend-collection">
+                <a class="collection" target="_blank" href="javascript:;">
+                    <img th:src="@{/test/upload_images/1239240801.jpg}"
+                         alt="64"/>
+                    <div class="name">散文</div>
+                </a> <a class="collection" target="_blank" href="javascript:;">
+                <img th:src="@{/test/upload_images/WechatIMG207.jpg}" alt="64"/>
+                <div class="name">书法</div>
+            </a> <a class="collection" target="_blank" href="javascript:;">
+                <img th:src="@{/test/upload_images/man-hands-reading-boy-large.jpg}"
+                     alt="64"/>
+                <div class="name">社会热点</div>
+            </a> <a class="collection" target="_blank" href="javascript:;">
+                <img th:src="@{/test/upload_images/%E6%9C%AA%E6%A0%87%E9%A2%98-1.png}"
+                     alt="64"/>
+                <div class="name">微小说</div>
+            </a> <a class="collection" target="_blank" href="javascript:;">
+                <img th:src="@{/test/upload_images/%E6%BC%AB%E7%94%BB%E4%B8%93%E9%A2%98.jpg}"
+                     alt="64"/>
+                <div class="name">漫画·手绘</div>
+            </a> <a class="collection" target="_blank" href="javascript:;">
+                <img th:src="@{/test/upload_images/1.jpg}" alt="64"/>
+                <div class="name">世间事</div>
+            </a> <a class="collection" target="_blank" href="javascript:;">
+                <img th:src="@{/test/upload_images/0__15815600_401_00.jpg}"
+                     alt="64"/>
+                <div class="name">连载小说</div>
+            </a>
+                <a class="more-hot-collection" target="_blank" href="javascript:;">
+                    更多热门专题 <i class="iconfont ic-link"></i>
+                </a></div>
+            <div class="split-line"></div>
+            <div id="list-container">
+                <!-- 文章列表模块 -->
+                <ul class="note-list" infinite-scroll-url="javascript:;">
+                    <li id="note-17215651" data-note-id="17215651" class="have-img">
+                        <a class="wrap-img" href="javascript:;" target="_blank">
+                            <img th:data-echo="@{/test/upload_images/2716242-ee57eae462dd44ca.jpg}"
+                                 class="img-blur"
+                                 th:src="@{/test/upload_images/2716242-ee57eae462dd44ca.jpg}"
+                                 alt="120"/>
+                        </a>
+                        <div class="content">
+                            <div class="author">
+                                <a class="avatar" target="_blank" href="javascript:;">
+                                    <img th:src="@{/test/upload_images/dade7369-fc84-4d51-a5c9-71543077a325.jpg}"
+                                         alt="64"/>
+                                </a>
+                                <div class="name">
+                                    <a class="blue-link" target="_blank" href="javascript:;">大雄老师1</a>
+                                    <span class="time" data-shared-at="2017-09-18T08:32:55+08:00"></span>
+                                </div>
+                            </div>
+                            <a class="title" target="_blank" href="javascript:;">感谢李雨桐，让我们认识了这样的"薛之谦"</a>
+                            <p class="abstract">
+                                说实话，在知道李雨桐撕薛之谦后，作为一个听薛之谦歌曲十年之久的歌迷，从一开始的惊讶，到后来的平静，直到现在的感谢……
+                                喜欢薛之谦，应该是06年，也就是《认真的雪》大街小巷传播...
+                            </p>
+                            <div class="meta">
+                                <a class="collection-tag" target="_blank" href="javascript:;">娱乐八卦</a>
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-read"></i> 9763
+                                </a> <a target="_blank" href="javascript:;">
+                                <i class="iconfont ic-list-comments"></i> 161
+                            </a> <span><i class="iconfont ic-list-like"></i> 185</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="note-17199001" data-note-id="17199001" class="have-img">
+                        <a class="wrap-img" href="javascript:;" target="_blank">
+                            <img th:data-echo="@{/test/upload_images/7447436-4c37ebfc6b1fab69.png}"
+                                 class="img-blur"
+                                 th:src="@{/test/upload_images/7447436-4c37ebfc6b1fab69.png}"
+                                 alt="120"/>
+                        </a>
+                        <div class="content">
+                            <div class="author">
+                                <a class="avatar" target="_blank" href="javascript:;">
+                                    <img th:src="@{/test/upload_images/e657e0d8-3ffc-4a3b-86a0-a3af0d06ab85.jpg}"
+                                         alt="64"/>
+                                </a>
+                                <div class="name">
+                                    <a class="blue-link" target="_blank" href="javascript:;">习习有话说</a>
+                                    <span class="time" data-shared-at="2017-09-18T09:21:25+08:00"></span>
+                                </div>
+                            </div>
+                            <a class="title" target="_blank" href="javascript:;">写小说的你应该知道这些常识，而不是技巧</a>
+                            <p class="abstract">
+                                写作技巧是无意识积累的结果，有些技巧对大牛来说是锦上添花，但是对小白来说可能是雪上加霜了。
+                                所以对于新手来说，你要准备的不是技巧，而是关于写小说的常识。所以如果你准备写小说，...
+                            </p>
+                            <div class="meta">
+                                <a class="collection-tag" target="_blank" href="javascript:;">读书</a>
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-read"></i> 2451
+                                </a> <a target="_blank" href="javascript:;">
+                                <i class="iconfont ic-list-comments"></i> 26
+                            </a> <span><i class="iconfont ic-list-like"></i> 205</span>
+                                <span><i class="iconfont ic-list-money"></i> 1</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="note-17216611" data-note-id="17216611" class="have-img">
+                        <a class="wrap-img" href="javascript:;" target="_blank">
+                            <img th:data-echo="@{/test/upload_images/3321285-71e54e7f69d25953.jpg}"
+                                 class="img-blur"
+                                 th:src="@{/test/upload_images/3321285-71e54e7f69d25953.jpg}"
+                                 alt="120"/>
+                        </a>
+                        <div class="content">
+                            <div class="author">
+                                <a class="avatar" target="_blank" href="javascript:;">
+                                    <img th:src="@{/test/upload_images/6ada9e54-9ea3-4ec7-8c57-1999bacd7601.jpg}"
+                                         alt="64"/>
+                                </a>
+                                <div class="name">
+                                    <a class="blue-link" target="_blank" href="javascript:;">九线作家_Kosion宋觉明</a>
+                                    <span class="time" data-shared-at="2017-09-18T09:11:38+08:00"></span>
+                                </div>
+                            </div>
+                            <a class="title" target="_blank" href="javascript:;">毕业后，我过着死鱼一样的生活</a>
+                            <p class="abstract">
+                                你知道你自己想要什么吗？看完这句话，你需要停顿三秒。﻿ 我不知道。﻿ 可悲的是，我还没有钱。﻿ 更可悲的是，我没有努力。﻿ ﻿01
+                                最近一直不开心，抱怨工作，抱怨生活，也抱怨...
+                            </p>
+                            <div class="meta">
+                                <a class="collection-tag" target="_blank" href="javascript:;">散文</a>
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-read"></i> 6614
+                                </a> <a target="_blank" href="javascript:;">
+                                <i class="iconfont ic-list-comments"></i> 239
+                            </a> <span><i class="iconfont ic-list-like"></i> 217</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="note-17306896" data-note-id="17306896" class="have-img">
+                        <a class="wrap-img" href="javascript:;" target="_blank">
+                            <img th:data-echo="@{/test/upload_images/5889454-657026c6b63e0cea.jpg}"
+                                 class="img-blur"
+                                 th:src="@{/test/upload_images/5889454-657026c6b63e0cea}"
+                                 alt="120"/>
+                        </a>
+                        <div class="content">
+                            <div class="author">
+                                <a class="avatar" target="_blank" href="javascript:;">
+                                    <img th:src="@{/test/upload_images/216fe347-e666-438e-9fd3-82e02fcd2a0c.jpg}"
+                                         alt="64"/>
+                                </a>
+                                <div class="name">
+                                    <a class="blue-link" target="_blank" href="javascript:;">新世相</a>
+                                    <span class="time" data-shared-at="2017-09-20T10:15:48+08:00"></span>
+                                </div>
+                            </div>
+                            <a class="title" target="_blank" href="javascript:;">用快手的有钱人：我只刷了10万块，我欠快手太多</a>
+                            <p class="abstract">
+                                点击上方蓝字关注「新世相」，我们终将改变潮水的方向。 ​Sayings： 去年有一篇引起巨大争议的文章，说 "快手" 上有一个人们不知道的中国农村。作者说那些激烈的表演是
+                                "...
+                            </p>
+                            <div class="meta">
+                                <a class="collection-tag" target="_blank" href="javascript:;">今日看点</a>
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-read"></i> 335
+                                </a> <a target="_blank" href="javascript:;">
+                                <i class="iconfont ic-list-comments"></i> 1
+                            </a> <span><i class="iconfont ic-list-like"></i> 5</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="note-17294341" data-note-id="17294341" class="">
+                        <div class="content">
+                            <div class="author">
+                                <a class="avatar" target="_blank" href="javascript:;">
+                                    <img th:src="@{/test/upload_images/84f5d846-75b6-4abb-92d7-51e66dbb6a31.JPG}"
+                                         alt="64"/>
+                                </a>
+                                <div class="name">
+                                    <a class="blue-link" target="_blank" href="javascript:;">厨室机密</a>
+                                    <span class="time" data-shared-at="2017-09-19T22:51:28+08:00"></span>
+                                </div>
+                            </div>
+                            <a class="title" target="_blank" href="javascript:;">CoCo壱番屋，"食屎啦你"</a>
+                            <p class="abstract">
+                                1. 洗手要求严苛，实际不洗； 2. 洗碗池被食物残渣堵住，整个上午都不换水； 3. 重点：鸡屎掉进蛋液，迅速搅拌，做成蛋包饭给您吃了； 4.
+                                米饭基本无可挑剔，有时优先卖剩...
+                            </p>
+                            <div class="meta">
+                                <a class="collection-tag" target="_blank" href="javascript:;">美食</a>
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-read"></i> 204
+                                </a> <a target="_blank" href="javascript:;">
+                                <i class="iconfont ic-list-comments"></i> 2
+                            </a> <span><i class="iconfont ic-list-like"></i> 3</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="note-17215651" data-note-id="17215651" class="have-img">
+                        <a class="wrap-img" href="javascript:;" target="_blank">
+                            <img th:data-echo="@{/test/upload_images/2716242-ee57eae462dd44ca.jpg}"
+                                 class="img-blur"
+                                 th:src="@{/test/upload_images/2716242-ee57eae462dd44ca.jpg}"
+                                 alt="120"/>
+                        </a>
+                        <div class="content">
+                            <div class="author">
+                                <a class="avatar" target="_blank" href="javascript:;">
+                                    <img th:src="@{/test/upload_images/dade7369-fc84-4d51-a5c9-71543077a325.jpg}"
+                                         alt="64"/>
+                                </a>
+                                <div class="name">
+                                    <a class="blue-link" target="_blank" href="javascript:;">大雄老师1</a>
+                                    <span class="time" data-shared-at="2017-09-18T08:32:55+08:00"></span>
+                                </div>
+                            </div>
+                            <a class="title" target="_blank" href="javascript:;">感谢李雨桐，让我们认识了这样的"薛之谦"</a>
+                            <p class="abstract">
+                                说实话，在知道李雨桐撕薛之谦后，作为一个听薛之谦歌曲十年之久的歌迷，从一开始的惊讶，到后来的平静，直到现在的感谢……
+                                喜欢薛之谦，应该是06年，也就是《认真的雪》大街小巷传播...
+                            </p>
+                            <div class="meta">
+                                <a class="collection-tag" target="_blank" href="javascript:;">娱乐八卦</a>
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-read"></i> 9763
+                                </a> <a target="_blank" href="javascript:;">
+                                <i class="iconfont ic-list-comments"></i> 161
+                            </a> <span><i class="iconfont ic-list-like"></i> 185</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="note-17199001" data-note-id="17199001" class="have-img">
+                        <a class="wrap-img" href="javascript:;" target="_blank">
+                            <img th:data-echo="@{/test/upload_images/7447436-4c37ebfc6b1fab69.png}"
+                                 class="img-blur"
+                                 th:src="@{/test/upload_images/7447436-4c37ebfc6b1fab69.png}"
+                                 alt="120"/>
+                        </a>
+                        <div class="content">
+                            <div class="author">
+                                <a class="avatar" target="_blank" href="javascript:;">
+                                    <img th:src="@{/test/upload_images/e657e0d8-3ffc-4a3b-86a0-a3af0d06ab85.jpg}"
+                                         alt="64"/>
+                                </a>
+                                <div class="name">
+                                    <a class="blue-link" target="_blank" href="javascript:;">习习有话说</a>
+                                    <span class="time" data-shared-at="2017-09-18T09:21:25+08:00"></span>
+                                </div>
+                            </div>
+                            <a class="title" target="_blank" href="javascript:;">写小说的你应该知道这些常识，而不是技巧</a>
+                            <p class="abstract">
+                                写作技巧是无意识积累的结果，有些技巧对大牛来说是锦上添花，但是对小白来说可能是雪上加霜了。
+                                所以对于新手来说，你要准备的不是技巧，而是关于写小说的常识。所以如果你准备写小说，...
+                            </p>
+                            <div class="meta">
+                                <a class="collection-tag" target="_blank" href="javascript:;">读书</a>
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-read"></i> 2451
+                                </a> <a target="_blank" href="javascript:;">
+                                <i class="iconfont ic-list-comments"></i> 26
+                            </a> <span><i class="iconfont ic-list-like"></i> 205</span>
+                                <span><i class="iconfont ic-list-money"></i> 1</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="note-17216611" data-note-id="17216611" class="have-img">
+                        <a class="wrap-img" href="javascript:;" target="_blank">
+                            <img th:data-echo="@{/test/upload_images/3321285-71e54e7f69d25953.jpg}"
+                                 class="img-blur"
+                                 th:src="@{/test/upload_images/3321285-71e54e7f69d25953.jpg}"
+                                 alt="120"/>
+                        </a>
+                        <div class="content">
+                            <div class="author">
+                                <a class="avatar" target="_blank" href="javascript:;">
+                                    <img th:src="@{/test/upload_images/6ada9e54-9ea3-4ec7-8c57-1999bacd7601.jpg}"
+                                         alt="64"/>
+                                </a>
+                                <div class="name">
+                                    <a class="blue-link" target="_blank" href="javascript:;">九线作家_Kosion宋觉明</a>
+                                    <span class="time" data-shared-at="2017-09-18T09:11:38+08:00"></span>
+                                </div>
+                            </div>
+                            <a class="title" target="_blank" href="javascript:;">毕业后，我过着死鱼一样的生活</a>
+                            <p class="abstract">
+                                你知道你自己想要什么吗？看完这句话，你需要停顿三秒。﻿ 我不知道。﻿ 可悲的是，我还没有钱。﻿ 更可悲的是，我没有努力。﻿ ﻿01
+                                最近一直不开心，抱怨工作，抱怨生活，也抱怨...
+                            </p>
+                            <div class="meta">
+                                <a class="collection-tag" target="_blank" href="javascript:;">散文</a>
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-read"></i> 6614
+                                </a> <a target="_blank" href="javascript:;">
+                                <i class="iconfont ic-list-comments"></i> 239
+                            </a> <span><i class="iconfont ic-list-like"></i> 217</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="note-17306896" data-note-id="17306896" class="have-img">
+                        <a class="wrap-img" href="javascript:;" target="_blank">
+                            <img th:data-echo="@{/test/upload_images/5889454-657026c6b63e0cea.jpg}"
+                                 class="img-blur"
+                                 th:src="@{/test/upload_images/5889454-657026c6b63e0cea}"
+                                 alt="120"/>
+                        </a>
+                        <div class="content">
+                            <div class="author">
+                                <a class="avatar" target="_blank" href="javascript:;">
+                                    <img th:src="@{/test/upload_images/216fe347-e666-438e-9fd3-82e02fcd2a0c.jpg}"
+                                         alt="64"/>
+                                </a>
+                                <div class="name">
+                                    <a class="blue-link" target="_blank" href="javascript:;">新世相</a>
+                                    <span class="time" data-shared-at="2017-09-20T10:15:48+08:00"></span>
+                                </div>
+                            </div>
+                            <a class="title" target="_blank" href="javascript:;">用快手的有钱人：我只刷了10万块，我欠快手太多</a>
+                            <p class="abstract">
+                                点击上方蓝字关注「新世相」，我们终将改变潮水的方向。 ​Sayings： 去年有一篇引起巨大争议的文章，说 "快手" 上有一个人们不知道的中国农村。作者说那些激烈的表演是
+                                "...
+                            </p>
+                            <div class="meta">
+                                <a class="collection-tag" target="_blank" href="javascript:;">今日看点</a>
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-read"></i> 335
+                                </a> <a target="_blank" href="javascript:;">
+                                <i class="iconfont ic-list-comments"></i> 1
+                            </a> <span><i class="iconfont ic-list-like"></i> 5</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="note-17294341" data-note-id="17294341" class="">
+                        <div class="content">
+                            <div class="author">
+                                <a class="avatar" target="_blank" href="javascript:;">
+                                    <img th:src="@{/test/upload_images/84f5d846-75b6-4abb-92d7-51e66dbb6a31.JPG}"
+                                         alt="64"/>
+                                </a>
+                                <div class="name">
+                                    <a class="blue-link" target="_blank" href="javascript:;">厨室机密</a>
+                                    <span class="time" data-shared-at="2017-09-19T22:51:28+08:00"></span>
+                                </div>
+                            </div>
+                            <a class="title" target="_blank" href="javascript:;">CoCo壱番屋，"食屎啦你"</a>
+                            <p class="abstract">
+                                1. 洗手要求严苛，实际不洗； 2. 洗碗池被食物残渣堵住，整个上午都不换水； 3. 重点：鸡屎掉进蛋液，迅速搅拌，做成蛋包饭给您吃了； 4.
+                                米饭基本无可挑剔，有时优先卖剩...
+                            </p>
+                            <div class="meta">
+                                <a class="collection-tag" target="_blank" href="javascript:;">美食</a>
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-read"></i> 204
+                                </a> <a target="_blank" href="javascript:;">
+                                <i class="iconfont ic-list-comments"></i> 2
+                            </a> <span><i class="iconfont ic-list-like"></i> 3</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="note-17215651" data-note-id="17215651" class="have-img">
+                        <a class="wrap-img" href="javascript:;" target="_blank">
+                            <img th:data-echo="@{/test/upload_images/2716242-ee57eae462dd44ca.jpg}"
+                                 class="img-blur"
+                                 th:src="@{/test/upload_images/2716242-ee57eae462dd44ca.jpg}"
+                                 alt="120"/>
+                        </a>
+                        <div class="content">
+                            <div class="author">
+                                <a class="avatar" target="_blank" href="javascript:;">
+                                    <img th:src="@{/test/upload_images/dade7369-fc84-4d51-a5c9-71543077a325.jpg}"
+                                         alt="64"/>
+                                </a>
+                                <div class="name">
+                                    <a class="blue-link" target="_blank" href="javascript:;">大雄老师1</a>
+                                    <span class="time" data-shared-at="2017-09-18T08:32:55+08:00"></span>
+                                </div>
+                            </div>
+                            <a class="title" target="_blank" href="javascript:;">感谢李雨桐，让我们认识了这样的"薛之谦"</a>
+                            <p class="abstract">
+                                说实话，在知道李雨桐撕薛之谦后，作为一个听薛之谦歌曲十年之久的歌迷，从一开始的惊讶，到后来的平静，直到现在的感谢……
+                                喜欢薛之谦，应该是06年，也就是《认真的雪》大街小巷传播...
+                            </p>
+                            <div class="meta">
+                                <a class="collection-tag" target="_blank" href="javascript:;">娱乐八卦</a>
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-read"></i> 9763
+                                </a> <a target="_blank" href="javascript:;">
+                                <i class="iconfont ic-list-comments"></i> 161
+                            </a> <span><i class="iconfont ic-list-like"></i> 185</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="note-17199001" data-note-id="17199001" class="have-img">
+                        <a class="wrap-img" href="javascript:;" target="_blank">
+                            <img th:data-echo="@{/test/upload_images/7447436-4c37ebfc6b1fab69.png}"
+                                 class="img-blur"
+                                 th:src="@{/test/upload_images/7447436-4c37ebfc6b1fab69.png}"
+                                 alt="120"/>
+                        </a>
+                        <div class="content">
+                            <div class="author">
+                                <a class="avatar" target="_blank" href="javascript:;">
+                                    <img th:src="@{/test/upload_images/e657e0d8-3ffc-4a3b-86a0-a3af0d06ab85.jpg}"
+                                         alt="64"/>
+                                </a>
+                                <div class="name">
+                                    <a class="blue-link" target="_blank" href="javascript:;">习习有话说</a>
+                                    <span class="time" data-shared-at="2017-09-18T09:21:25+08:00"></span>
+                                </div>
+                            </div>
+                            <a class="title" target="_blank" href="javascript:;">写小说的你应该知道这些常识，而不是技巧</a>
+                            <p class="abstract">
+                                写作技巧是无意识积累的结果，有些技巧对大牛来说是锦上添花，但是对小白来说可能是雪上加霜了。
+                                所以对于新手来说，你要准备的不是技巧，而是关于写小说的常识。所以如果你准备写小说，...
+                            </p>
+                            <div class="meta">
+                                <a class="collection-tag" target="_blank" href="javascript:;">读书</a>
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-read"></i> 2451
+                                </a> <a target="_blank" href="javascript:;">
+                                <i class="iconfont ic-list-comments"></i> 26
+                            </a> <span><i class="iconfont ic-list-like"></i> 205</span>
+                                <span><i class="iconfont ic-list-money"></i> 1</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="note-17216611" data-note-id="17216611" class="have-img">
+                        <a class="wrap-img" href="javascript:;" target="_blank">
+                            <img th:data-echo="@{/test/upload_images/3321285-71e54e7f69d25953.jpg}"
+                                 class="img-blur"
+                                 th:src="@{/test/upload_images/3321285-71e54e7f69d25953.jpg}"
+                                 alt="120"/>
+                        </a>
+                        <div class="content">
+                            <div class="author">
+                                <a class="avatar" target="_blank" href="javascript:;">
+                                    <img th:src="@{/test/upload_images/6ada9e54-9ea3-4ec7-8c57-1999bacd7601.jpg}"
+                                         alt="64"/>
+                                </a>
+                                <div class="name">
+                                    <a class="blue-link" target="_blank" href="javascript:;">九线作家_Kosion宋觉明</a>
+                                    <span class="time" data-shared-at="2017-09-18T09:11:38+08:00"></span>
+                                </div>
+                            </div>
+                            <a class="title" target="_blank" href="javascript:;">毕业后，我过着死鱼一样的生活</a>
+                            <p class="abstract">
+                                你知道你自己想要什么吗？看完这句话，你需要停顿三秒。﻿ 我不知道。﻿ 可悲的是，我还没有钱。﻿ 更可悲的是，我没有努力。﻿ ﻿01
+                                最近一直不开心，抱怨工作，抱怨生活，也抱怨...
+                            </p>
+                            <div class="meta">
+                                <a class="collection-tag" target="_blank" href="javascript:;">散文</a>
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-read"></i> 6614
+                                </a> <a target="_blank" href="javascript:;">
+                                <i class="iconfont ic-list-comments"></i> 239
+                            </a> <span><i class="iconfont ic-list-like"></i> 217</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="note-17306896" data-note-id="17306896" class="have-img">
+                        <a class="wrap-img" href="javascript:;" target="_blank">
+                            <img th:data-echo="@{/test/upload_images/5889454-657026c6b63e0cea.jpg}"
+                                 class="img-blur"
+                                 th:src="@{/test/upload_images/5889454-657026c6b63e0cea}"
+                                 alt="120"/>
+                        </a>
+                        <div class="content">
+                            <div class="author">
+                                <a class="avatar" target="_blank" href="javascript:;">
+                                    <img th:src="@{/test/upload_images/216fe347-e666-438e-9fd3-82e02fcd2a0c.jpg}"
+                                         alt="64"/>
+                                </a>
+                                <div class="name">
+                                    <a class="blue-link" target="_blank" href="javascript:;">新世相</a>
+                                    <span class="time" data-shared-at="2017-09-20T10:15:48+08:00"></span>
+                                </div>
+                            </div>
+                            <a class="title" target="_blank" href="javascript:;">用快手的有钱人：我只刷了10万块，我欠快手太多</a>
+                            <p class="abstract">
+                                点击上方蓝字关注「新世相」，我们终将改变潮水的方向。 ​Sayings： 去年有一篇引起巨大争议的文章，说 "快手" 上有一个人们不知道的中国农村。作者说那些激烈的表演是
+                                "...
+                            </p>
+                            <div class="meta">
+                                <a class="collection-tag" target="_blank" href="javascript:;">今日看点</a>
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-read"></i> 335
+                                </a> <a target="_blank" href="javascript:;">
+                                <i class="iconfont ic-list-comments"></i> 1
+                            </a> <span><i class="iconfont ic-list-like"></i> 5</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="note-17294341" data-note-id="17294341" class="">
+                        <div class="content">
+                            <div class="author">
+                                <a class="avatar" target="_blank" href="javascript:;">
+                                    <img th:src="@{/test/upload_images/84f5d846-75b6-4abb-92d7-51e66dbb6a31.JPG}"
+                                         alt="64"/>
+                                </a>
+                                <div class="name">
+                                    <a class="blue-link" target="_blank" href="javascript:;">厨室机密</a>
+                                    <span class="time" data-shared-at="2017-09-19T22:51:28+08:00"></span>
+                                </div>
+                            </div>
+                            <a class="title" target="_blank" href="javascript:;">CoCo壱番屋，"食屎啦你"</a>
+                            <p class="abstract">
+                                1. 洗手要求严苛，实际不洗； 2. 洗碗池被食物残渣堵住，整个上午都不换水； 3. 重点：鸡屎掉进蛋液，迅速搅拌，做成蛋包饭给您吃了； 4.
+                                米饭基本无可挑剔，有时优先卖剩...
+                            </p>
+                            <div class="meta">
+                                <a class="collection-tag" target="_blank" href="javascript:;">美食</a>
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-read"></i> 204
+                                </a> <a target="_blank" href="javascript:;">
+                                <i class="iconfont ic-list-comments"></i> 2
+                            </a> <span><i class="iconfont ic-list-like"></i> 3</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="note-17215651" data-note-id="17215651" class="have-img">
+                        <a class="wrap-img" href="javascript:;" target="_blank">
+                            <img th:data-echo="@{/test/upload_images/2716242-ee57eae462dd44ca.jpg}"
+                                 class="img-blur"
+                                 th:src="@{/test/upload_images/2716242-ee57eae462dd44ca.jpg}"
+                                 alt="120"/>
+                        </a>
+                        <div class="content">
+                            <div class="author">
+                                <a class="avatar" target="_blank" href="javascript:;">
+                                    <img th:src="@{/test/upload_images/dade7369-fc84-4d51-a5c9-71543077a325.jpg}"
+                                         alt="64"/>
+                                </a>
+                                <div class="name">
+                                    <a class="blue-link" target="_blank" href="javascript:;">大雄老师1</a>
+                                    <span class="time" data-shared-at="2017-09-18T08:32:55+08:00"></span>
+                                </div>
+                            </div>
+                            <a class="title" target="_blank" href="javascript:;">感谢李雨桐，让我们认识了这样的"薛之谦"</a>
+                            <p class="abstract">
+                                说实话，在知道李雨桐撕薛之谦后，作为一个听薛之谦歌曲十年之久的歌迷，从一开始的惊讶，到后来的平静，直到现在的感谢……
+                                喜欢薛之谦，应该是06年，也就是《认真的雪》大街小巷传播...
+                            </p>
+                            <div class="meta">
+                                <a class="collection-tag" target="_blank" href="javascript:;">娱乐八卦</a>
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-read"></i> 9763
+                                </a> <a target="_blank" href="javascript:;">
+                                <i class="iconfont ic-list-comments"></i> 161
+                            </a> <span><i class="iconfont ic-list-like"></i> 185</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="note-17199001" data-note-id="17199001" class="have-img">
+                        <a class="wrap-img" href="javascript:;" target="_blank">
+                            <img th:data-echo="@{/test/upload_images/7447436-4c37ebfc6b1fab69.png}"
+                                 class="img-blur"
+                                 th:src="@{/test/upload_images/7447436-4c37ebfc6b1fab69.png}"
+                                 alt="120"/>
+                        </a>
+                        <div class="content">
+                            <div class="author">
+                                <a class="avatar" target="_blank" href="javascript:;">
+                                    <img th:src="@{/test/upload_images/e657e0d8-3ffc-4a3b-86a0-a3af0d06ab85.jpg}"
+                                         alt="64"/>
+                                </a>
+                                <div class="name">
+                                    <a class="blue-link" target="_blank" href="javascript:;">习习有话说</a>
+                                    <span class="time" data-shared-at="2017-09-18T09:21:25+08:00"></span>
+                                </div>
+                            </div>
+                            <a class="title" target="_blank" href="javascript:;">写小说的你应该知道这些常识，而不是技巧</a>
+                            <p class="abstract">
+                                写作技巧是无意识积累的结果，有些技巧对大牛来说是锦上添花，但是对小白来说可能是雪上加霜了。
+                                所以对于新手来说，你要准备的不是技巧，而是关于写小说的常识。所以如果你准备写小说，...
+                            </p>
+                            <div class="meta">
+                                <a class="collection-tag" target="_blank" href="javascript:;">读书</a>
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-read"></i> 2451
+                                </a> <a target="_blank" href="javascript:;">
+                                <i class="iconfont ic-list-comments"></i> 26
+                            </a> <span><i class="iconfont ic-list-like"></i> 205</span>
+                                <span><i class="iconfont ic-list-money"></i> 1</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="note-17216611" data-note-id="17216611" class="have-img">
+                        <a class="wrap-img" href="javascript:;" target="_blank">
+                            <img th:data-echo="@{/test/upload_images/3321285-71e54e7f69d25953.jpg}"
+                                 class="img-blur"
+                                 th:src="@{/test/upload_images/3321285-71e54e7f69d25953.jpg}"
+                                 alt="120"/>
+                        </a>
+                        <div class="content">
+                            <div class="author">
+                                <a class="avatar" target="_blank" href="javascript:;">
+                                    <img th:src="@{/test/upload_images/6ada9e54-9ea3-4ec7-8c57-1999bacd7601.jpg}"
+                                         alt="64"/>
+                                </a>
+                                <div class="name">
+                                    <a class="blue-link" target="_blank" href="javascript:;">九线作家_Kosion宋觉明</a>
+                                    <span class="time" data-shared-at="2017-09-18T09:11:38+08:00"></span>
+                                </div>
+                            </div>
+                            <a class="title" target="_blank" href="javascript:;">毕业后，我过着死鱼一样的生活</a>
+                            <p class="abstract">
+                                你知道你自己想要什么吗？看完这句话，你需要停顿三秒。﻿ 我不知道。﻿ 可悲的是，我还没有钱。﻿ 更可悲的是，我没有努力。﻿ ﻿01
+                                最近一直不开心，抱怨工作，抱怨生活，也抱怨...
+                            </p>
+                            <div class="meta">
+                                <a class="collection-tag" target="_blank" href="javascript:;">散文</a>
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-read"></i> 6614
+                                </a> <a target="_blank" href="javascript:;">
+                                <i class="iconfont ic-list-comments"></i> 239
+                            </a> <span><i class="iconfont ic-list-like"></i> 217</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="note-17306896" data-note-id="17306896" class="have-img">
+                        <a class="wrap-img" href="javascript:;" target="_blank">
+                            <img th:data-echo="@{/test/upload_images/5889454-657026c6b63e0cea.jpg}"
+                                 class="img-blur"
+                                 th:src="@{/test/upload_images/5889454-657026c6b63e0cea}"
+                                 alt="120"/>
+                        </a>
+                        <div class="content">
+                            <div class="author">
+                                <a class="avatar" target="_blank" href="javascript:;">
+                                    <img th:src="@{/test/upload_images/216fe347-e666-438e-9fd3-82e02fcd2a0c.jpg}"
+                                         alt="64"/>
+                                </a>
+                                <div class="name">
+                                    <a class="blue-link" target="_blank" href="javascript:;">新世相</a>
+                                    <span class="time" data-shared-at="2017-09-20T10:15:48+08:00"></span>
+                                </div>
+                            </div>
+                            <a class="title" target="_blank" href="javascript:;">用快手的有钱人：我只刷了10万块，我欠快手太多</a>
+                            <p class="abstract">
+                                点击上方蓝字关注「新世相」，我们终将改变潮水的方向。 ​Sayings： 去年有一篇引起巨大争议的文章，说 "快手" 上有一个人们不知道的中国农村。作者说那些激烈的表演是
+                                "...
+                            </p>
+                            <div class="meta">
+                                <a class="collection-tag" target="_blank" href="javascript:;">今日看点</a>
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-read"></i> 335
+                                </a> <a target="_blank" href="javascript:;">
+                                <i class="iconfont ic-list-comments"></i> 1
+                            </a> <span><i class="iconfont ic-list-like"></i> 5</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="note-17294341" data-note-id="17294341" class="">
+                        <div class="content">
+                            <div class="author">
+                                <a class="avatar" target="_blank" href="javascript:;">
+                                    <img th:src="@{/test/upload_images/84f5d846-75b6-4abb-92d7-51e66dbb6a31.JPG}"
+                                         alt="64"/>
+                                </a>
+                                <div class="name">
+                                    <a class="blue-link" target="_blank" href="javascript:;">厨室机密</a>
+                                    <span class="time" data-shared-at="2017-09-19T22:51:28+08:00"></span>
+                                </div>
+                            </div>
+                            <a class="title" target="_blank" href="javascript:;">CoCo壱番屋，"食屎啦你"</a>
+                            <p class="abstract">
+                                1. 洗手要求严苛，实际不洗； 2. 洗碗池被食物残渣堵住，整个上午都不换水； 3. 重点：鸡屎掉进蛋液，迅速搅拌，做成蛋包饭给您吃了； 4.
+                                米饭基本无可挑剔，有时优先卖剩...
+                            </p>
+                            <div class="meta">
+                                <a class="collection-tag" target="_blank" href="javascript:;">美食</a>
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-read"></i> 204
+                                </a> <a target="_blank" href="javascript:;">
+                                <i class="iconfont ic-list-comments"></i> 2
+                            </a> <span><i class="iconfont ic-list-like"></i> 3</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <!-- 文章列表模块 -->
+            </div>
+        </div>
+        <div class="col-xs-7 col-xs-offset-1 aside">
+            <div class="board">
+                <a target="_blank" href="javascript:;">
+                    <img th:src="@{/test/assets/web/banner-s-1-b8ff9ec59f72ea88ecc8c42956f41f78.png}" alt="Banner s 1"/>
+                </a> <a target="_blank" href="javascript:;"><img
+                    th:src="@{/test/assets/web/banner-s-3-7123fd94750759acf7eca05b871e9d17.png}" alt="Banner s 3"/></a>
+                <a target="_blank" href="javascript:;"><img
+                        th:src="@{/test/assets/web/banner-s-4-b70da70d679593510ac93a172dfbaeaa.png}" alt="Banner s 4"/></a>
+                <a utm_medium="index-banner-s" target="_blank" href="javascript:;"><img th:src="@{/test/assets/web/惠农出版.jpg}"
+                                                                                        alt="Banner s 5"/></a>
+                <a target="_blank" href="javascript:;"><img th:src="@{/test/assets/web/惠农大学堂.jpg}" alt="Banner s 6"/></a>
+            </div>
+            <!-- 首页右侧 App 下载提示 -->
+            <a class="col-xs-8 download" data-toggle="popover" data-placement="top" data-html="true"
+               data-trigger="hover"
+               data-content="&lt;img src=&quot;assets/web/download-app-qrcode-0257cd2c1d094cba9caa7bdc9e5a1393.png&quot; alt=&quot;Download app qrcode&quot; /&gt;"
+               href="javascript:;">
+                <img class="qrcode" th:src="@{/test/assets/web/download-app-qrcode-0257cd2c1d094cba9caa7bdc9e5a1393.png}"
+                     alt="Download app qrcode"/>
+                <div class="info">
+                    <div class="title">下载惠农手机App<i class="iconfont ic-link"></i></div>
+                    <div class="description">惠农有网，农品共享</div>
+                </div>
+            </a>
+            <!-- 简书日报 -->
+            <div class="jianshu-daily">
+                <div class="title">
+                    惠农日报
+                    <a target="_blank" href="javascript:;">查看往期</a>
+                </div>
+                <a target="_blank" class="note" href="javascript:;">
+                    <div class="note-title">人间故事馆008——我在北京开地铁,每天送一万人回家</div>
+                </a> <a target="_blank" class="note" href="javascript:;">
+                <img th:src="@{/test/upload_images/568470-0a0824cf445d8acf.png}"
+                     alt="96"/>
+                <div class="note-title">黛玉早报170918 —— 《23岁的我，开始逼着我妈去相亲角》</div>
+            </a>
+            </div>
+            <!-- 推荐作者 -->
+            <div data-vcomp="recommended-author-list"></div>
+        </div>
+    </div>
+</div>
+<div data-vcomp="side-tool"></div>
+<footer class="container">
+    <div class="row">
+        <div class="col-xs-17 main">
+            <p align="center"><a target="_blank" href="javascript:;">关于惠农</a><em> · </em><a target="_blank"
+                                                                                            href="javascript:;">联系我们</a><em>
+                · </em><a target="_blank" href="javascript:;">加入我们</a><em> · </em><a target="_blank"
+                                                                                     href="javascript:;">惠农出版</a><em>
+                · </em><a target="_blank" href="javascript:;">帮助中心</a><em> · </em></p>
+        </div>
+    </div>
+</footer>
+<script type="application/json" data-name="page-data">
+    {
+        "user_signed_in": false,
+        "locale": "zh-CN",
+        "os": "other",
+        "read_mode": "day",
+        "read_font": "font2"
+    }
+</script>
+<script th:src="@{/test/assets/babel-polyfill-8053f0c4c81c27b7aff2.js}"></script>
+<script th:src="@{/test/assets/web-base-cc0ef4171979d91c5884.js}"></script>
+<script th:src="@{/test/assets/web-780e8747353f13ebad82.js}"></script>
+<script th:src="@{/test/assets/web/pages/home/index/entry-91155bcdfdd2414381a7.js}"></script>
+</body>
+
+</html>
