@@ -11,7 +11,7 @@ import team.se.acommunity.entity.User;
 @Component
 public class HostHolder {
     /**
-     * 可以查看这个类的源码，他是先取出当前线程，但后将数据存储到当前线程中去，数据的生命周期就是这个线程的生命周期
+     * 可以查看这个类的源码，他是先取出当前线程，然后将数据存储到当前线程中去，数据的生命周期就是这个线程的生命周期
      * 数据是被存到当前线程的map中
      */
     private ThreadLocal<User> users = new ThreadLocal<>();

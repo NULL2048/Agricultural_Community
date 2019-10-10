@@ -25,7 +25,7 @@ public class LoginRequiredInterceptor implements HandlerInterceptor {
             Method method = handlerMethod.getMethod();
             // 获得这个方法的指定注解
             LoginRequired loginRequired = method.getAnnotation(LoginRequired.class);
-            // 取到了loginRequired表明访问这个方法需要登陆，但是hostHolder娶不到User说明没有登陆，这就说明出现了问题
+            // 取到了loginRequired表明访问这个方法需要登陆，但是hostHolder取不到User说明没有登陆，这就说明出现了问题
             if (loginRequired != null && hostHolder.getUser() == null) {
                 response.sendRedirect(request.getContextPath() + "/login");
                 return false;

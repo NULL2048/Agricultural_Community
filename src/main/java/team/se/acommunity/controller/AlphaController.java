@@ -198,4 +198,15 @@ public class AlphaController {
         System.out.println(session.getAttribute("name"));
         return "get session";
     }
+
+    // ajsx示例
+    @RequestMapping(path = "/ajax", method = RequestMethod.POST)
+    @ResponseBody // 因为要返回字符串，而不是请求转发或者重定向什么的，所以要加上这个标签
+    public String testAjax(String name, int age) {
+        System.out.println(name);
+        System.out.println(age);
+        // 将json格式的字符串响应给浏览器端
+        return CommunityUtil.getJSONString(0, "操作成功");
+    }
+
 }
