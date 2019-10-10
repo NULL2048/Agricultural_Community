@@ -11,6 +11,7 @@
 	<groupId>team.se.acommunity</groupId>
 	<artifactId>Agricultural_Community</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>Agricultural_Community</name>
 	<description>agricultural communities</description>
 
