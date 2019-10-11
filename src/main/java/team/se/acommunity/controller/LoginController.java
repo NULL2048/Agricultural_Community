@@ -60,9 +60,9 @@ public class LoginController implements CommunityConstant {
         Map<String, Object> map = userService.register(user);
         if (map == null || map.isEmpty()) {
             model.addAttribute("msg", "恭喜您，注册成功，我们已经向您的邮箱发送了一封激活邮件，请尽快激活");
-            model.addAttribute("target", "/index");
+            model.addAttribute("target", "/index"); // 这个/index指的是controller的访问路径
             // 将model传给下面这个return的界面，然后跳转到这个界面
-            return "/site/operate-result";
+            return "/test/operate-result";
         } else { // 注册失败
             // 取到service传过来的数据，存入到model中，用来将这些数据传送给/site/register这个界面
             model.addAttribute("usernameMsg", map.get("usernameMsg"));
@@ -70,7 +70,7 @@ public class LoginController implements CommunityConstant {
             model.addAttribute("emailMsg", map.get("emailMsg"));
 
             // 注册失败就跳转回/site/register这个界面
-            return "/site/register";
+            return "/test/register";
         }
     }
 
@@ -165,7 +165,7 @@ public class LoginController implements CommunityConstant {
                         // 通过cookieValue这个注解来获取cookie中的内容
     public String logout(@CookieValue("ticket") String ticket) {
         userService.logout(ticket);
-        return "redirect:/login";
+        return "redirect:/index";
     }
 
     @RequestMapping(path = "/forget", method = RequestMethod.GET)

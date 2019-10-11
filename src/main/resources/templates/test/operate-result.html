@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="icon" href="https://static.nowcoder.com/images/logo_87_87.png"/>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/global.css}" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/test/assets/web-e7e403d2843dd1edd8db.css}"/>
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/test/assets/web/pages/home/index/entry-7642b94e17df29096c13.css}"/>
+	<title>惠农网-操作结果</title>
+</head>
+<body class="bg-white">
+	<div class="nk-container">
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="width-limit">
+				<!-- 左上方 Logo -->
+				<a class="logo" href="index.html"><img th:src="@{/test/assets/web/44.png}" alt="Logo"/></a>
+				<!-- 右上角 -->
+				<!-- 未登录显示登录/注册/写文章 -->
+				<a class="btn write-btn" target="_blank" href="javascript:;">
+					<i class="iconfont ic-write"></i>写文章
+				</a>
+				<a class="btn sign-up" th:href="@{/register}" th:if="${loginUser == null}">注册</a>
+				<a class="btn log-in" th:href="@{/login}" th:if="${loginUser == null}">登录</a>
+
+				<!-- 如果用户登录，显示下拉菜单 下面这个div就是下拉菜单的位置-->
+				<div class="user" th:if="${loginUser != null}">
+					<div data-hover="dropdown">
+						<a class="avatar" href="javascript:;"><img
+								src="assets/web/1-04bbeead395d74921af6a4e8214b4f61.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120"
+								alt="120"/></a>
+					</div>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="javascript:;">
+								<i class="iconfont ic-navigation-profile"></i><span>我的主页</span>
+							</a>
+						</li>
+						<li>
+							<!-- TODO bookmarks_path -->
+							<a href="javascript:;">
+								<i class="iconfont ic-navigation-mark"></i><span>收藏的文章</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;">
+								<i class="iconfont ic-navigation-like"></i><span>喜欢的文章</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;">
+								<i class="iconfont ic-navigation-wallet"></i><span>我的钱包</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;">
+								<i class="iconfont ic-navigation-settings"></i><span>设置</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;">
+								<i class="iconfont ic-navigation-feedback"></i><span>帮助与反馈</span>
+							</a>
+						</li>
+						<li>
+							<a rel="nofollow" data-method="delete" href="javascript:;">
+								<i class="iconfont ic-navigation-signout"></i><span>退出</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<!--导航栏夜间模式按钮-->
+				<div id="view-mode-ctrl">
+				</div>
+
+				<!--这个使导航栏左边的首页，下载app按钮。没有登陆时显示-->
+				<div class="container" th:if="${loginUser == null}">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu"
+								aria-expanded="false">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div>
+					<div class="collapse navbar-collapse" id="menu">
+						<ul class="nav navbar-nav">
+							<li class="active">
+								<a href="javascript:;">
+									<span class="menu-text">首页</span><i class="iconfont ic-navigation-discover menu-icon"></i>
+								</a></li>
+							<li class="">
+								<a class="app-download-btn" href="javascript:;"><span class="menu-text">下载App</span><i
+										class="iconfont ic-navigation-download menu-icon"></i></a>
+							</li>
+							<!--搜索栏-->
+							<li class="search">
+								<form target="_blank" action="/search" accept-charset="UTF-8" method="get"><input name="utf8"
+																												  type="hidden"
+																												  value="&#x2713;"/>
+									<input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索"
+										   class="search-input"/>
+									<a class="search-btn" href="javascript:void(null)"><i class="iconfont ic-search"></i></a>
+								</form>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!--导航栏左边的发现，关注，消息按钮 登录时显示-->
+				<div class="container" th:if="${loginUser != null}">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu"
+								aria-expanded="false">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div>
+					<div class="collapse navbar-collapse" id="menu">
+						<ul class="nav navbar-nav">
+							<li class="">
+								<a href="javascript:;">
+									<span class="menu-text">发现</span>
+									<i class="iconfont ic-navigation-discover menu-icon"></i>
+								</a>
+							</li>
+							<li class="">
+								<a href="javascript:;">
+									<span class="menu-text">关注</span>
+									<i class="iconfont ic-navigation-follow menu-icon"></i>
+								</a>
+							</li>
+							<li class="notification v-notification-dropdown-menu">
+								<a class="notification-btn" href="javascript:;" data-hover="dropdown">
+									<span class="menu-text">消息</span>
+									<i class="iconfont ic-navigation-notification menu-icon"></i>
+									<span class="badge"></span>
+								</a>
+							</li>
+							<!--导航栏搜索框-->
+							<li class="search">
+								<form target="_blank" action="/search" accept-charset="UTF-8" method="get">
+									<input name="utf8" type="hidden" value="&#x2713;"/>
+									<input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索"
+										   class="search-input"/>
+									<a class="search-btn" href="javascript:void(null)">
+										<i class="iconfont ic-search"></i>
+									</a>
+								</form>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<!-- 内容 -->
+		<div class="main">
+			<div class="container mt-5">
+				<div class="jumbotron">
+					<p class="lead" th:text="${msg}">您的账号已经激活成功,可以正常使用了!</p>
+					<hr class="my-4">
+					<p>
+<!--						系统会在 <span id="seconds" class="text-danger">8</span> 秒后自动跳转,-->
+						您也可以点此 <a id="target" th:href="@{${target}}" class="text-primary">链接</a>, 手动跳转!
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<!--网页底部-->
+		<footer class="container">
+			<div class="row">
+				<div class="col-xs-17 main">
+					<p align="center">
+						<a target="_blank" href="javascript:;">关于惠农</a><em> · </em>
+						<a target="_blank" href="javascript:;">联系我们</a><em>· </em>
+						<a target="_blank" href="javascript:;">加入我们</a><em> · </em>
+						<a target="_blank" href="javascript:;">惠农出版</a><em>· </em>
+						<a target="_blank" href="javascript:;">帮助中心</a><em> · </em>
+					</p>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+	<script>
+		$(function(){
+			setInterval(function(){
+				var seconds = $("#seconds").text();
+				$("#seconds").text(--seconds);
+				if(seconds == 0) {
+					location.href = $("#target").attr("href");
+				}
+			}, 1000);
+		});
+	</script>
+	<script type="application/json" data-name="page-data">
+		{
+			"user_signed_in": false,
+			"locale": "zh-CN",
+			"os": "other",
+			"read_mode": "day",
+			"read_font": "font2"
+		}
+	</script>
+	<script th:src="@{/test/assets/babel-polyfill-8053f0c4c81c27b7aff2.js}"></script>
+	<script th:src="@{/test/assets/web-base-cc0ef4171979d91c5884.js}"></script>
+	<script th:src="@{/test/assets/web-780e8747353f13ebad82.js}"></script>
+	<script th:src="@{/test/assets/web/pages/home/index/entry-91155bcdfdd2414381a7.js}"></script>
+	<script th:src="@{/test/assets/web-6f284f71bf6839d4fe98.js}"></script>
+</body>
+</html>

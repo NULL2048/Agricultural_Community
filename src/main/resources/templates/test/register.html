@@ -23,30 +23,34 @@
 			</div>
 		</div>
 
-		<div class="login form">
-			<div class="group">
-				<div class="group-ipt email">
-					<input type="email" name="email" id="email" class="ipt" placeholder="邮箱地址" required>
-				</div>
-				<div class="group-ipt user">
-					<input type="text" name="user" id="user" class="ipt" placeholder="选择一个用户名" required>
-				</div>
-				<div class="group-ipt password">
-					<input type="password" name="password" id="password" class="ipt" placeholder="设置登录密码" required>
-				</div>
-				<div class="group-ipt password1">
-					<input type="password" name="password1" id="password1" class="ipt" placeholder="重复密码" required>
-				</div>
-				<div class="group-ipt verify">
-					<input type="text" name="verify" id="verify" class="ipt" placeholder="输入验证码" required>
-					<img src="http://zrong.me/home/index/imgcode?id=" class="imgcode">
+		<form th:action="@{/register}" method="post">
+			<div class="login form">
+				<div class="group">
+					<div class="group-ipt email">
+						<input type="email" name="email" id="email" th:value="${user!=null?user.email:''}" class="ipt" placeholder="邮箱地址" required>
+					</div>
+					<div class="group-ipt user">
+						<input type="text" name="username" id="user" th:value="${user!=null?user.username:''}" class="ipt" placeholder="选择一个用户名" required>
+					</div>
+					<div class="group-ipt password">
+						<input type="password" name="password" id="password" th:value="${user!=null?user.password:''}" class="ipt" placeholder="设置登录密码" required>
+					</div>
+					<div class="group-ipt password1">
+						<input type="password" name="password1" id="password1" th:value="${user!=null?user.password:''}" class="ipt" placeholder="重复密码" required>
+					</div>
+					<div class="group-ipt verify">
+						<input type="text" name="verify" id="verify" class="ipt" placeholder="输入验证码" required>
+						<!--验证码图片-->
+						<img th:src="@{/kaptcha}" id="kaptcha" class="imgcode">
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="button">
-			<button type="submit" class="login-btn register-btn" id="button">注册</button>
-		</div>
+			<div class="button">
+				<button type="submit" class="login-btn register-btn" id="button">注册</button>
+			</div>
+		</form>
+
 	</div>
 </div>
 
@@ -69,8 +73,11 @@
 	},function(){
 		layer.closeAll('tips');
 	}).click(function(){
-		$(this).attr('src','http://zrong.me/home/index/imgcode?id=' + Math.random());
-	})
+		var path = "/ac" + "/kaptcha?p=" + Math.random();
+		// 下面这个方法是把path写入到上面那个验证码标签的src中去
+		$(this).attr('src',path);
+		// #后面是取的id,这里的this就是表示的当前这个标签，将这个id的标签中的src属性内容换成path的内容，path的路径就去访问LoginController中那个生成验证码的方法，它获取的
+	});
 
 	$(".login-btn").click(function(){
 		var email = $("#email").val();

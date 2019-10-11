@@ -46,7 +46,13 @@ public class UserController {
     @LoginRequired
     @RequestMapping(path = "/setting", method = RequestMethod.GET)
     public String getSettingPage() {
-        return "/site/setting";
+        return "/test/setting";
+    }
+
+    @LoginRequired
+    @RequestMapping(path = "/setting/basic", method = RequestMethod.GET)
+    public String getSettingBasicPage() {
+        return "/test/settings/basic";
     }
 
     // 上传的时候表单方法必须为post
@@ -55,7 +61,7 @@ public class UserController {
     public String uploadHeader(MultipartFile headerImage, Model model) {
         if (headerImage == null) {
             model.addAttribute("error", "您还没有选择图片");
-            return "/site/setting";
+            return "/test/setting";
         }
 
         String fileName = headerImage.getOriginalFilename();
@@ -63,7 +69,7 @@ public class UserController {
         String suffix = fileName.substring(fileName.lastIndexOf('.'));
         if (StringUtils.isBlank(suffix)) {
             model.addAttribute("error", "文件的格式不正确");
-            return "/site/setting";
+            return "/test/setting";
         }
 
         // 生成随机文件名
