@@ -90,7 +90,7 @@ public class LoginController implements CommunityConstant {
             model.addAttribute("msg", "激活失败，您的激活链接已失效");
             model.addAttribute("target", "/index");
         }
-        return "/site/operate-result";
+        return "/test/operate-result";
     }
 
     /**
