@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="icon" href="https://static.nowcoder.com/images/logo_87_87.png"/>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+<!--	<link rel="icon" href="https://static.nowcoder.com/images/logo_87_87.png"/>-->
+<!--	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">-->
 <!--	<link rel="stylesheet" th:href="@{/css/global.css}" />-->
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/test/assets/web-e7e403d2843dd1edd8db.css}"/>
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/test/assets/web/pages/home/index/entry-7642b94e17df29096c13.css}"/>
@@ -12,10 +12,12 @@
 </head>
 <body class="bg-white">
 	<div class="nk-container">
+		<!-- 全局顶部导航栏 -->
+
 		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 			<div class="width-limit">
 				<!-- 左上方 Logo -->
-				<a class="logo" href="index.html"><img th:src="@{/test/assets/web/44.png}" alt="Logo"/></a>
+				<a class="logo" th:href="@{/index}"><img th:src="@{/test/assets/web/44.png}" alt="Logo"/></a>
 				<!-- 右上角 -->
 				<!-- 未登录显示登录/注册/写文章 -->
 				<a class="btn write-btn" target="_blank" href="javascript:;">
@@ -26,10 +28,11 @@
 
 				<!-- 如果用户登录，显示下拉菜单 下面这个div就是下拉菜单的位置-->
 				<div class="user" th:if="${loginUser != null}">
+					<!--用户头像-->
 					<div data-hover="dropdown">
-						<a class="avatar" href="javascript:;"><img
-								src="assets/web/1-04bbeead395d74921af6a4e8214b4f61.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120"
-								alt="120"/></a>
+						<a class="avatar" href="javascript:;">
+							<img th:src="${loginUser.headerUrl}" alt="120"/>
+						</a>
 					</div>
 					<ul class="dropdown-menu">
 						<li>
@@ -54,8 +57,9 @@
 							</a>
 						</li>
 						<li>
-							<a href="javascript:;">
-								<i class="iconfont ic-navigation-settings"></i><span>设置</span>
+							<a th:href="@{/user/setting/basic}">
+								<i class="iconfont ic-navigation-settings"></i>
+								<span>设置</span>
 							</a>
 						</li>
 						<li>
@@ -64,8 +68,9 @@
 							</a>
 						</li>
 						<li>
-							<a rel="nofollow" data-method="delete" href="javascript:;">
-								<i class="iconfont ic-navigation-signout"></i><span>退出</span>
+							<a rel="nofollow" th:href="@{/logout}">
+								<i class="iconfont ic-navigation-signout"></i>
+								<span>退出</span>
 							</a>
 						</li>
 					</ul>
@@ -88,9 +93,11 @@
 					<div class="collapse navbar-collapse" id="menu">
 						<ul class="nav navbar-nav">
 							<li class="active">
-								<a href="javascript:;">
-									<span class="menu-text">首页</span><i class="iconfont ic-navigation-discover menu-icon"></i>
-								</a></li>
+								<a th:href="@{/index}">
+									<span class="menu-text">首页</span>
+									<i class="iconfont ic-navigation-discover menu-icon"></i>
+								</a>
+							</li>
 							<li class="">
 								<a class="app-download-btn" href="javascript:;"><span class="menu-text">下载App</span><i
 										class="iconfont ic-navigation-download menu-icon"></i></a>
@@ -173,23 +180,26 @@
 				</div>
 			</div>
 		</div>
-
-		<!--网页底部-->
-		<footer class="container">
-			<div class="row">
-				<div class="col-xs-17 main">
-					<p align="center">
-						<a target="_blank" href="javascript:;">关于惠农</a><em> · </em>
-						<a target="_blank" href="javascript:;">联系我们</a><em>· </em>
-						<a target="_blank" href="javascript:;">加入我们</a><em> · </em>
-						<a target="_blank" href="javascript:;">惠农出版</a><em>· </em>
-						<a target="_blank" href="javascript:;">帮助中心</a><em> · </em>
-					</p>
-				</div>
-			</div>
-		</footer>
 	</div>
-
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<!--网页底部-->
+	<footer class="container">
+		<div class="row">
+			<div class="col-xs-17 main">
+				<p align="center">
+					<a target="_blank" href="javascript:;">关于惠农</a><em> · </em>
+					<a target="_blank" href="javascript:;">联系我们</a><em>· </em>
+					<a target="_blank" href="javascript:;">加入我们</a><em> · </em>
+					<a target="_blank" href="javascript:;">惠农出版</a><em>· </em>
+					<a target="_blank" href="javascript:;">帮助中心</a><em> · </em>
+				</p>
+			</div>
+		</div>
+	</footer>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>

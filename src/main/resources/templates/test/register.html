@@ -5,6 +5,14 @@
 	<title>注册 - 惠农 - </title>
 	<meta author="软工1702">
 	<link rel="stylesheet" type="text/css" th:href="@{/test/style/register-login.css}">
+	<style>
+		.hello{
+			color:#F00;
+			/*border:1px solid #eee;*/
+			/*height:15px;*/
+			font-size:12px
+		}
+	</style>
 </head>
 <body>
 <div id="box"></div>
@@ -27,19 +35,38 @@
 			<div class="login form">
 				<div class="group">
 					<div class="group-ipt email">
-						<input type="email" name="email" id="email" th:value="${user!=null?user.email:''}" class="ipt" placeholder="邮箱地址" required>
+						<input type="email" name="email" id="email" th:value="${user!=null?user.email:''}" th:class="|ipt ${emailMsg!=null?'is-invalid':''}|" placeholder="邮箱地址" required>
 					</div>
+					<div class="hello invalid-feedback" th:text="${emailMsg}">
+						该邮箱已注册!
+					</div>
+
 					<div class="group-ipt user">
-						<input type="text" name="username" id="user" th:value="${user!=null?user.username:''}" class="ipt" placeholder="选择一个用户名" required>
+						<input type="text" name="username" id="user" th:value="${user!=null?user.username:''}" th:class="|ipt ${usernameMsg!=null?'is-invalid':''}|" placeholder="选择一个用户名" required>
 					</div>
+					<div class="hello invalid-feedback" th:text="${usernameMsg}">
+						该账号已存在!
+					</div>
+
 					<div class="group-ipt password">
-						<input type="password" name="password" id="password" th:value="${user!=null?user.password:''}" class="ipt" placeholder="设置登录密码" required>
+						<input type="password" name="password" id="password" th:value="${user!=null?user.password:''}" th:class="|ipt ${passwordMsg!=null?'is-invalid':''}|" placeholder="设置登录密码" required>
 					</div>
+					<div class="hello invalid-feedback" th:text="${passwordMsg}">
+						密码长度不能小于8位!
+					</div>
+<!--					id="confirm-password"-->
 					<div class="group-ipt password1">
-						<input type="password" name="password1" id="password1" th:value="${user!=null?user.password:''}" class="ipt" placeholder="重复密码" required>
+						<input type="password1" name="password1" id="confirm-password" th:value="${user!=null?user.password:''}" class="ipt" placeholder="重复密码" required>
 					</div>
+					<div class="hello invalid-feedback">
+						两次输入的密码不一致!
+					</div>
+
 					<div class="group-ipt verify">
-						<input type="text" name="verify" id="verify" class="ipt" placeholder="输入验证码" required>
+						<input type="text" name="verify" id="verify" th:class="|ipt ${codeMsg!=null?'is-invalid':''}|" placeholder="输入验证码" required>
+						<div class="hello invalid-feedback" th:text="${codeMsg}">
+							验证码不正确!
+						</div>
 						<!--验证码图片-->
 						<img th:src="@{/kaptcha}" id="kaptcha" class="imgcode">
 					</div>
