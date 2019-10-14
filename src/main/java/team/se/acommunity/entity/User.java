@@ -13,6 +13,15 @@ public class User {
     private String activationCode;
     private String headerUrl;
     private Date createTime;
+    private String confirmPassword;
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
 
     public int getId() {
         return id;

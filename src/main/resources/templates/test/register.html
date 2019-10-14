@@ -5,6 +5,7 @@
 	<title>注册 - 惠农 - </title>
 	<meta author="软工1702">
 	<link rel="stylesheet" type="text/css" th:href="@{/test/style/register-login.css}">
+	<link rel="icon" th:href="@{/test/images/1.png}"/>
 	<style>
 		.hello{
 			color:#F00;
@@ -56,9 +57,9 @@
 					</div>
 <!--					id="confirm-password"-->
 					<div class="group-ipt password1">
-						<input type="password" name="confirm-password" id="confirm-password" th:value="${user!=null?user.password:''}" class="ipt" placeholder="重复密码" required>
+						<input type="password" name="confirmPassword"  th:class="|ipt ${passwordMsg1!=null?'is-invalid':''}|" placeholder="重复密码" required>
 					</div>
-					<div class="hello invalid-feedback">
+					<div class="hello invalid-feedback" th:text="${passwordMsg1}">
 						两次输入的密码不一致!
 					</div>
 

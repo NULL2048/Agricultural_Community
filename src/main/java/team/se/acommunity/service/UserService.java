@@ -70,8 +70,18 @@ public class UserService implements CommunityConstant {
             return map;
         }
 
+        if (StringUtils.isBlank(user.getConfirmPassword())) {
+            map.put("passwordMsg1", "确认密码不能为空！");
+            return map;
+        }
+
         if (StringUtils.isBlank(user.getEmail())) {
             map.put("emailMsg", "邮箱不能为空！");
+            return map;
+        }
+
+        if (!user.getPassword().equals(user.getConfirmPassword())) {
+            map.put("passwordMsg1", "两次输入的密码不一致!");
             return map;
         }
 
