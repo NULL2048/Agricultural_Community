@@ -151,6 +151,7 @@ public class LoginController implements CommunityConstant {
             // 将cookie存到resp中传回给浏览器端
             resp.addCookie(cookie);
             // 重定向到主页
+            logger.info(username + ":登陆成功");
             return "redirect:/index";
         } else {
             // 登录不成功返回错误信息
@@ -165,6 +166,7 @@ public class LoginController implements CommunityConstant {
                         // 通过cookieValue这个注解来获取cookie中的内容
     public String logout(@CookieValue("ticket") String ticket) {
         userService.logout(ticket);
+        logger.info("退出成功");
         return "redirect:/login";
     }
 

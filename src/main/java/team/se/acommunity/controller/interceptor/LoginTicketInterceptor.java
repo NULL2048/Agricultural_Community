@@ -33,7 +33,7 @@ public class LoginTicketInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        // 要获得浏览器端传过来的cookie，cookie是通过reques传过来的
+        // 要获得浏览器端传过来的cookie，cookie是通过request传过来的
         // 获取ticket
         String ticket = CookieUtil.getValue(request, "ticket");
 
