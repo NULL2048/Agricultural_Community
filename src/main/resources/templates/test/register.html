@@ -56,7 +56,7 @@
 					</div>
 <!--					id="confirm-password"-->
 					<div class="group-ipt password1">
-						<input type="password1" name="password1" id="confirm-password" th:value="${user!=null?user.password:''}" class="ipt" placeholder="重复密码" required>
+						<input type="password" name="confirm-password" id="confirm-password" th:value="${user!=null?user.password:''}" class="ipt" placeholder="重复密码" required>
 					</div>
 					<div class="hello invalid-feedback">
 						两次输入的密码不一致!
@@ -136,6 +136,17 @@
 			$(".zt").hide();
 		}
 	})
+</script>
+<script>
+	function check_data() {
+		var pwd1 = $("#password").val();
+		var pwd2 = $("#confirm-password").val();
+		if(pwd1 != pwd2) {
+			$("#confirm-password").addClass("is-invalid");
+			return false;
+		}
+		return true;
+	}
 </script>
 </body>
 </html>
