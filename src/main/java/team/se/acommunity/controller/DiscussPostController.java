@@ -84,7 +84,7 @@ public class DiscussPostController implements CommunityConstant {
                 // 评论作者
                 commentVO.put("user", userService.getUserById(comment.getUserId()));
 
-                // 回复列表                                                                         // 这个标识最大值，也就是有多少条查多少条，不做分页了
+                // 回复列表                                                                         // 这个标识最大值，也就是有多少条查多少条，不做分页了,然后在界面通过循环实现分页显示
                 List<Comment> replyList = commentService.listCommentsByEntity(ENTITY_TYPE_COMMENT, comment.getId(), 0, Integer.MAX_VALUE);
                 // 回复VO列表
                 List<Map<String, Object>> replyVoList = new ArrayList<>();
@@ -113,7 +113,4 @@ public class DiscussPostController implements CommunityConstant {
         model.addAttribute("comments", commentVoList);
         return "/site/discuss-detail";
     }
-
-
-
 }

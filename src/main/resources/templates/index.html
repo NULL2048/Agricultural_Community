@@ -154,7 +154,7 @@
 							<a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">上一页</a></li>
 																				<!--这里用到的循环输出了from到to的页码区间的数字-->
 						<li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}"> <!--用到了模板提供的方法，生成一个数字范围内的连续数组-->
-							<a class="page-link" href="#" th:text="${i}">1</a>
+							<a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}">1</a>
 						</li>
 						<li th:class="|page-item ${page.current==page.total?'disabled':''}|">
 							<a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">下一页</a>

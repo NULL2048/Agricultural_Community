@@ -121,6 +121,11 @@
 						<div class="mt-0">
 							<span class="font-size-12 text-success" th:utext="${cvo.user.username}">掉脑袋切切</span>
 							<span class="badge badge-secondary float-right floor">
+									<!--这里就是用来求当前的回复是第几楼
+										获得当前这一页数据的起始行，这里的行指的是数据库里面的行，然后加上当前的循环次数
+										得到的就是这个回复当前是总共是第几层楼
+										因为这里的数据都是分页查询的，每一页都是独立的一页查询，所以不同页要得到连贯的楼层数，就要用这种方法
+									-->
 									<i th:text="${page.offset + cvoStat.count}">1</i>#
 								</span>
 						</div>
@@ -143,7 +148,7 @@
 										<span th:if="${rvo.target==null}">
 											<b class="text-info" th:text="${rvo.user.username}">寒江雪</b>:&nbsp;&nbsp;
 										</span>
-									<span th:if="${rvo.target!=null}">
+										<span th:if="${rvo.target!=null}">
 											<i class="text-info" th:text="${rvo.user.username}">Sissi</i> 回复
 											<b class="text-info" th:text="${rvo.target.username}">寒江雪</b>:&nbsp;&nbsp;
 										</span>
@@ -156,6 +161,9 @@
 										<li class="d-inline ml-2">|</li>
 										<li class="d-inline ml-2"><a th:href="|#huifu-${rvoStat.count}|" data-toggle="collapse" class="text-primary">回复</a></li>
 									</ul>
+									<!--这里就是要把每一个回复框和上面的评论一一对应起来，就是通过id来对应的，这里就用到了循环中获得循环次数的方法
+										thymeleaf模板中默认就是将当前循环的对象，也就是:前面的对象名加上Stat然后再取.count得到的就是当前的循环次数
+									-->
 									<div th:id="|huifu-${rvoStat.count}|" class="mt-4 collapse">
 										<div>
 											<input type="text" class="input-size" placeholder="回复寒江雪"/>
