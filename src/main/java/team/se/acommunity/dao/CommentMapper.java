@@ -24,4 +24,6 @@ public interface CommentMapper {
      * @return
      */
     int countCommentsByEntity(int entityType, int entityId);
+
+    int insertComment(Comment comment);
 }
