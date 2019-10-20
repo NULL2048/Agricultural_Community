@@ -164,25 +164,39 @@
 									<!--这里就是要把每一个回复框和上面的评论一一对应起来，就是通过id来对应的，这里就用到了循环中获得循环次数的方法
 										thymeleaf模板中默认就是将当前循环的对象，也就是:前面的对象名加上Stat然后再取.count得到的就是当前的循环次数
 									-->
-									<div th:id="|huifu-${rvoStat.count}|" class="mt-4 collapse">
-										<div>
-											<input type="text" class="input-size" placeholder="回复寒江雪"/>
+									<!--回复某个人的文本框-->
+									<form method="post" th:action="@{|/comment/add/${post.id}|}">
+										<div th:id="|huifu-${rvoStat.count}|" class="mt-4 collapse">
+											<div>                                                <!--这里用||拼一个变量-->
+												<input type="text" class="input-size" name="content" th:placeholder="|回复${rvo.user.username}|"/>
+												<input type="hidden" name="entityType" value="2">
+												<!--因为这里是在评论的回复，回复的是某一个人的某一条评论，所以也应该传回回复评论的Id-->
+												<input type="hidden" name="entityId" th:value="${cvo.comment.id}">
+												<input type="hidden" name="targetId" th:value="${rvo.user.id}">
+											</div>
+											<div class="text-right mt-2">
+												<button type="submit" class="btn btn-primary btn-sm" onclick="#">&nbsp;&nbsp;回&nbsp;&nbsp;复&nbsp;&nbsp;</button>
+											</div>
 										</div>
-										<div class="text-right mt-2">
-											<button type="button" class="btn btn-primary btn-sm" onclick="#">&nbsp;&nbsp;回&nbsp;&nbsp;复&nbsp;&nbsp;</button>
-										</div>
-									</div>
+									</form>
+
 								</div>
 							</li>
 
 							<!-- 回复输入框 -->
 							<li class="pb-3 pt-3">
-								<div>
-									<input type="text" class="input-size" placeholder="请输入你的观点"/>
-								</div>
-								<div class="text-right mt-2">
-									<button type="button" class="btn btn-primary btn-sm" onclick="#">&nbsp;&nbsp;回&nbsp;&nbsp;复&nbsp;&nbsp;</button>
-								</div>
+								<form method="post" th:action="@{|/comment/add/${post.id}|}">
+									<div>
+										<input type="text" class="input-size" name="content" placeholder="请输入你的观点"/>
+										<input type="hidden" name="entityType" value="2">
+										<!--因为这里是在评论的回复，回复的是某一条评论，所以应该传回回复评论的Id-->
+										<input type="hidden" name="entityId" th:value="${cvo.comment.id}">
+									</div>
+									<div class="text-right mt-2">
+										<button type="submit" class="btn btn-primary btn-sm" onclick="#">&nbsp;&nbsp;回&nbsp;&nbsp;复&nbsp;&nbsp;</button>
+									</div>
+								</form>
+
 							</li>
 						</ul>
 					</div>
@@ -210,7 +224,8 @@
 					<a name="replyform"></a>
 					<textarea placeholder="在这里畅所欲言你的看法吧!" name="content"></textarea>
 					<input type="hidden" name="entityType" value="1">
-					<input type="hidden" name="entityId" value="${post.id}">
+					<!--因为这里是文章的评论，评论的是某一篇文章，所以应该传回评论文章的Id-->
+					<input type="hidden" name="entityId" th:value="${post.id}">
 				</p>
 				<p class="text-right">
 					<button type="submit" class="btn btn-primary btn-sm">&nbsp;&nbsp;回&nbsp;&nbsp;帖&nbsp;&nbsp;</button>
