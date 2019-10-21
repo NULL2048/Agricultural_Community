@@ -122,27 +122,29 @@
 				
 				<!-- 私信列表 -->
 				<ul class="list-unstyled">
-					<li class="media pb-3 pt-3 mb-3 border-bottom position-relative" th:each="map:">
-						<span class="badge badge-danger">3</span>
+					<li class="media pb-3 pt-3 mb-3 border-bottom position-relative" th:each="map:${conversations}">
+						<!--每一个会话的未读数量 z这里也需要判断没有未读的时候不显示红点-->
+						<span class="badge badge-danger" th:text="${map.unreadCount}" th:if="${map.unreadCount != 0}">3</span>
 						<a href="profile.html">
-							<img src="http://images.nowcoder.com/head/8t.png" class="mr-4 rounded-circle user-header" alt="用户头像" >
+							<!--显示目标用户的头像 这一点需要注意一下，虽然src里面写是是路径，但是这里的路径是从对象中取出来，所以这里不用@还是用$-->
+							<img th:src="${map.target.headerUrl}" class="mr-4 rounded-circle user-header" alt="用户头像" >
 						</a>
 						<div class="media-body">
 							<h6 class="mt-0 mb-3">
-								<span class="text-success">落基山脉下的闲人</span>
-								<span class="float-right text-muted font-size-12">2019-04-28 14:13:25</span>
+								<span class="text-success" th:utext="${map.target.username}">落基山脉下的闲人</span>
+								<span class="float-right text-muted font-size-12" th:text="${#dates.format(map.conversation.createTime, 'yyyy-MM-dd HH:mm:ss')}">2019-04-28 14:13:25</span>
 							</h6>
 							<div>
-								<a href="letter-detail.html">米粉车, 你来吧!</a>
+								<a href="letter-detail.html" th:utext="${map.conversation.content}">米粉车, 你来吧!</a>
 								<ul class="d-inline font-size-12 float-right">
-									<li class="d-inline ml-2"><a href="#" class="text-primary">共5条会话</a></li>
+									<li class="d-inline ml-2"><a href="#" class="text-primary">共<i th:text="${map.letterCount}">5</i>条会话</a></li>
 								</ul>
 							</div>
 						</div>
 					</li>
 				</ul>
 				<!-- 分页 -->
-				<nav class="mt-5">
+				<nav class="mt-5" th:replace="index::pagination">
 					<ul class="pagination justify-content-center">
 						<li class="page-item"><a class="page-link" href="#">首页</a></li>
 						<li class="page-item disabled"><a class="page-link" href="#">上一页</a></li>

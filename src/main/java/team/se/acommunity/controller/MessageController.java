@@ -1,8 +1,10 @@
 package team.se.acommunity.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import team.se.acommunity.dao.MessageMapper;
@@ -49,6 +51,7 @@ public class MessageController {
         if (conversationList != null) {
             for (Message message : conversationList) {
                 Map<String, Object> map = new HashMap<>();
+                // 存储每一个会话最新私信内容
                 map.put("conversation", message);
                 // 存储每一条会话中私信的数量
                 map.put("letterCount", messageService.countLetter(message.getConversationId()));
@@ -70,5 +73,13 @@ public class MessageController {
         model.addAttribute("letterUnreadCount", letterUnreadCount);
 
         return "/site/letter";
+    }
+
+    @RequestMapping(path = "/letter/detail/{conversationId}", method = RequestMethod.GET)
+    public String getLetterDetail(@PathVariable("conversationId") String conversationId, Page page, Model model) {
+        // 设置分页信息
+        page.setLimit(5);
+        page.setPath("/letter/detail/" + conversationId);
+        page.setRows(messageService.countLetter(conversationId));
     }
 }
