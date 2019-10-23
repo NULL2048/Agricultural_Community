@@ -30,7 +30,6 @@ public class MessageController {
     // 私信列表
     @RequestMapping(path = "/letter/list", method = RequestMethod.GET)
     public String getLetterList(Model model, Page page) {
-        Integer.valueOf("abc");
         User user = hostHolder.getUser();
 
         // 设置分页信息
@@ -159,6 +158,7 @@ public class MessageController {
     @RequestMapping(path = "/letter/send", method = RequestMethod.POST)
     @ResponseBody // 这个方法是异步的，所以这里要加ResponseBody这个标签
     public String sendMessage(String toName, String content) {
+        Integer.valueOf("abc");
         User target = userService.getUserByName(toName);
 
         if (target == null) {
