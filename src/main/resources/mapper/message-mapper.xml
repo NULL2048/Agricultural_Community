@@ -9,7 +9,7 @@
     </sql>
 
     <sql id="insertFields">
-        user_id, entity_type, entity_id, target_id, content, status, create_time
+        from_id, to_id, conversation_id, content, status, create_time
     </sql>
 
     <select id="listConversations" resultType="Message">
@@ -66,6 +66,19 @@
             and conversation_id = #{conversationId}
         </if>
     </select>
-
-
+                         <!--因为id是自增字段，所以插入的时候传入的Java对象中是没有id这个属性值为空，所以在这里要标注出来传入的Java属性中哪一个属性是主键，所以这个里面写的是Java对象的属性名，然后执行完插入之后，就会把数据库自动生成的id值插入给传入的Java对象，这样在Java代码中就可以使用这个对象中的id属性了-->
+    <insert id="insertMessage" parameterType="Message" keyProperty="id">
+        insert into message(<include refid="insertFields"></include>)
+        values(#{fromId}, #{toId}, #{conversationId}, #{content}, #{status}, #{createTime})
+    </insert>
+    <!--参数是多个可以不用声明-->
+    <update id="updateStatus">
+        update message set status = #{status}
+        where id in
+        <!--因为传过来的是多个数组，所以这里where用in，而且下面需要用一个循环遍历出所有的结果成为一个集合放到in里面-->
+        <!--下面这个循环collection属性是指定要遍历的集合 item是指每一次遍历内容存储进的元素 open遍历以左括号开始 separator表示遍历结果以逗号分隔 close遍历以右括号结束-->
+        <foreach collection="ids" item="id" open="(" separator="," close=")"> <!--实际上这个就是一个拼接字符串的循环，将其拼接到代码中-->
+            #{id}
+        </foreach>
+    </update>
 </mapper>

@@ -17,5 +17,9 @@ public interface MessageMapper {
     int countLetter(String conversationId);
     // 查询未读私信数量  这个方法要负责实现两种业务，一种是统计用户所有未读私信总数，一个是统计某一个会话的未读私信数，所以这里用一个动态参数conversationId，如果查询某个会话的未读消息数才添加这个参数
     int countUnreadLetter(int userId, String conversationId);
+    // 增加私信
+    int insertMessage(Message message);
+    // 更改消息状态
+    int updateStatus(List<Integer> ids, int status);
 
 }
