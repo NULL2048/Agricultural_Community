@@ -28,7 +28,10 @@
 								<a class="nav-link" th:href="@{/index}">首页</a>
 							</li>
 							<li class="nav-item ml-3 btn-group-vertical" th:if="${loginUser != null}">
-								<a class="nav-link position-relative" href="site/letter.html">消息<span class="badge badge-danger">12</span></a>
+								<a class="nav-link position-relative" th:href="@{/letter/list}">
+									消息
+									<span class="badge badge-danger" th:text="${letterUnreadCount}" th:if="${letterUnreadCount != 0} ">12</span>
+								</a>
 							</li>
 							<li class="nav-item ml-3 btn-group-vertical" th:if="${loginUser == null}">
 								<!--这个注册的访问路径指的是controller里面设置的路径，因为界面上要跳转其他界面都要通过controller-->
@@ -72,8 +75,8 @@
 						<li class="nav-item">
 							<a class="nav-link" href="#">最热</a>
 						</li>
-					</ul>
-					<button type="button" class="btn btn-primary btn-sm position-absolute rt-0" data-toggle="modal" data-target="#publishModal">我要发布</button>
+					</ul>                                                                                                                       <!--当用户登录之后才显示我要发布这个按钮-->
+					<button type="button" class="btn btn-primary btn-sm position-absolute rt-0" data-toggle="modal" data-target="#publishModal" th:if="${loginUser!=null}">我要发布</button>
 				</div>
 				<!-- 弹出框 -->
 				<div class="modal fade" id="publishModal" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel" aria-hidden="true">
@@ -128,8 +131,8 @@
 						</a>
 						<div class="media-body">
 							<h6 class="mt-0 mb-3"> <!--utext可以把文本中的转移字符转译再输出，text是原样输出字符-->
-								<a href="#" th:utext="${map.post.title}">备战春招，面试刷题跟他复习，一个月全搞定！</a>
-								                                               <!--if判断标签-->
+								<a th:href="@{|/discuss/detail/${map.post.id}|}" th:utext="${map.post.title}">备战春招，面试刷题跟他复习，一个月全搞定！</a>
+								<!--这里的路径因为既有常量，又有变量，所以这里要将路径用||括起来，这个里面既可以写常量，也可以写变量--><!--if判断标签-->
 								<span class="badge badge-secondary bg-primary" th:if="${map.post.type==1}">置顶</span>
 								<span class="badge badge-secondary bg-danger" th:if="${map.post.status==1}">精华</span>
 							</h6>
@@ -138,14 +141,14 @@
 								<ul class="d-inline float-right">
 									<li class="d-inline ml-2">赞 11</li>
 									<li class="d-inline ml-2">|</li>
-									<li class="d-inline ml-2">回帖 7</li>
+									<li class="d-inline ml-2">回帖 <i th:text="${map.post.commentCount}">30</i></li>
 								</ul>
 							</div>
 						</div>						
 					</li>
 				</ul>
 				<!-- 分页 -->
-				<nav class="mt-5" th:if="${page.rows>0}"> <!--当数据总数大于零才显示分页的内容-->
+				<nav class="mt-5" th:if="${page.rows>0}" th:fragment="pagination"> <!--当数据总数大于零才显示分页的内容-->
 					<ul class="pagination justify-content-center">
 						<li class="page-item">                         <!--用()括起来就相当于用?将括号的内容拼接到path上，后面用,号连接其他变量，就相当于再用&连接-->
 							<a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
@@ -154,7 +157,7 @@
 							<a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">上一页</a></li>
 																				<!--这里用到的循环输出了from到to的页码区间的数字-->
 						<li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}"> <!--用到了模板提供的方法，生成一个数字范围内的连续数组-->
-							<a class="page-link" href="#" th:text="${i}">1</a>
+							<a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}">1</a>
 						</li>
 						<li th:class="|page-item ${page.current==page.total?'disabled':''}|">
 							<a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">下一页</a>

@@ -15,4 +15,10 @@ public interface DiscussPostMapper {
     // 如果只有一个参数，并且在<if>里使用，则必须加别名，如果向上面那个多个参数，使用if不用加别名
     // 这个方法查询某个用户发表的帖子数量,如果穿的参数是0，就显示所有的帖子有多少
     int getDiscussPostRows(@Param("userId") int userId);
+
+    int insertDiscussPost(DiscussPost discussPost);
+
+    DiscussPost getDiscussPostById(int id);
+
+    int updateCommentCount(int id, int commentCount);
 }

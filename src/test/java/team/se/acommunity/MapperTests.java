@@ -8,9 +8,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import team.se.acommunity.dao.DiscussPostMapper;
 import team.se.acommunity.dao.LoginTicketMapper;
+import team.se.acommunity.dao.MessageMapper;
 import team.se.acommunity.dao.UserMapper;
 import team.se.acommunity.entity.DiscussPost;
 import team.se.acommunity.entity.LoginTicket;
+import team.se.acommunity.entity.Message;
 import team.se.acommunity.entity.User;
 
 import java.util.Date;
@@ -28,6 +30,9 @@ public class MapperTests {
 
     @Autowired
     private LoginTicketMapper loginTicketMapper;
+
+    @Autowired
+    private MessageMapper messageMapper;
 
     @Test
     public void testSelectUser() {
@@ -101,4 +106,23 @@ public class MapperTests {
         System.out.println(loginTicket);
     }
 
+    @Test
+    public void testSelectLetters() {
+        List<Message> temp = messageMapper.listConversations(111, 0, 20);
+        for (Message t : temp) {
+            System.out.println(t);
+        }
+
+        System.out.println(messageMapper.countConversation(111));
+
+        temp = messageMapper.listLetters("111_112", 0, 20);
+        for (Message t : temp) {
+            System.out.println(t);
+        }
+
+        System.out.println(messageMapper.countLetter("111_112"));
+
+        System.out.println(messageMapper.countUnreadLetter(131, "111_131"));
+
+    }
 }
