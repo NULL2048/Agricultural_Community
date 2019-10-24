@@ -19,7 +19,7 @@ public class ExceptionAdvice {
 
     // 下面这个注释是controller出现异常之后被调用，用来处理异常，括号里面写要处理哪些异常，这个Exception是所有异常的父类，所以这里就表示要处理所有异常
     @ExceptionHandler({Exception.class})
-    // 方法必须是共有的并且没有返回值, e对象用来接收异常类型对象，一般常用的参数就是下面三个
+    // 方法必须是共有的并且没有返回值,方法名随意写， e对象用来接收异常类型对象，一般常用的参数就是下面三个
     public void handleException(Exception e, HttpServletRequest request, HttpServletResponse response) throws IOException {
         // 这个是将异常信息存入到日志当中，e.getMessage方法获得的是异常总总的信息，也就是平时报错的Cause By里面的内容，即一段异常最上面的那一句话
         logger.error("服务器发生异常：" + e.getMessage());
