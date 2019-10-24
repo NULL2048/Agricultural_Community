@@ -21,20 +21,66 @@
     <link rel="icon" th:href="@{/test/images/1.png}"/>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/test/assets/web-e7e403d2843dd1edd8db.css}"/>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/test/assets/web/pages/home/index/entry-7642b94e17df29096c13.css}"/>
+
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">-->
+
 </head>
 
 <body lang="zh-CN" class="reader-black-font">
 <!-- 全局顶部导航栏 -->
 
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" th:fragment="header1">
         <div class="width-limit">
             <!-- 左上方 Logo -->
             <a class="logo" th:href="@{/index}"><img th:src="@{/test/assets/web/44.png}" alt="Logo"/></a>
             <!-- 右上角 -->
             <!-- 未登录显示登录/注册/写文章 -->
-            <a class="btn write-btn" target="_blank" href="javascript:;">
+            <button type="button" class="btn write-btn" target="_blank" data-toggle="modal" data-target="#publishModal">
                 <i class="iconfont ic-write"></i>写文章
-            </a>
+            </button>
+            <!-- 弹出框 -->
+            <div  id="publishModal" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="publishModalLabel">新帖发布</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">标题：</label>
+                                    <input type="text" class="form-control" id="recipient-name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="message-text" class="col-form-label">正文：</label>
+                                    <textarea class="form-control" id="message-text" rows="15"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" id="publishBtn">发布</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 提示框 -->
+            <div class="modal fade" id="hintModal" tabindex="-1" role="dialog" aria-labelledby="hintModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="hintModalLabel">提示</h5>
+                        </div>
+                        <div class="modal-body" id="hintBody">
+                            发布完毕!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <a class="btn sign-up" th:href="@{/register}" th:if="${loginUser == null}">注册</a>
             <a class="btn log-in" th:href="@{/login}" th:if="${loginUser == null}">登录</a>
 
@@ -992,6 +1038,7 @@
 <script th:src="@{/test/assets/web-780e8747353f13ebad82.js}"></script>
 <script th:src="@{/test/assets/web/pages/home/index/entry-91155bcdfdd2414381a7.js}"></script>
 <script th:src="@{/test/assets/web-6f284f71bf6839d4fe98.js}"></script>
+<script>th:src="@{/test/js/index.js}"</script>
 </body>
 
 </html>
