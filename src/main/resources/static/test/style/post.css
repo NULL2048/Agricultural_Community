@@ -1,0 +1,591 @@
+.next-dialog-container .next-dialog {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+}
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.next-dialog {
+    position: fixed;
+    z-index: 1001;
+    background: #fff;
+    border: 1px solid #dcdee3;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.12);
+    text-align: left;
+    overflow: hidden;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    max-width: 90%;
+}
+.next-dialog-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1001;
+    padding: 40px;
+    overflow: auto;
+    text-align: center;
+}
+
+.next-dialog-header {
+    padding: 12px 20px;
+    border-bottom: 0 solid transparent;
+    font-size: 16px;
+    background: transparent;
+    color: #333;
+}
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.next-dialog {
+    position: fixed;
+    z-index: 1001;
+    background: #fff;
+    border: 1px solid #dcdee3;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.12);
+    text-align: left;
+    overflow: hidden;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    max-width: 90%;
+}
+.next-dialog-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1001;
+    padding: 40px;
+    overflow: auto;
+    text-align: center;
+}
+
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.next-dialog-body {
+    padding: 20px;
+    font-size: 12px;
+    color: #666;
+}
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.next-dialog {
+    position: fixed;
+    z-index: 1001;
+    background: #fff;
+    border: 1px solid #dcdee3;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.12);
+    text-align: left;
+    overflow: hidden;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    max-width: 90%;
+}
+.next-dialog-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1001;
+    padding: 40px;
+    overflow: auto;
+    text-align: center;
+}
+
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.next-row, .next-row *, .next-row :after, .next-row :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.next-row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.next-dialog-body {
+    padding: 20px;
+    font-size: 12px;
+    color: #666;
+}
+.next-dialog {
+    position: fixed;
+    z-index: 1001;
+    background: #fff;
+    border: 1px solid #dcdee3;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.12);
+    text-align: left;
+    overflow: hidden;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    max-width: 90%;
+}
+.next-dialog-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1001;
+    padding: 40px;
+    overflow: auto;
+    text-align: center;
+}
+
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.next-dialog-footer.next-align-center {
+    text-align: center;
+}
+.next-dialog-footer {
+    padding: 12px 20px;
+    border-top: 0 solid transparent;
+    background: transparent;
+}
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.next-dialog {
+    position: fixed;
+    z-index: 1001;
+    background: #fff;
+    border: 1px solid #dcdee3;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.12);
+    text-align: left;
+    overflow: hidden;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    max-width: 90%;
+}
+.next-dialog-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1001;
+    padding: 40px;
+    overflow: auto;
+    text-align: center;
+}
+
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.next-btn.next-btn-primary, .next-btn.next-btn-primary.visited, .next-btn.next-btn-primary:link, .next-btn.next-btn-primary:visited {
+    color: #fff;
+}
+.next-btn.next-btn-primary {
+    border-style: solid;
+    background-color: #42c02ec7;
+    border-color: transparent;
+}
+.next-btn.next-medium { 
+    border-radius: 3px; 
+    padding: 0 12px;
+    height: 14px; 
+    line-height: 10px; 
+    font-size: 12px; 
+    border-width: 1px; 
+} 
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.next-btn {
+    position: relative;
+    display: inline-block;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    text-decoration: none;
+    text-align: center;
+    text-transform: none;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: all .1s linear;
+    transition: all .1s linear;
+    cursor: pointer;
+}
+.next-btn, .next-btn:active, .next-btn:focus, .next-btn:hover {
+    outline: 0;
+}
+.next-btn, .next-btn *, .next-btn :after, .next-btn :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.next-dialog-footer.next-align-center {
+    text-align: center;
+}
+.next-dialog {
+    position: fixed;
+    z-index: 1001;
+    background: #fff;
+    border: 1px solid #dcdee3;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.12);
+    text-align: left;
+    overflow: hidden;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    max-width: 90%;
+}
+.next-dialog-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1001;
+    padding: 40px;
+    overflow: auto;
+    text-align: center;
+}
+
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.next-btn:after {
+    text-align: center;
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: opacity .1s linear;
+    transition: opacity .1s linear;
+}
+
+.next-dialog-btn+.next-dialog-btn {
+    margin-left: 4px;
+}
+.next-btn.next-btn-normal, .next-btn.next-btn-normal.visited, .next-btn.next-btn-normal:link, .next-btn.next-btn-normal:visited {
+    color: #333;
+}
+.next-btn.next-btn-normal {
+    border-style: solid;
+    background-color: #fff;
+    border-color: #c4c6cf;
+}
+.next-btn.next-medium {
+    border-radius: 3px;
+    padding: 0 12px;
+    height: 28px;
+    line-height: 26px;
+    font-size: 12px;
+    border-width: 1px;
+}
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.next-btn {
+    position: relative;
+    display: inline-block;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    text-decoration: none;
+    text-align: center;
+    text-transform: none;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: all .1s linear;
+    transition: all .1s linear;
+    cursor: pointer;
+}
+.next-btn, .next-btn:active, .next-btn:focus, .next-btn:hover {
+    outline: 0;
+}
+.next-btn, .next-btn *, .next-btn :after, .next-btn :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.next-dialog-footer.next-align-center {
+    text-align: center;
+}
+.next-dialog {
+    position: fixed;
+    z-index: 1001;
+    background: #fff;
+    border: 1px solid #dcdee3;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.12);
+    text-align: left;
+    overflow: hidden;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    max-width: 90%;
+}
+.next-dialog-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1001;
+    padding: 40px;
+    overflow: auto;
+    text-align: center;
+}
+
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.next-btn:after {
+    text-align: center;
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: opacity .1s linear;
+    transition: opacity .1s linear;
+}
+
+.next-dialog-close, .next-dialog-close:link, .next-dialog-close:visited {
+    height: 16px;
+    color: #999;
+}
+.next-dialog-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 16px;
+    cursor: pointer;
+}
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.next-dialog {
+    position: fixed;
+    z-index: 1001;
+    background: #fff;
+    border: 1px solid #dcdee3;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.12);
+    text-align: left;
+    overflow: hidden;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    max-width: 90%;
+}
+.next-dialog-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1001;
+    padding: 40px;
+    overflow: auto;
+    text-align: center;
+}
+
+
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.next-dialog-close .next-dialog-close-icon.next-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -6px;
+    margin-left: -6px;
+    width: 12px;
+    height: 12px;
+    line-height: 12px;
+}
+.next-icon {
+    display: inline-block;
+    font-family: NextIcon;
+    font-style: normal;
+    font-weight: 400;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.next-dialog-close, .next-dialog-close:link, .next-dialog-close:visited {
+    height: 16px;
+    color: #999;
+}
+.next-dialog-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 16px;
+    cursor: pointer;
+}
+.next-dialog {
+    position: fixed;
+    z-index: 1001;
+    background: #fff;
+    border: 1px solid #dcdee3;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.12);
+    text-align: left;
+    overflow: hidden;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    max-width: 90%;
+}
+.next-dialog-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1001;
+    padding: 40px;
+    overflow: auto;
+    text-align: center;
+}
+
+
+.next-dialog-close .next-dialog-close-icon.next-icon:before {
+    width: 12px;
+    height: 12px;
+    font-size: 12px;
+    line-height: 12px;
+}
+.next-icon.next-medium:before {
+    width: 20px;
+    font-size: 20px;
+    line-height: inherit;
+}
+.next-icon-close:before {
+    content: "\E626";
+}
+.next-icon:before {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.next-dialog, .next-dialog *, .next-dialog :after, .next-dialog :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.next-dialog-close .next-dialog-close-icon.next-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -6px;
+    margin-left: -6px;
+    width: 12px;
+    height: 12px;
+    line-height: 12px;
+}
+.next-dialog-close .next-dialog-close-icon.next-icon:before {
+    width: 12px;
+    height: 12px;
+    font-size: 12px;
+    line-height: 12px;
+}
