@@ -99,4 +99,12 @@ public class DiscussPost {
     public void setScore(double score) {
         this.score = score;
     }
+
+    public String subString(int begin, int end) {
+        if (end > content.length()) {
+            end = content.length();
+        }
+
+        return content.substring(begin, end);
+    }
 }

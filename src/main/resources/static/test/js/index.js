@@ -1,6 +1,8 @@
 console.log("河北农业大学_信息科学与技术学院_软件工程1702班");
 console.log("惠农网项目");
 
+var CONTEXT_PATH = "/ac";
+
 $(function(){
     // 对发布按钮做一个点击事件，点了发布按钮之后就调用publish()方法
     $("#publishBtn").click(publish);
@@ -8,7 +10,7 @@ $(function(){
 
 function publish() {
     // 点完了发布按钮，将发布文章页面隐藏
-    $("#publishModal").modal("hide");
+    $("#dev").hide();
 
     // 获取标题和内容
     // 取标题的标签 这里使用的是jquery的ID选择器，将界面中id值是recipient-name的标签获取，然后用val方法获取标签的value值
@@ -26,10 +28,10 @@ function publish() {
             // id选择器获取这个提示框标签,利用text方法修改一下这个便签里面的文本
             $("#hintBody").text(data.msg);
             // 显示提示消息
-            $("#hintModal").modal("show");
+            $("#popupDev").show();
             // 2秒后自动隐藏提示框
             setTimeout(function(){
-                $("#hintModal").modal("hide");
+                $("#popupDev").hide();
                 // 刷新页面
                 if (data.code === 0) { // 判断是否已经发表成功
                     window.location.reload();

@@ -38,6 +38,8 @@ public class HomeController {
                 Map<String, Object> map = new HashMap<>();
                 map.put("post", post);
 
+                map.put("brief", post.subString(0, 120) + "...");
+
                 User user = userService.getUserById(post.getUserId());
                 map.put("user", user);
                 discussPosts.add(map);

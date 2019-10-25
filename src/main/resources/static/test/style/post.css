@@ -243,9 +243,23 @@
 }
 .next-btn.next-btn-primary {
     border-style: solid;
-    background-color: #42c02ec7;
+    background-color: #66c644;
     border-color: transparent;
 }
+.next-btn.next-btn-primary.active, .next-btn.next-btn-primary.hover, .next-btn.next-btn-primary:active, .next-btn.next-btn-primary:focus, .next-btn.next-btn-primary:hover {
+    color: #fff;
+    background-color: #50b52e;
+    border-color: transparent;
+    text-decoration: none;
+}
+.next-btn.next-btn-normal.active, .next-btn.next-btn-normal.hover, .next-btn.next-btn-normal:active, .next-btn.next-btn-normal:focus, .next-btn.next-btn-normal:hover {
+    color: #333;
+    background-color: #f2f3f7;
+    border-color: #a0a2ad;
+    text-decoration: none;
+}
+
+
 .next-btn.next-medium { 
     border-radius: 3px; 
     padding: 0 12px;

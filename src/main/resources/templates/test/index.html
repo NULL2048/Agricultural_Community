@@ -20,228 +20,293 @@
     <title>惠农--惠农有网，农品共享</title>
     <link rel="icon" th:href="@{/test/images/1.png}"/>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/test/assets/web-e7e403d2843dd1edd8db.css}"/>
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{/test/assets/web/pages/home/index/entry-7642b94e17df29096c13.css}"/>
+    <link rel="stylesheet" type="text/css" media="all"
+          th:href="@{/test/assets/web/pages/home/index/entry-7642b94e17df29096c13.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/test/style/post.css}"/>
+    <style>
+        .center {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            margin: auto;
+        }
+    </style>
 
-<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">-->
+
+    <!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">-->
 
 </head>
 
 <body lang="zh-CN" class="reader-black-font">
 <!-- 全局顶部导航栏 -->
 
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" th:fragment="header1">
-        <div class="width-limit">
-            <!-- 左上方 Logo -->
-            <a class="logo" th:href="@{/index}"><img th:src="@{/test/assets/web/44.png}" alt="Logo"/></a>
-            <!-- 右上角 -->
-            <!-- 未登录显示登录/注册/写文章 -->
-            <button type="button" class="btn write-btn" target="_blank" data-toggle="modal" data-target="#publishModal">
-                <i class="iconfont ic-write"></i>写文章
-            </button>
-            <!-- 弹出框 -->
-            <div  id="publishModal" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="publishModalLabel">新帖发布</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" th:fragment="header1">
+    <div class="width-limit">
+        <!-- 左上方 Logo -->
+        <a class="logo" th:href="@{/index}"><img th:src="@{/test/assets/web/44.png}" alt="Logo"/></a>
+        <!-- 右上角 -->
+        <!-- 未登录显示登录/注册/写文章 -->
+        <button type="button" class="btn write-btn" id="publish" target="_blank" data-toggle="modal"
+                data-target="#publishModal">
+            <i class="iconfont ic-write"></i>写文章
+        </button>
+        <!--发表文章文本标记器-->
+        <div role="dialog" aria-modal="true" aria-labelledby="dialog-title-k24o8wqp" id="dev"
+             class="center next-dialog next-closeable simple-form-dialog"
+             style="width: 640px;height:500px;display:none">
+
+            <div style="font-weight:700" class="next-dialog-header" id="dialog-title-k24lhv54" role="heading"
+                 aria-level="1">
+                <font face="幼圆">发布文章</font>
+            </div>
+            <hr>
+            <div class="next-dialog-body">
+                <form>
+                    <div>
+                        <div class="next-row" role="row" style="margin-top: 0px;" dir="ltr">
+                            <div style="font-size: 12px;color: #333;font-weight:700">
+                                <font face="幼圆">题目：</font>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">标题：</label>
-                                    <input type="text" class="form-control" id="recipient-name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="message-text" class="col-form-label">正文：</label>
-                                    <textarea class="form-control" id="message-text" rows="15"></textarea>
-                                </div>
-                            </form>
+                        <div class="next-row" role="row" style="margin-top: 10px;" dir="ltr">
+                            <div class="next-col next-col-18" role="gridcell" dir="ltr">
+                        <span class="next-input next-medium"
+                              style="width: 100%;">
+                            <input
+                                    style="width: 600px;height: 30px;border-radius:3px;border:1px solid #999;"
+                                    height="100%"
+                                    value="" autocomplete="off" id="recipient-name">
+                        </span>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                            <button type="button" class="btn btn-primary" id="publishBtn">发布</button>
+                        <div class="next-row" role="row" style="margin-top: 10px;" dir="ltr">
+                            <div class="next-col" role="gridcell" dir="ltr">
+
+                            </div>
+                        </div>
+                        <div style="font-size: 12px;color: #333;font-weight:700">
+                            <font face="幼圆">正文：</font>
+                        </div>
+                        <div class="next-row" role="row" style="margin-top: 10px;" dir="ltr">
+
+                            <div style="width:100%;height:50%" class="next-col" role="gridcell" dir="ltr">
+                        <span class="next-input next-input-textarea"
+                              style="width: 100%;">
+                            <textarea
+                                    style="resize:none;width:600px;height:250px;border-radius:6px;border:1px solid #999;"
+                                    placeholder="" rows="4" data-real="true" id="message-text">
+                            </textarea>
+                        </span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
-            <!-- 提示框 -->
-            <div class="modal fade" id="hintModal" tabindex="-1" role="dialog" aria-labelledby="hintModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="hintModalLabel">提示</h5>
-                        </div>
-                        <div class="modal-body" id="hintBody">
-                            发布完毕!
+            <div class="next-dialog-footer next-align-center">
+            <span style="position:absolute; right:65px; bottom:5px;">
+                <button class="next-btn next-medium next-btn-primary next-dialog-btn" type="button" id="publishBtn">发布</button></span>
+                <span style="position:absolute; right:5px; bottom:5px;">
+                <button class="next-btn next-medium next-btn-normal next-dialog-btn" type="button"
+                        onclick="myDialog();">取消</button></span>
+            </div>
+            <a class="next-dialog-close" role="button" aria-label="关闭">
+                <button style="background-color: transparent; border: 0;" aria-label="Close" onclick="myDialog();">×
+                </button>
+            </a>
+
+        </div>
+        <!--发表文章按钮弹出框-->
+        <div role="dialog" aria-modal="true" aria-labelledby="dialog-title-k24o8wqp" id="popupDev"
+             class="center   next-dialog next-closeable simple-form-dialog" style="width: 400px;height:200px;display:none">
+        <span style="position:absolute; left:9px; top:11px;">
+            <div style="font-weight:700;font-size:14" id="dialog-title-k24lhv54" role="heading" aria-level="1">
+                <font face="幼圆">消息提示</font>
+            </div>
+        </span>
+            <div class="next-dialog-body">
+                <div>
+                    <div class="next-row" role="row" style="margin-top: 5px;" dir="ltr">
+                    </div>
+                    <div class="next-row" role="row" style="margin-top: 45px;" dir="ltr">
+                        <div class="next-col next-col-18" role="gridcell" dir="ltr">
+                            <span class="next-input next-medium" style="width: 100%;" id="hintBody">
+                                发布完毕!
+                            </span>
                         </div>
                     </div>
+                    <div class="next-row" role="row" style="margin-top: 10px;" dir="ltr">
+                        <div class="next-col" role="gridcell" dir="ltr">
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
+            <div class="next-dialog-footer next-align-center">
+            <span style="position:absolute; right:200px; bottom:10px;">
+                <button class="next-btn next-medium next-btn-primary next-dialog-btn" type="button" onclick="myPopup()">确定</button></span>
+                <span style="position:absolute; right:145px; bottom:10px;">
+                <button class="next-btn next-medium next-btn-normal next-dialog-btn" type="button" onclick="myPopup()">取消</button></span>
 
-            <a class="btn sign-up" th:href="@{/register}" th:if="${loginUser == null}">注册</a>
-            <a class="btn log-in" th:href="@{/login}" th:if="${loginUser == null}">登录</a>
+            </div>
+            <a class="next-dialog-close" role="button" aria-label="关闭">
+                <button
+                        style="background-color: transparent; border: 0;" aria-label="Close"
+                        onclick="myPopup()">×
+                </button>
+            </a>
 
-            <!-- 如果用户登录，显示下拉菜单 下面这个div就是下拉菜单的位置-->
-            <div class="user" th:if="${loginUser != null}">
-                <!--用户头像-->
-                <div data-hover="dropdown">
-                    <a class="avatar" href="javascript:;">
-                        <img th:src="${loginUser.headerUrl}" alt="120"/>
+        </div>
+
+
+        <a class="btn sign-up" th:href="@{/register}" th:if="${loginUser == null}">注册</a>
+        <a class="btn log-in" th:href="@{/login}" th:if="${loginUser == null}">登录</a>
+
+        <!-- 如果用户登录，显示下拉菜单 下面这个div就是下拉菜单的位置-->
+        <div class="user" th:if="${loginUser != null}">
+            <!--用户头像-->
+            <div data-hover="dropdown">
+                <a class="avatar" href="javascript:;">
+                    <img th:src="${loginUser.headerUrl}" alt="120"/>
+                </a>
+            </div>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="javascript:;">
+                        <i class="iconfont ic-navigation-profile"></i><span>我的主页</span>
                     </a>
-                </div>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="javascript:;">
-                            <i class="iconfont ic-navigation-profile"></i><span>我的主页</span>
+                </li>
+                <li>
+                    <!-- TODO bookmarks_path -->
+                    <a href="javascript:;">
+                        <i class="iconfont ic-navigation-mark"></i><span>收藏的文章</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="iconfont ic-navigation-like"></i><span>喜欢的文章</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="iconfont ic-navigation-wallet"></i><span>我的钱包</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/user/setting/basic}">
+                        <i class="iconfont ic-navigation-settings"></i>
+                        <span>设置</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="iconfont ic-navigation-feedback"></i><span>帮助与反馈</span>
+                    </a>
+                </li>
+                <li>
+                    <a rel="nofollow" th:href="@{/logout}">
+                        <i class="iconfont ic-navigation-signout"></i>
+                        <span>退出</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!--导航栏夜间模式按钮-->
+        <div id="view-mode-ctrl">
+        </div>
+
+        <!--这个使导航栏左边的首页，下载app按钮。没有登陆时显示-->
+        <div class="container" th:if="${loginUser == null}">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu"
+                        aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a th:href="@{/index}">
+                            <span class="menu-text">首页</span>
+                            <i class="iconfont ic-navigation-discover menu-icon"></i>
                         </a>
                     </li>
-                    <li>
-                        <!-- TODO bookmarks_path -->
-                        <a href="javascript:;">
-                            <i class="iconfont ic-navigation-mark"></i><span>收藏的文章</span>
-                        </a>
+                    <li class="">
+                        <a class="app-download-btn" href="javascript:;"><span class="menu-text">下载App</span><i
+                                class="iconfont ic-navigation-download menu-icon"></i></a>
                     </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="iconfont ic-navigation-like"></i><span>喜欢的文章</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="iconfont ic-navigation-wallet"></i><span>我的钱包</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a th:href="@{/user/setting/basic}">
-                            <i class="iconfont ic-navigation-settings"></i>
-                            <span>设置</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="iconfont ic-navigation-feedback"></i><span>帮助与反馈</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a rel="nofollow" th:href="@{/logout}">
-                            <i class="iconfont ic-navigation-signout"></i>
-                            <span>退出</span>
-                        </a>
+                    <!--搜索栏-->
+                    <li class="search">
+                        <form target="_blank" action="/search" accept-charset="UTF-8" method="get"><input name="utf8"
+                                                                                                          type="hidden"
+                                                                                                          value="&#x2713;"/>
+                            <input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索"
+                                   class="search-input"/>
+                            <a class="search-btn" href="javascript:void(null)"><i class="iconfont ic-search"></i></a>
+                        </form>
                     </li>
                 </ul>
             </div>
-
-            <!--导航栏夜间模式按钮-->
-            <div id="view-mode-ctrl">
+        </div>
+        <!--导航栏左边的发现，关注，消息按钮 登录时显示-->
+        <div class="container" th:if="${loginUser != null}">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu"
+                        aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
             </div>
-
-            <!--这个使导航栏左边的首页，下载app按钮。没有登陆时显示-->
-            <div class="container" th:if="${loginUser == null}">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu"
-                            aria-expanded="false">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="collapse navbar-collapse" id="menu">
-                    <ul class="nav navbar-nav">
-                        <li class="active">
-                            <a th:href="@{/index}">
-                                <span class="menu-text">首页</span>
-                                <i class="iconfont ic-navigation-discover menu-icon"></i>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="nav navbar-nav">
+                    <li class="">
+                        <a href="javascript:;">
+                            <span class="menu-text">发现</span>
+                            <i class="iconfont ic-navigation-discover menu-icon"></i>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="javascript:;">
+                            <span class="menu-text">关注</span>
+                            <i class="iconfont ic-navigation-follow menu-icon"></i>
+                        </a>
+                    </li>
+                    <li class="notification v-notification-dropdown-menu">
+                        <a class="notification-btn" href="javascript:;" data-hover="dropdown">
+                            <span class="menu-text">消息</span>
+                            <i class="iconfont ic-navigation-notification menu-icon"></i>
+                            <span class="badge"></span>
+                        </a>
+                    </li>
+                    <!--导航栏搜索框-->
+                    <li class="search">
+                        <form target="_blank" action="/search" accept-charset="UTF-8" method="get">
+                            <input name="utf8" type="hidden" value="&#x2713;"/>
+                            <input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索"
+                                   class="search-input"/>
+                            <a class="search-btn" href="javascript:void(null)">
+                                <i class="iconfont ic-search"></i>
                             </a>
-                        </li>
-                        <li class="">
-                            <a class="app-download-btn" href="javascript:;"><span class="menu-text">下载App</span><i
-                                    class="iconfont ic-navigation-download menu-icon"></i></a>
-                        </li>
-                        <!--搜索栏-->
-                        <li class="search">
-                            <form target="_blank" action="/search" accept-charset="UTF-8" method="get"><input name="utf8"
-                                                                                                              type="hidden"
-                                                                                                              value="&#x2713;"/>
-                                <input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索"
-                                       class="search-input"/>
-                                <a class="search-btn" href="javascript:void(null)"><i class="iconfont ic-search"></i></a>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!--导航栏左边的发现，关注，消息按钮 登录时显示-->
-            <div class="container" th:if="${loginUser != null}">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu"
-                            aria-expanded="false">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="collapse navbar-collapse" id="menu">
-                    <ul class="nav navbar-nav">
-                        <li class="">
-                            <a href="javascript:;">
-                                <span class="menu-text">发现</span>
-                                <i class="iconfont ic-navigation-discover menu-icon"></i>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a href="javascript:;">
-                                <span class="menu-text">关注</span>
-                                <i class="iconfont ic-navigation-follow menu-icon"></i>
-                            </a>
-                        </li>
-                        <li class="notification v-notification-dropdown-menu">
-                            <a class="notification-btn" href="javascript:;" data-hover="dropdown">
-                                <span class="menu-text">消息</span>
-                                <i class="iconfont ic-navigation-notification menu-icon"></i>
-                                <span class="badge"></span>
-                            </a>
-                        </li>
-                        <!--导航栏搜索框-->
-                        <li class="search">
-                            <form target="_blank" action="/search" accept-charset="UTF-8" method="get">
-                                <input name="utf8" type="hidden" value="&#x2713;"/>
-                                <input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索"
-                                       class="search-input"/>
-                                <a class="search-btn" href="javascript:void(null)">
-                                    <i class="iconfont ic-search"></i>
-                                </a>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
+                        </form>
+                    </li>
+                </ul>
             </div>
         </div>
-    </nav>
-
+    </div>
+</nav>
 
 
 <!--主页主体内容-->
 <div class="container index">
     <div class="row">
-        <!-- Banner -->
+        <!-- Banner  主页图片滚轮-->
         <div id="indexCarousel" class="carousel slide">
-            <!--ol class="carousel-indicators">
-        <li data-target="#indexCarousel" data-slide-to="0"
-          class="active"></li>
-        <li data-target="#indexCarousel" data-slide-to="1"
-          class=""></li>
-        <li data-target="#indexCarousel" data-slide-to="2"
-          class=""></li>
-        <li data-target="#indexCarousel" data-slide-to="3"
-          class=""></li>
-        <li data-target="#indexCarousel" data-slide-to="4"
-          class=""></li>
-        <li data-target="#indexCarousel" data-slide-to="5"
-          class=""></li>
-    </ol-->
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="banner">
@@ -285,7 +350,7 @@
             <a class="right carousel-control" href="#indexCarousel" role="button" data-slide="next"><i
                     class="iconfont ic-next-s"></i></a>
         </div>
-        <!-- Banner -->  <!--19981226-->
+        <!-- Banner 专栏分类 -->  <!--19981226-->
         <div class="col-xs-16 main">
             <div class="recommend-collection">
                 <a class="collection" target="_blank" href="javascript:;">
@@ -319,39 +384,56 @@
                     更多热门专题 <i class="iconfont ic-link"></i>
                 </a></div>
             <div class="split-line"></div>
+
             <div id="list-container">
                 <!-- 文章列表模块 -->
                 <ul class="note-list" infinite-scroll-url="javascript:;">
                     <li id="note-17215651" data-note-id="17215651" class="have-img">
+                        <!--文章预览图-->
                         <a class="wrap-img" href="javascript:;" target="_blank">
+                            <!--js图片懒加载-->
                             <img th:data-echo="@{/test/upload_images/2716242-ee57eae462dd44ca.jpg}"
                                  class="img-blur"
                                  th:src="@{/test/upload_images/2716242-ee57eae462dd44ca.jpg}"
                                  alt="120"/>
                         </a>
+                        <!--文章内容相关信息-->
                         <div class="content">
+                            <!--作者相关信息-->
                             <div class="author">
+                                <!--作者头像-->
                                 <a class="avatar" target="_blank" href="javascript:;">
                                     <img th:src="@{/test/upload_images/dade7369-fc84-4d51-a5c9-71543077a325.jpg}"
                                          alt="64"/>
                                 </a>
+                                <!--作者昵称和文章发表时间-->
                                 <div class="name">
                                     <a class="blue-link" target="_blank" href="javascript:;">大雄老师1</a>
                                     <span class="time" data-shared-at="2017-09-18T08:32:55+08:00"></span>
                                 </div>
                             </div>
+                            <!--文章标题-->
                             <a class="title" target="_blank" href="javascript:;">共享经济还能这么玩</a>
+                            <!--文章简介-->
                             <p class="abstract">
                                 给庄稼打农药是个苦差事，可是今年很多农民却说一点都不辛苦。 原来今年在河北、安徽、山东等地出现了“共享农机”，
                                 成为了春耕生产中一道独特的风景。 只需要注册会员、扫码交押金、开锁几个简单的步骤，就可以用上先进的植保机。那么，“共享农机”真的好用吗？它们能替农民带来便利吗...
                             </p>
                             <div class="meta">
+                                <!--文章分类-->
                                 <a class="collection-tag" target="_blank" href="javascript:;">农业经济</a>
+                                <!--文章浏览次数-->
                                 <a target="_blank" href="javascript:;">
                                     <i class="iconfont ic-list-read"></i> 9763
-                                </a> <a target="_blank" href="javascript:;">
-                                <i class="iconfont ic-list-comments"></i> 161
-                            </a> <span><i class="iconfont ic-list-like"></i> 185</span>
+                                </a>
+                                <!--文章评论数-->
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-comments"></i> 161
+                                </a>
+                                <!--文章收藏数-->
+                                <span>
+                                    <i class="iconfont ic-list-like"></i> 185
+                                </span>
                             </div>
                         </div>
                     </li>
@@ -385,583 +467,63 @@
                                 </a> <a target="_blank" href="javascript:;">
                                 <i class="iconfont ic-list-comments"></i> 26
                             </a> <span><i class="iconfont ic-list-like"></i> 205</span>
+                                <!--打赏数-->
                                 <span><i class="iconfont ic-list-money"></i> 1</span>
                             </div>
                         </div>
                     </li>
-<!--                    <li id="note-17216611" data-note-id="17216611" class="have-img">-->
-<!--                        <a class="wrap-img" href="javascript:;" target="_blank">-->
-<!--                            <img th:data-echo="@{/test/upload_images/3321285-71e54e7f69d25953.jpg}"-->
-<!--                                 class="img-blur"-->
-<!--                                 th:src="@{/test/upload_images/3321285-71e54e7f69d25953.jpg}"-->
-<!--                                 alt="120"/>-->
-<!--                        </a>-->
-<!--                        <div class="content">-->
-<!--                            <div class="author">-->
-<!--                                <a class="avatar" target="_blank" href="javascript:;">-->
-<!--                                    <img th:src="@{/test/upload_images/6ada9e54-9ea3-4ec7-8c57-1999bacd7601.jpg}"-->
-<!--                                         alt="64"/>-->
-<!--                                </a>-->
-<!--                                <div class="name">-->
-<!--                                    <a class="blue-link" target="_blank" href="javascript:;">九线作家_Kosion宋觉明</a>-->
-<!--                                    <span class="time" data-shared-at="2017-09-18T09:11:38+08:00"></span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <a class="title" target="_blank" href="javascript:;">毕业后，我过着死鱼一样的生活</a>-->
-<!--                            <p class="abstract">-->
-<!--                                你知道你自己想要什么吗？看完这句话，你需要停顿三秒。﻿ 我不知道。﻿ 可悲的是，我还没有钱。﻿ 更可悲的是，我没有努力。﻿ ﻿01-->
-<!--                                最近一直不开心，抱怨工作，抱怨生活，也抱怨...-->
-<!--                            </p>-->
-<!--                            <div class="meta">-->
-<!--                                <a class="collection-tag" target="_blank" href="javascript:;">散文</a>-->
-<!--                                <a target="_blank" href="javascript:;">-->
-<!--                                    <i class="iconfont ic-list-read"></i> 6614-->
-<!--                                </a> <a target="_blank" href="javascript:;">-->
-<!--                                <i class="iconfont ic-list-comments"></i> 239-->
-<!--                            </a> <span><i class="iconfont ic-list-like"></i> 217</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li id="note-17306896" data-note-id="17306896" class="have-img">-->
-<!--                        <a class="wrap-img" href="javascript:;" target="_blank">-->
-<!--                            <img th:data-echo="@{/test/upload_images/5889454-657026c6b63e0cea.jpg}"-->
-<!--                                 class="img-blur"-->
-<!--                                 th:src="@{/test/upload_images/5889454-657026c6b63e0cea}"-->
-<!--                                 alt="120"/>-->
-<!--                        </a>-->
-<!--                        <div class="content">-->
-<!--                            <div class="author">-->
-<!--                                <a class="avatar" target="_blank" href="javascript:;">-->
-<!--                                    <img th:src="@{/test/upload_images/216fe347-e666-438e-9fd3-82e02fcd2a0c.jpg}"-->
-<!--                                         alt="64"/>-->
-<!--                                </a>-->
-<!--                                <div class="name">-->
-<!--                                    <a class="blue-link" target="_blank" href="javascript:;">新世相</a>-->
-<!--                                    <span class="time" data-shared-at="2017-09-20T10:15:48+08:00"></span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <a class="title" target="_blank" href="javascript:;">用快手的有钱人：我只刷了10万块，我欠快手太多</a>-->
-<!--                            <p class="abstract">-->
-<!--                                点击上方蓝字关注「新世相」，我们终将改变潮水的方向。 ​Sayings： 去年有一篇引起巨大争议的文章，说 "快手" 上有一个人们不知道的中国农村。作者说那些激烈的表演是-->
-<!--                                "...-->
-<!--                            </p>-->
-<!--                            <div class="meta">-->
-<!--                                <a class="collection-tag" target="_blank" href="javascript:;">今日看点</a>-->
-<!--                                <a target="_blank" href="javascript:;">-->
-<!--                                    <i class="iconfont ic-list-read"></i> 335-->
-<!--                                </a> <a target="_blank" href="javascript:;">-->
-<!--                                <i class="iconfont ic-list-comments"></i> 1-->
-<!--                            </a> <span><i class="iconfont ic-list-like"></i> 5</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li id="note-17294341" data-note-id="17294341" class="">-->
-<!--                        <div class="content">-->
-<!--                            <div class="author">-->
-<!--                                <a class="avatar" target="_blank" href="javascript:;">-->
-<!--                                    <img th:src="@{/test/upload_images/84f5d846-75b6-4abb-92d7-51e66dbb6a31.JPG}"-->
-<!--                                         alt="64"/>-->
-<!--                                </a>-->
-<!--                                <div class="name">-->
-<!--                                    <a class="blue-link" target="_blank" href="javascript:;">厨室机密</a>-->
-<!--                                    <span class="time" data-shared-at="2017-09-19T22:51:28+08:00"></span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <a class="title" target="_blank" href="javascript:;">CoCo壱番屋，"食屎啦你"</a>-->
-<!--                            <p class="abstract">-->
-<!--                                1. 洗手要求严苛，实际不洗； 2. 洗碗池被食物残渣堵住，整个上午都不换水； 3. 重点：鸡屎掉进蛋液，迅速搅拌，做成蛋包饭给您吃了； 4.-->
-<!--                                米饭基本无可挑剔，有时优先卖剩...-->
-<!--                            </p>-->
-<!--                            <div class="meta">-->
-<!--                                <a class="collection-tag" target="_blank" href="javascript:;">美食</a>-->
-<!--                                <a target="_blank" href="javascript:;">-->
-<!--                                    <i class="iconfont ic-list-read"></i> 204-->
-<!--                                </a> <a target="_blank" href="javascript:;">-->
-<!--                                <i class="iconfont ic-list-comments"></i> 2-->
-<!--                            </a> <span><i class="iconfont ic-list-like"></i> 3</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li id="note-17215651" data-note-id="17215651" class="have-img">-->
-<!--                        <a class="wrap-img" href="javascript:;" target="_blank">-->
-<!--                            <img th:data-echo="@{/test/upload_images/2716242-ee57eae462dd44ca.jpg}"-->
-<!--                                 class="img-blur"-->
-<!--                                 th:src="@{/test/upload_images/2716242-ee57eae462dd44ca.jpg}"-->
-<!--                                 alt="120"/>-->
-<!--                        </a>-->
-<!--                        <div class="content">-->
-<!--                            <div class="author">-->
-<!--                                <a class="avatar" target="_blank" href="javascript:;">-->
-<!--                                    <img th:src="@{/test/upload_images/dade7369-fc84-4d51-a5c9-71543077a325.jpg}"-->
-<!--                                         alt="64"/>-->
-<!--                                </a>-->
-<!--                                <div class="name">-->
-<!--                                    <a class="blue-link" target="_blank" href="javascript:;">大雄老师1</a>-->
-<!--                                    <span class="time" data-shared-at="2017-09-18T08:32:55+08:00"></span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <a class="title" target="_blank" href="javascript:;">感谢李雨桐，让我们认识了这样的"薛之谦"</a>-->
-<!--                            <p class="abstract">-->
-<!--                                说实话，在知道李雨桐撕薛之谦后，作为一个听薛之谦歌曲十年之久的歌迷，从一开始的惊讶，到后来的平静，直到现在的感谢……-->
-<!--                                喜欢薛之谦，应该是06年，也就是《认真的雪》大街小巷传播...-->
-<!--                            </p>-->
-<!--                            <div class="meta">-->
-<!--                                <a class="collection-tag" target="_blank" href="javascript:;">娱乐八卦</a>-->
-<!--                                <a target="_blank" href="javascript:;">-->
-<!--                                    <i class="iconfont ic-list-read"></i> 9763-->
-<!--                                </a> <a target="_blank" href="javascript:;">-->
-<!--                                <i class="iconfont ic-list-comments"></i> 161-->
-<!--                            </a> <span><i class="iconfont ic-list-like"></i> 185</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li id="note-17199001" data-note-id="17199001" class="have-img">-->
-<!--                        <a class="wrap-img" href="javascript:;" target="_blank">-->
-<!--                            <img th:data-echo="@{/test/upload_images/7447436-4c37ebfc6b1fab69.png}"-->
-<!--                                 class="img-blur"-->
-<!--                                 th:src="@{/test/upload_images/7447436-4c37ebfc6b1fab69.png}"-->
-<!--                                 alt="120"/>-->
-<!--                        </a>-->
-<!--                        <div class="content">-->
-<!--                            <div class="author">-->
-<!--                                <a class="avatar" target="_blank" href="javascript:;">-->
-<!--                                    <img th:src="@{/test/upload_images/e657e0d8-3ffc-4a3b-86a0-a3af0d06ab85.jpg}"-->
-<!--                                         alt="64"/>-->
-<!--                                </a>-->
-<!--                                <div class="name">-->
-<!--                                    <a class="blue-link" target="_blank" href="javascript:;">习习有话说</a>-->
-<!--                                    <span class="time" data-shared-at="2017-09-18T09:21:25+08:00"></span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <a class="title" target="_blank" href="javascript:;">写小说的你应该知道这些常识，而不是技巧</a>-->
-<!--                            <p class="abstract">-->
-<!--                                写作技巧是无意识积累的结果，有些技巧对大牛来说是锦上添花，但是对小白来说可能是雪上加霜了。-->
-<!--                                所以对于新手来说，你要准备的不是技巧，而是关于写小说的常识。所以如果你准备写小说，...-->
-<!--                            </p>-->
-<!--                            <div class="meta">-->
-<!--                                <a class="collection-tag" target="_blank" href="javascript:;">读书</a>-->
-<!--                                <a target="_blank" href="javascript:;">-->
-<!--                                    <i class="iconfont ic-list-read"></i> 2451-->
-<!--                                </a> <a target="_blank" href="javascript:;">-->
-<!--                                <i class="iconfont ic-list-comments"></i> 26-->
-<!--                            </a> <span><i class="iconfont ic-list-like"></i> 205</span>-->
-<!--                                <span><i class="iconfont ic-list-money"></i> 1</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li id="note-17216611" data-note-id="17216611" class="have-img">-->
-<!--                        <a class="wrap-img" href="javascript:;" target="_blank">-->
-<!--                            <img th:data-echo="@{/test/upload_images/3321285-71e54e7f69d25953.jpg}"-->
-<!--                                 class="img-blur"-->
-<!--                                 th:src="@{/test/upload_images/3321285-71e54e7f69d25953.jpg}"-->
-<!--                                 alt="120"/>-->
-<!--                        </a>-->
-<!--                        <div class="content">-->
-<!--                            <div class="author">-->
-<!--                                <a class="avatar" target="_blank" href="javascript:;">-->
-<!--                                    <img th:src="@{/test/upload_images/6ada9e54-9ea3-4ec7-8c57-1999bacd7601.jpg}"-->
-<!--                                         alt="64"/>-->
-<!--                                </a>-->
-<!--                                <div class="name">-->
-<!--                                    <a class="blue-link" target="_blank" href="javascript:;">九线作家_Kosion宋觉明</a>-->
-<!--                                    <span class="time" data-shared-at="2017-09-18T09:11:38+08:00"></span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <a class="title" target="_blank" href="javascript:;">毕业后，我过着死鱼一样的生活</a>-->
-<!--                            <p class="abstract">-->
-<!--                                你知道你自己想要什么吗？看完这句话，你需要停顿三秒。﻿ 我不知道。﻿ 可悲的是，我还没有钱。﻿ 更可悲的是，我没有努力。﻿ ﻿01-->
-<!--                                最近一直不开心，抱怨工作，抱怨生活，也抱怨...-->
-<!--                            </p>-->
-<!--                            <div class="meta">-->
-<!--                                <a class="collection-tag" target="_blank" href="javascript:;">散文</a>-->
-<!--                                <a target="_blank" href="javascript:;">-->
-<!--                                    <i class="iconfont ic-list-read"></i> 6614-->
-<!--                                </a> <a target="_blank" href="javascript:;">-->
-<!--                                <i class="iconfont ic-list-comments"></i> 239-->
-<!--                            </a> <span><i class="iconfont ic-list-like"></i> 217</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li id="note-17306896" data-note-id="17306896" class="have-img">-->
-<!--                        <a class="wrap-img" href="javascript:;" target="_blank">-->
-<!--                            <img th:data-echo="@{/test/upload_images/5889454-657026c6b63e0cea.jpg}"-->
-<!--                                 class="img-blur"-->
-<!--                                 th:src="@{/test/upload_images/5889454-657026c6b63e0cea}"-->
-<!--                                 alt="120"/>-->
-<!--                        </a>-->
-<!--                        <div class="content">-->
-<!--                            <div class="author">-->
-<!--                                <a class="avatar" target="_blank" href="javascript:;">-->
-<!--                                    <img th:src="@{/test/upload_images/216fe347-e666-438e-9fd3-82e02fcd2a0c.jpg}"-->
-<!--                                         alt="64"/>-->
-<!--                                </a>-->
-<!--                                <div class="name">-->
-<!--                                    <a class="blue-link" target="_blank" href="javascript:;">新世相</a>-->
-<!--                                    <span class="time" data-shared-at="2017-09-20T10:15:48+08:00"></span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <a class="title" target="_blank" href="javascript:;">用快手的有钱人：我只刷了10万块，我欠快手太多</a>-->
-<!--                            <p class="abstract">-->
-<!--                                点击上方蓝字关注「新世相」，我们终将改变潮水的方向。 ​Sayings： 去年有一篇引起巨大争议的文章，说 "快手" 上有一个人们不知道的中国农村。作者说那些激烈的表演是-->
-<!--                                "...-->
-<!--                            </p>-->
-<!--                            <div class="meta">-->
-<!--                                <a class="collection-tag" target="_blank" href="javascript:;">今日看点</a>-->
-<!--                                <a target="_blank" href="javascript:;">-->
-<!--                                    <i class="iconfont ic-list-read"></i> 335-->
-<!--                                </a> <a target="_blank" href="javascript:;">-->
-<!--                                <i class="iconfont ic-list-comments"></i> 1-->
-<!--                            </a> <span><i class="iconfont ic-list-like"></i> 5</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li id="note-17294341" data-note-id="17294341" class="">-->
-<!--                        <div class="content">-->
-<!--                            <div class="author">-->
-<!--                                <a class="avatar" target="_blank" href="javascript:;">-->
-<!--                                    <img th:src="@{/test/upload_images/84f5d846-75b6-4abb-92d7-51e66dbb6a31.JPG}"-->
-<!--                                         alt="64"/>-->
-<!--                                </a>-->
-<!--                                <div class="name">-->
-<!--                                    <a class="blue-link" target="_blank" href="javascript:;">厨室机密</a>-->
-<!--                                    <span class="time" data-shared-at="2017-09-19T22:51:28+08:00"></span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <a class="title" target="_blank" href="javascript:;">CoCo壱番屋，"食屎啦你"</a>-->
-<!--                            <p class="abstract">-->
-<!--                                1. 洗手要求严苛，实际不洗； 2. 洗碗池被食物残渣堵住，整个上午都不换水； 3. 重点：鸡屎掉进蛋液，迅速搅拌，做成蛋包饭给您吃了； 4.-->
-<!--                                米饭基本无可挑剔，有时优先卖剩...-->
-<!--                            </p>-->
-<!--                            <div class="meta">-->
-<!--                                <a class="collection-tag" target="_blank" href="javascript:;">美食</a>-->
-<!--                                <a target="_blank" href="javascript:;">-->
-<!--                                    <i class="iconfont ic-list-read"></i> 204-->
-<!--                                </a> <a target="_blank" href="javascript:;">-->
-<!--                                <i class="iconfont ic-list-comments"></i> 2-->
-<!--                            </a> <span><i class="iconfont ic-list-like"></i> 3</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li id="note-17215651" data-note-id="17215651" class="have-img">-->
-<!--                        <a class="wrap-img" href="javascript:;" target="_blank">-->
-<!--                            <img th:data-echo="@{/test/upload_images/2716242-ee57eae462dd44ca.jpg}"-->
-<!--                                 class="img-blur"-->
-<!--                                 th:src="@{/test/upload_images/2716242-ee57eae462dd44ca.jpg}"-->
-<!--                                 alt="120"/>-->
-<!--                        </a>-->
-<!--                        <div class="content">-->
-<!--                            <div class="author">-->
-<!--                                <a class="avatar" target="_blank" href="javascript:;">-->
-<!--                                    <img th:src="@{/test/upload_images/dade7369-fc84-4d51-a5c9-71543077a325.jpg}"-->
-<!--                                         alt="64"/>-->
-<!--                                </a>-->
-<!--                                <div class="name">-->
-<!--                                    <a class="blue-link" target="_blank" href="javascript:;">大雄老师1</a>-->
-<!--                                    <span class="time" data-shared-at="2017-09-18T08:32:55+08:00"></span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <a class="title" target="_blank" href="javascript:;">感谢李雨桐，让我们认识了这样的"薛之谦"</a>-->
-<!--                            <p class="abstract">-->
-<!--                                说实话，在知道李雨桐撕薛之谦后，作为一个听薛之谦歌曲十年之久的歌迷，从一开始的惊讶，到后来的平静，直到现在的感谢……-->
-<!--                                喜欢薛之谦，应该是06年，也就是《认真的雪》大街小巷传播...-->
-<!--                            </p>-->
-<!--                            <div class="meta">-->
-<!--                                <a class="collection-tag" target="_blank" href="javascript:;">娱乐八卦</a>-->
-<!--                                <a target="_blank" href="javascript:;">-->
-<!--                                    <i class="iconfont ic-list-read"></i> 9763-->
-<!--                                </a> <a target="_blank" href="javascript:;">-->
-<!--                                <i class="iconfont ic-list-comments"></i> 161-->
-<!--                            </a> <span><i class="iconfont ic-list-like"></i> 185</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li id="note-17199001" data-note-id="17199001" class="have-img">-->
-<!--                        <a class="wrap-img" href="javascript:;" target="_blank">-->
-<!--                            <img th:data-echo="@{/test/upload_images/7447436-4c37ebfc6b1fab69.png}"-->
-<!--                                 class="img-blur"-->
-<!--                                 th:src="@{/test/upload_images/7447436-4c37ebfc6b1fab69.png}"-->
-<!--                                 alt="120"/>-->
-<!--                        </a>-->
-<!--                        <div class="content">-->
-<!--                            <div class="author">-->
-<!--                                <a class="avatar" target="_blank" href="javascript:;">-->
-<!--                                    <img th:src="@{/test/upload_images/e657e0d8-3ffc-4a3b-86a0-a3af0d06ab85.jpg}"-->
-<!--                                         alt="64"/>-->
-<!--                                </a>-->
-<!--                                <div class="name">-->
-<!--                                    <a class="blue-link" target="_blank" href="javascript:;">习习有话说</a>-->
-<!--                                    <span class="time" data-shared-at="2017-09-18T09:21:25+08:00"></span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <a class="title" target="_blank" href="javascript:;">写小说的你应该知道这些常识，而不是技巧</a>-->
-<!--                            <p class="abstract">-->
-<!--                                写作技巧是无意识积累的结果，有些技巧对大牛来说是锦上添花，但是对小白来说可能是雪上加霜了。-->
-<!--                                所以对于新手来说，你要准备的不是技巧，而是关于写小说的常识。所以如果你准备写小说，...-->
-<!--                            </p>-->
-<!--                            <div class="meta">-->
-<!--                                <a class="collection-tag" target="_blank" href="javascript:;">读书</a>-->
-<!--                                <a target="_blank" href="javascript:;">-->
-<!--                                    <i class="iconfont ic-list-read"></i> 2451-->
-<!--                                </a> <a target="_blank" href="javascript:;">-->
-<!--                                <i class="iconfont ic-list-comments"></i> 26-->
-<!--                            </a> <span><i class="iconfont ic-list-like"></i> 205</span>-->
-<!--                                <span><i class="iconfont ic-list-money"></i> 1</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li id="note-17216611" data-note-id="17216611" class="have-img">-->
-<!--                        <a class="wrap-img" href="javascript:;" target="_blank">-->
-<!--                            <img th:data-echo="@{/test/upload_images/3321285-71e54e7f69d25953.jpg}"-->
-<!--                                 class="img-blur"-->
-<!--                                 th:src="@{/test/upload_images/3321285-71e54e7f69d25953.jpg}"-->
-<!--                                 alt="120"/>-->
-<!--                        </a>-->
-<!--                        <div class="content">-->
-<!--                            <div class="author">-->
-<!--                                <a class="avatar" target="_blank" href="javascript:;">-->
-<!--                                    <img th:src="@{/test/upload_images/6ada9e54-9ea3-4ec7-8c57-1999bacd7601.jpg}"-->
-<!--                                         alt="64"/>-->
-<!--                                </a>-->
-<!--                                <div class="name">-->
-<!--                                    <a class="blue-link" target="_blank" href="javascript:;">九线作家_Kosion宋觉明</a>-->
-<!--                                    <span class="time" data-shared-at="2017-09-18T09:11:38+08:00"></span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <a class="title" target="_blank" href="javascript:;">毕业后，我过着死鱼一样的生活</a>-->
-<!--                            <p class="abstract">-->
-<!--                                你知道你自己想要什么吗？看完这句话，你需要停顿三秒。﻿ 我不知道。﻿ 可悲的是，我还没有钱。﻿ 更可悲的是，我没有努力。﻿ ﻿01-->
-<!--                                最近一直不开心，抱怨工作，抱怨生活，也抱怨...-->
-<!--                            </p>-->
-<!--                            <div class="meta">-->
-<!--                                <a class="collection-tag" target="_blank" href="javascript:;">散文</a>-->
-<!--                                <a target="_blank" href="javascript:;">-->
-<!--                                    <i class="iconfont ic-list-read"></i> 6614-->
-<!--                                </a> <a target="_blank" href="javascript:;">-->
-<!--                                <i class="iconfont ic-list-comments"></i> 239-->
-<!--                            </a> <span><i class="iconfont ic-list-like"></i> 217</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li id="note-17306896" data-note-id="17306896" class="have-img">-->
-<!--                        <a class="wrap-img" href="javascript:;" target="_blank">-->
-<!--                            <img th:data-echo="@{/test/upload_images/5889454-657026c6b63e0cea.jpg}"-->
-<!--                                 class="img-blur"-->
-<!--                                 th:src="@{/test/upload_images/5889454-657026c6b63e0cea}"-->
-<!--                                 alt="120"/>-->
-<!--                        </a>-->
-<!--                        <div class="content">-->
-<!--                            <div class="author">-->
-<!--                                <a class="avatar" target="_blank" href="javascript:;">-->
-<!--                                    <img th:src="@{/test/upload_images/216fe347-e666-438e-9fd3-82e02fcd2a0c.jpg}"-->
-<!--                                         alt="64"/>-->
-<!--                                </a>-->
-<!--                                <div class="name">-->
-<!--                                    <a class="blue-link" target="_blank" href="javascript:;">新世相</a>-->
-<!--                                    <span class="time" data-shared-at="2017-09-20T10:15:48+08:00"></span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <a class="title" target="_blank" href="javascript:;">用快手的有钱人：我只刷了10万块，我欠快手太多</a>-->
-<!--                            <p class="abstract">-->
-<!--                                点击上方蓝字关注「新世相」，我们终将改变潮水的方向。 ​Sayings： 去年有一篇引起巨大争议的文章，说 "快手" 上有一个人们不知道的中国农村。作者说那些激烈的表演是-->
-<!--                                "...-->
-<!--                            </p>-->
-<!--                            <div class="meta">-->
-<!--                                <a class="collection-tag" target="_blank" href="javascript:;">今日看点</a>-->
-<!--                                <a target="_blank" href="javascript:;">-->
-<!--                                    <i class="iconfont ic-list-read"></i> 335-->
-<!--                                </a> <a target="_blank" href="javascript:;">-->
-<!--                                <i class="iconfont ic-list-comments"></i> 1-->
-<!--                            </a> <span><i class="iconfont ic-list-like"></i> 5</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li id="note-17294341" data-note-id="17294341" class="">-->
-<!--                        <div class="content">-->
-<!--                            <div class="author">-->
-<!--                                <a class="avatar" target="_blank" href="javascript:;">-->
-<!--                                    <img th:src="@{/test/upload_images/84f5d846-75b6-4abb-92d7-51e66dbb6a31.JPG}"-->
-<!--                                         alt="64"/>-->
-<!--                                </a>-->
-<!--                                <div class="name">-->
-<!--                                    <a class="blue-link" target="_blank" href="javascript:;">厨室机密</a>-->
-<!--                                    <span class="time" data-shared-at="2017-09-19T22:51:28+08:00"></span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <a class="title" target="_blank" href="javascript:;">CoCo壱番屋，"食屎啦你"</a>-->
-<!--                            <p class="abstract">-->
-<!--                                1. 洗手要求严苛，实际不洗； 2. 洗碗池被食物残渣堵住，整个上午都不换水； 3. 重点：鸡屎掉进蛋液，迅速搅拌，做成蛋包饭给您吃了； 4.-->
-<!--                                米饭基本无可挑剔，有时优先卖剩...-->
-<!--                            </p>-->
-<!--                            <div class="meta">-->
-<!--                                <a class="collection-tag" target="_blank" href="javascript:;">美食</a>-->
-<!--                                <a target="_blank" href="javascript:;">-->
-<!--                                    <i class="iconfont ic-list-read"></i> 204-->
-<!--                                </a> <a target="_blank" href="javascript:;">-->
-<!--                                <i class="iconfont ic-list-comments"></i> 2-->
-<!--                            </a> <span><i class="iconfont ic-list-like"></i> 3</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li id="note-17215651" data-note-id="17215651" class="have-img">-->
-<!--                        <a class="wrap-img" href="javascript:;" target="_blank">-->
-<!--                            <img th:data-echo="@{/test/upload_images/2716242-ee57eae462dd44ca.jpg}"-->
-<!--                                 class="img-blur"-->
-<!--                                 th:src="@{/test/upload_images/2716242-ee57eae462dd44ca.jpg}"-->
-<!--                                 alt="120"/>-->
-<!--                        </a>-->
-<!--                        <div class="content">-->
-<!--                            <div class="author">-->
-<!--                                <a class="avatar" target="_blank" href="javascript:;">-->
-<!--                                    <img th:src="@{/test/upload_images/dade7369-fc84-4d51-a5c9-71543077a325.jpg}"-->
-<!--                                         alt="64"/>-->
-<!--                                </a>-->
-<!--                                <div class="name">-->
-<!--                                    <a class="blue-link" target="_blank" href="javascript:;">大雄老师1</a>-->
-<!--                                    <span class="time" data-shared-at="2017-09-18T08:32:55+08:00"></span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <a class="title" target="_blank" href="javascript:;">感谢李雨桐，让我们认识了这样的"薛之谦"</a>-->
-<!--                            <p class="abstract">-->
-<!--                                说实话，在知道李雨桐撕薛之谦后，作为一个听薛之谦歌曲十年之久的歌迷，从一开始的惊讶，到后来的平静，直到现在的感谢……-->
-<!--                                喜欢薛之谦，应该是06年，也就是《认真的雪》大街小巷传播...-->
-<!--                            </p>-->
-<!--                            <div class="meta">-->
-<!--                                <a class="collection-tag" target="_blank" href="javascript:;">娱乐八卦</a>-->
-<!--                                <a target="_blank" href="javascript:;">-->
-<!--                                    <i class="iconfont ic-list-read"></i> 9763-->
-<!--                                </a> <a target="_blank" href="javascript:;">-->
-<!--                                <i class="iconfont ic-list-comments"></i> 161-->
-<!--                            </a> <span><i class="iconfont ic-list-like"></i> 185</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li id="note-17199001" data-note-id="17199001" class="have-img">-->
-<!--                        <a class="wrap-img" href="javascript:;" target="_blank">-->
-<!--                            <img th:data-echo="@{/test/upload_images/7447436-4c37ebfc6b1fab69.png}"-->
-<!--                                 class="img-blur"-->
-<!--                                 th:src="@{/test/upload_images/7447436-4c37ebfc6b1fab69.png}"-->
-<!--                                 alt="120"/>-->
-<!--                        </a>-->
-<!--                        <div class="content">-->
-<!--                            <div class="author">-->
-<!--                                <a class="avatar" target="_blank" href="javascript:;">-->
-<!--                                    <img th:src="@{/test/upload_images/e657e0d8-3ffc-4a3b-86a0-a3af0d06ab85.jpg}"-->
-<!--                                         alt="64"/>-->
-<!--                                </a>-->
-<!--                                <div class="name">-->
-<!--                                    <a class="blue-link" target="_blank" href="javascript:;">习习有话说</a>-->
-<!--                                    <span class="time" data-shared-at="2017-09-18T09:21:25+08:00"></span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <a class="title" target="_blank" href="javascript:;">写小说的你应该知道这些常识，而不是技巧</a>-->
-<!--                            <p class="abstract">-->
-<!--                                写作技巧是无意识积累的结果，有些技巧对大牛来说是锦上添花，但是对小白来说可能是雪上加霜了。-->
-<!--                                所以对于新手来说，你要准备的不是技巧，而是关于写小说的常识。所以如果你准备写小说，...-->
-<!--                            </p>-->
-<!--                            <div class="meta">-->
-<!--                                <a class="collection-tag" target="_blank" href="javascript:;">读书</a>-->
-<!--                                <a target="_blank" href="javascript:;">-->
-<!--                                    <i class="iconfont ic-list-read"></i> 2451-->
-<!--                                </a> <a target="_blank" href="javascript:;">-->
-<!--                                <i class="iconfont ic-list-comments"></i> 26-->
-<!--                            </a> <span><i class="iconfont ic-list-like"></i> 205</span>-->
-<!--                                <span><i class="iconfont ic-list-money"></i> 1</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li id="note-17216611" data-note-id="17216611" class="have-img">-->
-<!--                        <a class="wrap-img" href="javascript:;" target="_blank">-->
-<!--                            <img th:data-echo="@{/test/upload_images/3321285-71e54e7f69d25953.jpg}"-->
-<!--                                 class="img-blur"-->
-<!--                                 th:src="@{/test/upload_images/3321285-71e54e7f69d25953.jpg}"-->
-<!--                                 alt="120"/>-->
-<!--                        </a>-->
-<!--                        <div class="content">-->
-<!--                            <div class="author">-->
-<!--                                <a class="avatar" target="_blank" href="javascript:;">-->
-<!--                                    <img th:src="@{/test/upload_images/6ada9e54-9ea3-4ec7-8c57-1999bacd7601.jpg}"-->
-<!--                                         alt="64"/>-->
-<!--                                </a>-->
-<!--                                <div class="name">-->
-<!--                                    <a class="blue-link" target="_blank" href="javascript:;">九线作家_Kosion宋觉明</a>-->
-<!--                                    <span class="time" data-shared-at="2017-09-18T09:11:38+08:00"></span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <a class="title" target="_blank" href="javascript:;">毕业后，我过着死鱼一样的生活</a>-->
-<!--                            <p class="abstract">-->
-<!--                                你知道你自己想要什么吗？看完这句话，你需要停顿三秒。﻿ 我不知道。﻿ 可悲的是，我还没有钱。﻿ 更可悲的是，我没有努力。﻿ ﻿01-->
-<!--                                最近一直不开心，抱怨工作，抱怨生活，也抱怨...-->
-<!--                            </p>-->
-<!--                            <div class="meta">-->
-<!--                                <a class="collection-tag" target="_blank" href="javascript:;">散文</a>-->
-<!--                                <a target="_blank" href="javascript:;">-->
-<!--                                    <i class="iconfont ic-list-read"></i> 6614-->
-<!--                                </a> <a target="_blank" href="javascript:;">-->
-<!--                                <i class="iconfont ic-list-comments"></i> 239-->
-<!--                            </a> <span><i class="iconfont ic-list-like"></i> 217</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li id="note-17306896" data-note-id="17306896" class="have-img">-->
-<!--                        <a class="wrap-img" href="javascript:;" target="_blank">-->
-<!--                            <img th:data-echo="@{/test/upload_images/5889454-657026c6b63e0cea.jpg}"-->
-<!--                                 class="img-blur"-->
-<!--                                 th:src="@{/test/upload_images/5889454-657026c6b63e0cea}"-->
-<!--                                 alt="120"/>-->
-<!--                        </a>-->
-<!--                        <div class="content">-->
-<!--                            <div class="author">-->
-<!--                                <a class="avatar" target="_blank" href="javascript:;">-->
-<!--                                    <img th:src="@{/test/upload_images/216fe347-e666-438e-9fd3-82e02fcd2a0c.jpg}"-->
-<!--                                         alt="64"/>-->
-<!--                                </a>-->
-<!--                                <div class="name">-->
-<!--                                    <a class="blue-link" target="_blank" href="javascript:;">新世相</a>-->
-<!--                                    <span class="time" data-shared-at="2017-09-20T10:15:48+08:00"></span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <a class="title" target="_blank" href="javascript:;">用快手的有钱人：我只刷了10万块，我欠快手太多</a>-->
-<!--                            <p class="abstract">-->
-<!--                                点击上方蓝字关注「新世相」，我们终将改变潮水的方向。 ​Sayings： 去年有一篇引起巨大争议的文章，说 "快手" 上有一个人们不知道的中国农村。作者说那些激烈的表演是-->
-<!--                                "...-->
-<!--                            </p>-->
-<!--                            <div class="meta">-->
-<!--                                <a class="collection-tag" target="_blank" href="javascript:;">今日看点</a>-->
-<!--                                <a target="_blank" href="javascript:;">-->
-<!--                                    <i class="iconfont ic-list-read"></i> 335-->
-<!--                                </a> <a target="_blank" href="javascript:;">-->
-<!--                                <i class="iconfont ic-list-comments"></i> 1-->
-<!--                            </a> <span><i class="iconfont ic-list-like"></i> 5</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li id="note-17294341" data-note-id="17294341" class="">-->
-<!--                        <div class="content">-->
-<!--                            <div class="author">-->
-<!--                                <a class="avatar" target="_blank" href="javascript:;">-->
-<!--                                    <img th:src="@{/test/upload_images/84f5d846-75b6-4abb-92d7-51e66dbb6a31.JPG}"-->
-<!--                                         alt="64"/>-->
-<!--                                </a>-->
-<!--                                <div class="name">-->
-<!--                                    <a class="blue-link" target="_blank" href="javascript:;">厨室机密</a>-->
-<!--                                    <span class="time" data-shared-at="2017-09-19T22:51:28+08:00"></span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <a class="title" target="_blank" href="javascript:;">CoCo壱番屋，"食屎啦你"</a>-->
-<!--                            <p class="abstract">-->
-<!--                                1. 洗手要求严苛，实际不洗； 2. 洗碗池被食物残渣堵住，整个上午都不换水； 3. 重点：鸡屎掉进蛋液，迅速搅拌，做成蛋包饭给您吃了； 4.-->
-<!--                                米饭基本无可挑剔，有时优先卖剩...-->
-<!--                            </p>-->
-<!--                            <div class="meta">-->
-<!--                                <a class="collection-tag" target="_blank" href="javascript:;">美食</a>-->
-<!--                                <a target="_blank" href="javascript:;">-->
-<!--                                    <i class="iconfont ic-list-read"></i> 204-->
-<!--                                </a> <a target="_blank" href="javascript:;">-->
-<!--                                <i class="iconfont ic-list-comments"></i> 2-->
-<!--                            </a> <span><i class="iconfont ic-list-like"></i> 3</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
+                    <li id="note-17215651" data-note-id="17215651" class="have-img" th:each="map:${discussPosts}">
+                        <!--文章预览图-->
+                        <a class="wrap-img" href="javascript:;" target="_blank">
+                            <!--js图片懒加载-->
+                            <img th:data-echo="@{/test/upload_images/5889454-657026c6b63e0cea.jpg}"
+                                 class="img-blur"
+                                 th:src="@{/test/upload_images/5889454-657026c6b63e0cea.jpg}"
+                                 alt="120"/>
+                        </a>
+                        <!--文章内容相关信息-->
+                        <div class="content">
+                            <!--作者相关信息-->
+                            <div class="author">
+                                <!--作者头像-->
+                                <a class="avatar" target="_blank" href="javascript:;">
+                                    <img th:src="${map.user.headerUrl}"
+                                         alt="64"/>
+                                </a>
+                                <!--作者昵称和文章发表时间-->
+                                <div class="name">
+                                    <a class="blue-link" target="_blank" href="javascript:;"
+                                       th:utext="${map.user.username}">大雄老师1</a>
+                                    <span  th:text="${#dates.format(map.post.createTime,'yyyy.MM.dd HH:mm')}">
+                                    </span>
+                                </div>
+                            </div>
+                            <!--文章标题-->
+                            <a class="title" target="_blank" th:href="@{|/discuss/detail/${map.post.id}|}"
+                               th:utext="${map.post.title}">共享经济还能这么玩</a>
+                            <!--文章简介-->
+                            <p class="abstract" th:utext="${map.brief}">
+                                给庄稼打农药是个苦差事，可是今年很多农民却说一点都不辛苦。 原来今年在河北、安徽、山东等地出现了“共享农机”，
+                                成为了春耕生产中一道独特的风景。 只需要注册会员、扫码交押金、开锁几个简单的步骤，就可以用上先进的植保机。那么，“共享农机”真的好用吗？它们能替农民带来便利吗...
+                            </p>
+                            <div class="meta">
+                                <!--文章分类-->
+                                <a class="collection-tag" target="_blank" href="javascript:;">农业经济</a>
+                                <!--文章浏览次数-->
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-read"></i> 9763
+                                </a>
+                                <!--文章评论数-->
+                                <a target="_blank" href="javascript:;">
+                                    <i class="iconfont ic-list-comments" th:text="${' ' + map.post.commentCount}"></i>
+                                </a>
+                                <!--文章收藏数-->
+                                <span>
+                                    <i class="iconfont ic-list-like"></i> 185
+                                </span>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
                 <!-- 文章列表模块 -->
             </div>
@@ -974,16 +536,19 @@
                     th:src="@{/test/assets/web/banner-s-3-7123fd94750759acf7eca05b871e9d17.png}" alt="Banner s 3"/></a>
                 <a target="_blank" href="javascript:;"><img
                         th:src="@{/test/assets/web/banner-s-4-b70da70d679593510ac93a172dfbaeaa.png}" alt="Banner s 4"/></a>
-                <a utm_medium="index-banner-s" target="_blank" href="javascript:;"><img th:src="@{/test/assets/web/惠农出版.jpg}"
-                                                                                        alt="Banner s 5"/></a>
-                <a target="_blank" href="javascript:;"><img th:src="@{/test/assets/web/惠农大学堂.jpg}" alt="Banner s 6"/></a>
+                <a utm_medium="index-banner-s" target="_blank" href="javascript:;"><img
+                        th:src="@{/test/assets/web/惠农出版.jpg}"
+                        alt="Banner s 5"/></a>
+                <a target="_blank" href="javascript:;"><img th:src="@{/test/assets/web/惠农大学堂.jpg}"
+                                                            alt="Banner s 6"/></a>
             </div>
             <!-- 首页右侧 App 下载提示 -->
             <a class="col-xs-8 download" data-toggle="popover" data-placement="top" data-html="true"
                data-trigger="hover"
                data-content="&lt;img src=&quot;assets/web/download-app-qrcode-0257cd2c1d094cba9caa7bdc9e5a1393.png&quot; alt=&quot;Download app qrcode&quot; /&gt;"
                href="javascript:;">
-                <img class="qrcode" th:src="@{/test/assets/web/download-app-qrcode-0257cd2c1d094cba9caa7bdc9e5a1393.png}"
+                <img class="qrcode"
+                     th:src="@{/test/assets/web/download-app-qrcode-0257cd2c1d094cba9caa7bdc9e5a1393.png}"
                      alt="Download app qrcode"/>
                 <div class="info">
                     <div class="title">下载惠农手机App<i class="iconfont ic-link"></i></div>
@@ -996,13 +561,13 @@
                     惠农日报
                     <a target="_blank" href="javascript:;">查看往期</a>
                 </div>
-<!--                <a target="_blank" class="note" href="javascript:;">-->
-<!--                    <div class="note-title">人间故事馆008——我在北京开地铁,每天送一万人回家</div>-->
-<!--                </a> <a target="_blank" class="note" href="javascript:;">-->
-<!--                <img th:src="@{/test/upload_images/568470-0a0824cf445d8acf.png}"-->
-<!--                     alt="96"/>-->
-<!--                <div class="note-title">黛玉早报170918 —— 《23岁的我，开始逼着我妈去相亲角》</div>-->
-<!--            </a>-->
+                <!--                <a target="_blank" class="note" href="javascript:;">-->
+                <!--                    <div class="note-title">人间故事馆008——我在北京开地铁,每天送一万人回家</div>-->
+                <!--                </a> <a target="_blank" class="note" href="javascript:;">-->
+                <!--                <img th:src="@{/test/upload_images/568470-0a0824cf445d8acf.png}"-->
+                <!--                     alt="96"/>-->
+                <!--                <div class="note-title">黛玉早报170918 —— 《23岁的我，开始逼着我妈去相亲角》</div>-->
+                <!--            </a>-->
             </div>
             <!-- 推荐作者 -->
             <div data-vcomp="recommended-author-list"></div>
@@ -1038,7 +603,36 @@
 <script th:src="@{/test/assets/web-780e8747353f13ebad82.js}"></script>
 <script th:src="@{/test/assets/web/pages/home/index/entry-91155bcdfdd2414381a7.js}"></script>
 <script th:src="@{/test/assets/web-6f284f71bf6839d4fe98.js}"></script>
-<script>th:src="@{/test/js/index.js}"</script>
+<script th:src="@{/test/js/index.js}"></script>
+<!--显示关闭文章编辑器窗口的js方法，如果当前窗口隐藏触发方法就会显示，如果已经显示点击就会隐藏-->
+<script>
+    $("#publish").click(function () {
+        if ($("#dev").css("display") == "none") {
+            $("#dev").show();
+        } else {
+            $("#dev").hide();
+        }
+    });
+</script>
+<!--显示关闭文章编辑器窗口的js方法-->
+<script>
+    function myDialog() {
+        if ($("#dev").css("display") == "none") {
+            $("#dev").show();
+        } else {
+            $("#dev").hide();
+        }
+    }
+</script>
+<script>
+    function myPopup() {
+        if ($("#popupDev").css("display") == "none") {
+            $("#popupDev").show();
+        } else {
+            $("#popupDev").hide();
+        }
+    }
+</script>
 </body>
 
 </html>
