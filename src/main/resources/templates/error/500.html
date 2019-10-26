@@ -3,133 +3,318 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="icon" href="https://static.nowcoder.com/images/logo_87_87.png"/>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
-	<link rel="stylesheet" th:href="@{/css/global.css}" />
-	<title>牛客网-500</title>
+	<link rel="icon" th:href="@{/test/images/1.png}"/>
+	<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"-->
+	<!--          crossorigin="anonymous">-->
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/test/assets/web-e7e403d2843dd1edd8db.css}"/>
+	<link rel="stylesheet" type="text/css" media="all"
+		  th:href="@{/test/assets/web/pages/home/index/entry-7642b94e17df29096c13.css}"/>
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/test/style/post.css}"/>
+
+	<link rel="stylesheet" th:href="@{/css/global.css}"/>
+	<title>惠农网-500</title>
 </head>
 <body>
-	<div class="nk-container">
-		<!-- 头部 -->
-		<header class="bg-dark sticky-top" th:replace="index::header">
-			<div class="container">
-				<!-- 导航 -->
-				<nav class="navbar navbar-expand-lg navbar-dark">
-					<!-- logo -->
-					<a class="navbar-brand" href="#"></a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<!-- 功能 -->
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav mr-auto">
-							<li class="nav-item ml-3 btn-group-vertical">
-								<a class="nav-link" href="../index.html">首页</a>
-							</li>
-							<li class="nav-item ml-3 btn-group-vertical">
-								<a class="nav-link position-relative" href="../site/letter.html">消息<span class="badge badge-danger">12</span></a>
-							</li>
-							<li class="nav-item ml-3 btn-group-vertical">
-								<a class="nav-link" href="../site/register.html">注册</a>
-							</li>
-							<li class="nav-item ml-3 btn-group-vertical">
-								<a class="nav-link" href="../site/login.html">登录</a>
-							</li>
-							<li class="nav-item ml-3 btn-group-vertical dropdown">
-								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<img src="http://images.nowcoder.com/head/1t.png" class="rounded-circle" style="width:30px;"/>
-								</a>
-								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item text-center" href="../site/profile.html">个人主页</a>
-									<a class="dropdown-item text-center" href="../site/setting.html">账号设置</a>
-									<a class="dropdown-item text-center" href="../site/login.html">退出登录</a>
-									<div class="dropdown-divider"></div>
-									<span class="dropdown-item text-center text-secondary">nowcoder</span>
+<div class="nk-container">
+	<!-- 全局顶部导航栏 -->
+
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="width-limit">
+			<!-- 左上方 Logo -->
+			<a class="logo" th:href="@{/index}"><img th:src="@{/test/assets/web/44.png}" alt="Logo"/></a>
+			<!-- 右上角 -->
+			<!-- 未登录显示登录/注册/写文章 -->
+			<button type="button" class="btn write-btn" id="publish" target="_blank" data-toggle="modal"
+					data-target="#publishModal">
+				<i class="iconfont ic-write"></i>写文章
+			</button>
+			<!--发表文章文本标记器-->
+			<div role="dialog" aria-modal="true" aria-labelledby="dialog-title-k24o8wqp" id="dev"
+				 class="center next-dialog next-closeable simple-form-dialog"
+				 style="width: 640px;height:500px;display:none">
+
+				<div style="font-weight:700" class="next-dialog-header" id="dialog-title-k24lhv54" role="heading"
+					 aria-level="1">
+					<font face="幼圆">发布文章</font>
+				</div>
+				<hr>
+				<div class="next-dialog-body">
+					<form>
+						<div>
+							<div class="next-row" role="row" style="margin-top: 0px;" dir="ltr">
+								<div style="font-size: 12px;color: #333;font-weight:700">
+									<font face="幼圆">题目：</font>
 								</div>
-							</li>
-						</ul>
-						<!-- 搜索 -->
-						<form class="form-inline my-2 my-lg-0" action="../site/search.html">
-							<input class="form-control mr-sm-2" type="search" aria-label="Search" />
-							<button class="btn btn-outline-light my-2 my-sm-0" type="submit">搜索</button>
-						</form>
-					</div>
-				</nav>
-			</div>
-		</header>
+							</div>
+							<div class="next-row" role="row" style="margin-top: 10px;" dir="ltr">
+								<div class="next-col next-col-18" role="gridcell" dir="ltr">
+                        <span class="next-input next-medium"
+							  style="width: 100%;">
+                            <input
+									style="width: 600px;height: 30px;border-radius:3px;border:1px solid #999;"
+									height="100%"
+									value="" autocomplete="off" id="recipient-name">
+                        </span>
+								</div>
+							</div>
+							<div class="next-row" role="row" style="margin-top: 10px;" dir="ltr">
+								<div class="next-col" role="gridcell" dir="ltr">
 
-		<!-- 内容 -->
-		<div class="main">
-			<div class="container pl-5 pr-5 pt-3 pb-3 mt-3 mb-3">
-				<img th:src="@{/img/error.png}" >
-			</div>
-		</div>
+								</div>
+							</div>
+							<div style="font-size: 12px;color: #333;font-weight:700">
+								<font face="幼圆">正文：</font>
+							</div>
+							<div class="next-row" role="row" style="margin-top: 10px;" dir="ltr">
 
-		<!-- 尾部 -->
-		<footer class="bg-dark">
-			<div class="container">
-				<div class="row">
-					<!-- 二维码 -->
-					<div class="col-4 qrcode">
-						<img src="https://uploadfiles.nowcoder.com/app/app_download.png" class="img-thumbnail" style="width:136px;" />
-					</div>
-					<!-- 公司信息 -->
-					<div class="col-8 detail-info">
-						<div class="row">
-							<div class="col">
-								<ul class="nav">
-									<li class="nav-item">
-										<a class="nav-link text-light" href="#">关于我们</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link text-light" href="#">加入我们</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link text-light" href="#">意见反馈</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link text-light" href="#">企业服务</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link text-light" href="#">联系我们</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link text-light" href="#">免责声明</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link text-light" href="#">友情链接</a>
-									</li>
-								</ul>
+								<div style="width:100%;height:50%" class="next-col" role="gridcell" dir="ltr">
+                        <span class="next-input next-input-textarea"
+							  style="width: 100%;">
+                            <textarea
+									style="resize:none;width:600px;height:250px;border-radius:6px;border:1px solid #999;"
+									placeholder="" rows="4" data-real="true" id="message-text">
+                            </textarea>
+                        </span>
+								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col">
-								<ul class="nav btn-group-vertical company-info">
-									<li class="nav-item text-white-50">
-										公司地址：北京市朝阳区大屯路东金泉时代3-2708北京牛客科技有限公司
-									</li>
-									<li class="nav-item text-white-50">
-										联系方式：010-60728802(电话)&nbsp;&nbsp;&nbsp;&nbsp;admin@nowcoder.com
-									</li>
-									<li class="nav-item text-white-50">
-										牛客科技©2018 All rights reserved
-									</li>
-									<li class="nav-item text-white-50">
-										京ICP备14055008号-4 &nbsp;&nbsp;&nbsp;&nbsp;
-										<img src="http://static.nowcoder.com/company/images/res/ghs.png" style="width:18px;" />
-										京公网安备 11010502036488号
-									</li>
-								</ul>
+					</form>
+				</div>
+				<div class="next-dialog-footer next-align-center">
+            <span style="position:absolute; right:65px; bottom:5px;">
+                <button class="next-btn next-medium next-btn-primary next-dialog-btn" type="button"
+						id="publishBtn">发布</button></span>
+					<span style="position:absolute; right:5px; bottom:5px;">
+                <button class="next-btn next-medium next-btn-normal next-dialog-btn" type="button"
+						onclick="myDialog();">取消</button></span>
+				</div>
+				<a class="next-dialog-close" role="button" aria-label="关闭">
+					<button style="background-color: transparent; border: 0;" aria-label="Close" onclick="myDialog();">×
+					</button>
+				</a>
+
+			</div>
+			<!--发表文章按钮弹出框-->
+			<div role="dialog" aria-modal="true" aria-labelledby="dialog-title-k24o8wqp" id="popupDev"
+				 class="center   next-dialog next-closeable simple-form-dialog"
+				 style="width: 400px;height:200px;display:none">
+        <span style="position:absolute; left:9px; top:11px;">
+            <div style="font-weight:700;font-size:14" id="dialog-title-k24lhv54" role="heading" aria-level="1">
+                <font face="幼圆">消息提示</font>
+            </div>
+        </span>
+				<div class="next-dialog-body">
+					<div>
+						<div class="next-row" role="row" style="margin-top: 5px;" dir="ltr">
+						</div>
+						<div class="next-row" role="row" style="margin-top: 45px;" dir="ltr">
+							<div class="next-col next-col-18" role="gridcell" dir="ltr">
+                            <span class="next-input next-medium" style="width: 100%;" id="hintBody">
+                                发布完毕!
+                            </span>
 							</div>
 						</div>
+						<div class="next-row" role="row" style="margin-top: 10px;" dir="ltr">
+							<div class="next-col" role="gridcell" dir="ltr">
+
+							</div>
+						</div>
+
 					</div>
 				</div>
+				<div class="next-dialog-footer next-align-center">
+            <span style="position:absolute; right:200px; bottom:10px;">
+                <button class="next-btn next-medium next-btn-primary next-dialog-btn" type="button" onclick="myPopup()">确定</button></span>
+					<span style="position:absolute; right:145px; bottom:10px;">
+                <button class="next-btn next-medium next-btn-normal next-dialog-btn" type="button" onclick="myPopup()">取消</button></span>
+
+				</div>
+				<a class="next-dialog-close" role="button" aria-label="关闭">
+					<button
+							style="background-color: transparent; border: 0;" aria-label="Close"
+							onclick="myPopup()">×
+					</button>
+				</a>
+
 			</div>
-		</footer>
+
+
+			<a class="btn sign-up" th:href="@{/register}" th:if="${loginUser == null}">注册</a>
+			<a class="btn log-in" th:href="@{/login}" th:if="${loginUser == null}">登录</a>
+
+			<!-- 如果用户登录，显示下拉菜单 下面这个div就是下拉菜单的位置-->
+			<div class="user" th:if="${loginUser != null}">
+				<!--用户头像-->
+				<div data-hover="dropdown">
+					<a class="avatar" href="javascript:;">
+						<img th:src="${loginUser.headerUrl}" alt="120"/>
+					</a>
+				</div>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="javascript:;">
+							<i class="iconfont ic-navigation-profile"></i><span>我的主页</span>
+						</a>
+					</li>
+					<li>
+						<!-- TODO bookmarks_path -->
+						<a href="javascript:;">
+							<i class="iconfont ic-navigation-mark"></i><span>收藏的文章</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:;">
+							<i class="iconfont ic-navigation-like"></i><span>喜欢的文章</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:;">
+							<i class="iconfont ic-navigation-wallet"></i><span>我的钱包</span>
+						</a>
+					</li>
+					<li>
+						<a th:href="@{/user/setting/basic}">
+							<i class="iconfont ic-navigation-settings"></i>
+							<span>设置</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:;">
+							<i class="iconfont ic-navigation-feedback"></i><span>帮助与反馈</span>
+						</a>
+					</li>
+					<li>
+						<a rel="nofollow" th:href="@{/logout}">
+							<i class="iconfont ic-navigation-signout"></i>
+							<span>退出</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<!--导航栏夜间模式按钮-->
+			<div id="view-mode-ctrl">
+			</div>
+
+			<!--这个使导航栏左边的首页，下载app按钮。没有登陆时显示-->
+			<div class="container" th:if="${loginUser == null}">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu"
+							aria-expanded="false">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse" id="menu">
+					<ul class="nav navbar-nav">
+						<li class="active">
+							<a th:href="@{/index}">
+								<span class="menu-text">首页</span>
+								<i class="iconfont ic-navigation-discover menu-icon"></i>
+							</a>
+						</li>
+						<li class="">
+							<a class="app-download-btn" href="javascript:;"><span class="menu-text">下载App</span><i
+									class="iconfont ic-navigation-download menu-icon"></i></a>
+						</li>
+						<!--搜索栏-->
+						<li class="search">
+							<form target="_blank" action="/search" accept-charset="UTF-8" method="get"><input
+									name="utf8"
+									type="hidden"
+									value="&#x2713;"/>
+								<input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索"
+									   class="search-input"/>
+								<a class="search-btn" href="javascript:void(null)"><i
+										class="iconfont ic-search"></i></a>
+							</form>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--导航栏左边的发现，关注，消息按钮 登录时显示-->
+			<div class="container" th:if="${loginUser != null}">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu"
+							aria-expanded="false">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse" id="menu">
+					<ul class="nav navbar-nav">
+						<li class="">
+							<a href="javascript:;">
+								<span class="menu-text">发现</span>
+								<i class="iconfont ic-navigation-discover menu-icon"></i>
+							</a>
+						</li>
+						<li class="">
+							<a href="javascript:;">
+								<span class="menu-text">关注</span>
+								<i class="iconfont ic-navigation-follow menu-icon"></i>
+							</a>
+						</li>
+						<li class="notification v-notification-dropdown-menu">
+							<a class="notification-btn" th:href="@{/letter/list}" data-hover="dropdown">
+								<span class="menu-text">消息</span>
+								<i class="iconfont ic-navigation-notification menu-icon"></i>
+								<span class="badge"></span>
+							</a>
+						</li>
+						<!--导航栏搜索框-->
+						<li class="search">
+							<form target="_blank" action="/search" accept-charset="UTF-8" method="get">
+								<input name="utf8" type="hidden" value="&#x2713;"/>
+								<input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索"
+									   class="search-input"/>
+								<a class="search-btn" href="javascript:void(null)">
+									<i class="iconfont ic-search"></i>
+								</a>
+							</form>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<!-- 内容 -->
+
+	<div class="main">
+		<div align="center" class="container pl-5 pr-5 pt-3 pb-3 mt-3 mb-3">
+			<a th:href="@{/index}">
+				<img th:src="@{/img/500.gif}">
+			</a>
+		</div>
 	</div>
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
-	<script th:src="@{/js/global.js}"></script>
+
+	<!--网页底部-->
+
+	<footer class="container" >
+
+		<div class="row">
+			<div class="col-xs-17 main">
+				<p style="position:absolute;right:70px; bottom:5px;">
+					<a target="_blank" href="javascript:;">关于惠农</a><em> · </em>
+					<a target="_blank" href="javascript:;">联系我们</a><em>· </em>
+					<a target="_blank" href="javascript:;">加入我们</a><em> · </em>
+					<a target="_blank" href="javascript:;">惠农出版</a><em>· </em>
+					<a target="_blank" href="javascript:;">帮助中心</a><em> · </em>
+				</p>
+			</div>
+		</div>
+	</footer>
+	<!--	</span>-->
+
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script th:src="@{/js/global.js}"></script>
+
 </body>
 </html>

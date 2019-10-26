@@ -104,28 +104,193 @@
     <link rel="apple-touch-icon-precomposed"
           href="//cdn2.jianshu.io/assets/apple-touch-icons/152-bf209460fc1c17bfd3e2b84c8e758bc11ca3e570fd411c3bbd84149b97453b99.png"
           sizes="152x152"/>
+    <link rel="icon" th:href="@{/test/images/1.png}"/>
+
 
 </head>
 
 <body lang="zh-CN" class="reader-black-font">
 <!-- 全局顶部导航栏 -->
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation" th:replace="index::header1">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="width-limit">
         <!-- 左上方 Logo -->
-        <a class="logo" href="index.html"><img src="assets/web/logo.png" alt="Logo"/></a>
-
+        <a class="logo" th:href="@{/index}"><img th:src="@{/test/assets/web/44.png}" alt="Logo"/></a>
         <!-- 右上角 -->
         <!-- 未登录显示登录/注册/写文章 -->
-        <a class="btn write-btn" target="_blank" href="javascript:;">
+        <button type="button" class="btn write-btn" id="publish" target="_blank" data-toggle="modal"
+                data-target="#publishModal">
             <i class="iconfont ic-write"></i>写文章
-        </a> <a class="btn sign-up" href="javascript:;">注册</a>
-        <a class="btn log-in" href="javascript:;">登录</a>
+        </button>
+        <!--发表文章文本标记器-->
+        <div role="dialog" aria-modal="true" aria-labelledby="dialog-title-k24o8wqp" id="dev"
+             class="center next-dialog next-closeable simple-form-dialog"
+             style="width: 640px;height:500px;display:none">
 
-        <!-- 如果用户登录，显示下拉菜单 -->
+            <div style="font-weight:700" class="next-dialog-header" id="dialog-title-k24lhv54" role="heading"
+                 aria-level="1">
+                <font face="幼圆">发布文章</font>
+            </div>
+            <hr>
+            <div class="next-dialog-body">
+                <form>
+                    <div>
+                        <div class="next-row" role="row" style="margin-top: 0px;" dir="ltr">
+                            <div style="font-size: 12px;color: #333;font-weight:700">
+                                <font face="幼圆">题目：</font>
+                            </div>
+                        </div>
+                        <div class="next-row" role="row" style="margin-top: 10px;" dir="ltr">
+                            <div class="next-col next-col-18" role="gridcell" dir="ltr">
+                        <span class="next-input next-medium"
+                              style="width: 100%;">
+                            <input
+                                    style="width: 600px;height: 30px;border-radius:3px;border:1px solid #999;"
+                                    height="100%"
+                                    value="" autocomplete="off" id="recipient-name">
+                        </span>
+                            </div>
+                        </div>
+                        <div class="next-row" role="row" style="margin-top: 10px;" dir="ltr">
+                            <div class="next-col" role="gridcell" dir="ltr">
 
+                            </div>
+                        </div>
+                        <div style="font-size: 12px;color: #333;font-weight:700">
+                            <font face="幼圆">正文：</font>
+                        </div>
+                        <div class="next-row" role="row" style="margin-top: 10px;" dir="ltr">
+
+                            <div style="width:100%;height:50%" class="next-col" role="gridcell" dir="ltr">
+                        <span class="next-input next-input-textarea"
+                              style="width: 100%;">
+                            <textarea
+                                    style="resize:none;width:600px;height:250px;border-radius:6px;border:1px solid #999;"
+                                    placeholder="" rows="4" data-real="true" id="message-text">
+                            </textarea>
+                        </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="next-dialog-footer next-align-center">
+            <span style="position:absolute; right:65px; bottom:5px;">
+                <button class="next-btn next-medium next-btn-primary next-dialog-btn" type="button"
+                        id="publishBtn">发布</button></span>
+                <span style="position:absolute; right:5px; bottom:5px;">
+                <button class="next-btn next-medium next-btn-normal next-dialog-btn" type="button"
+                        onclick="myDialog();">取消</button></span>
+            </div>
+            <a class="next-dialog-close" role="button" aria-label="关闭">
+                <button style="background-color: transparent; border: 0;" aria-label="Close" onclick="myDialog();">×
+                </button>
+            </a>
+
+        </div>
+        <!--发表文章按钮弹出框-->
+        <div role="dialog" aria-modal="true" aria-labelledby="dialog-title-k24o8wqp" id="popupDev"
+             class="center   next-dialog next-closeable simple-form-dialog"
+             style="width: 400px;height:200px;display:none">
+        <span style="position:absolute; left:9px; top:11px;">
+            <div style="font-weight:700;font-size:14" id="dialog-title-k24lhv54" role="heading" aria-level="1">
+                <font face="幼圆">消息提示</font>
+            </div>
+        </span>
+            <div class="next-dialog-body">
+                <div>
+                    <div class="next-row" role="row" style="margin-top: 5px;" dir="ltr">
+                    </div>
+                    <div class="next-row" role="row" style="margin-top: 45px;" dir="ltr">
+                        <div class="next-col next-col-18" role="gridcell" dir="ltr">
+                            <span class="next-input next-medium" style="width: 100%;" id="hintBody">
+                                发布完毕!
+                            </span>
+                        </div>
+                    </div>
+                    <div class="next-row" role="row" style="margin-top: 10px;" dir="ltr">
+                        <div class="next-col" role="gridcell" dir="ltr">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="next-dialog-footer next-align-center">
+            <span style="position:absolute; right:200px; bottom:10px;">
+                <button class="next-btn next-medium next-btn-primary next-dialog-btn" type="button" onclick="myPopup()">确定</button></span>
+                <span style="position:absolute; right:145px; bottom:10px;">
+                <button class="next-btn next-medium next-btn-normal next-dialog-btn" type="button" onclick="myPopup()">取消</button></span>
+
+            </div>
+            <a class="next-dialog-close" role="button" aria-label="关闭">
+                <button
+                        style="background-color: transparent; border: 0;" aria-label="Close"
+                        onclick="myPopup()">×
+                </button>
+            </a>
+
+        </div>
+
+
+        <a class="btn sign-up" th:href="@{/register}" th:if="${loginUser == null}">注册</a>
+        <a class="btn log-in" th:href="@{/login}" th:if="${loginUser == null}">登录</a>
+
+        <!-- 如果用户登录，显示下拉菜单 下面这个div就是下拉菜单的位置-->
+        <div class="user" th:if="${loginUser != null}">
+            <!--用户头像-->
+            <div data-hover="dropdown">
+                <a class="avatar" href="javascript:;">
+                    <img th:src="${loginUser.headerUrl}" alt="120"/>
+                </a>
+            </div>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="javascript:;">
+                        <i class="iconfont ic-navigation-profile"></i><span>我的主页</span>
+                    </a>
+                </li>
+                <li>
+                    <!-- TODO bookmarks_path -->
+                    <a href="javascript:;">
+                        <i class="iconfont ic-navigation-mark"></i><span>收藏的文章</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="iconfont ic-navigation-like"></i><span>喜欢的文章</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="iconfont ic-navigation-wallet"></i><span>我的钱包</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/user/setting/basic}">
+                        <i class="iconfont ic-navigation-settings"></i>
+                        <span>设置</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="iconfont ic-navigation-feedback"></i><span>帮助与反馈</span>
+                    </a>
+                </li>
+                <li>
+                    <a rel="nofollow" th:href="@{/logout}">
+                        <i class="iconfont ic-navigation-signout"></i>
+                        <span>退出</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!--导航栏夜间模式按钮-->
         <div id="view-mode-ctrl">
         </div>
-        <div class="container">
+
+        <!--这个使导航栏左边的首页，下载app按钮。没有登陆时显示-->
+        <div class="container" th:if="${loginUser == null}">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu"
                         aria-expanded="false">
@@ -136,14 +301,17 @@
             </div>
             <div class="collapse navbar-collapse" id="menu">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="javascript:;">
-                            <span class="menu-text">首页</span><i class="iconfont ic-navigation-discover menu-icon"></i>
-                        </a></li>
+                    <li class="active">
+                        <a th:href="@{/index}">
+                            <span class="menu-text">首页</span>
+                            <i class="iconfont ic-navigation-discover menu-icon"></i>
+                        </a>
+                    </li>
                     <li class="">
                         <a class="app-download-btn" href="javascript:;"><span class="menu-text">下载App</span><i
                                 class="iconfont ic-navigation-download menu-icon"></i></a>
                     </li>
+                    <!--搜索栏-->
                     <li class="search">
                         <form target="_blank" action="/search" accept-charset="UTF-8" method="get"><input name="utf8"
                                                                                                           type="hidden"
@@ -151,6 +319,51 @@
                             <input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索"
                                    class="search-input"/>
                             <a class="search-btn" href="javascript:void(null)"><i class="iconfont ic-search"></i></a>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--导航栏左边的发现，关注，消息按钮 登录时显示-->
+        <div class="container" th:if="${loginUser != null}">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu"
+                        aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="nav navbar-nav">
+                    <li class="">
+                        <a href="javascript:;">
+                            <span class="menu-text">发现</span>
+                            <i class="iconfont ic-navigation-discover menu-icon"></i>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="javascript:;">
+                            <span class="menu-text">关注</span>
+                            <i class="iconfont ic-navigation-follow menu-icon"></i>
+                        </a>
+                    </li>
+                    <li class="notification v-notification-dropdown-menu">
+                        <a class="notification-btn" href="javascript:;" data-hover="dropdown">
+                            <span class="menu-text">消息</span>
+                            <i class="iconfont ic-navigation-notification menu-icon"></i>
+                            <span class="badge"></span>
+                        </a>
+                    </li>
+                    <!--导航栏搜索框-->
+                    <li class="search">
+                        <form target="_blank" action="/search" accept-charset="UTF-8" method="get">
+                            <input name="utf8" type="hidden" value="&#x2713;"/>
+                            <input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索"
+                                   class="search-input"/>
+                            <a class="search-btn" href="javascript:void(null)">
+                                <i class="iconfont ic-search"></i>
+                            </a>
                         </form>
                     </li>
                 </ul>
@@ -184,6 +397,9 @@
                         <!-- 如果文章更新时间大于发布时间，那么使用 tooltip 显示更新时间 -->
                         <span class="publish-time" th:text="${#dates.format(post.createTime,'yyyy.MM.dd HH:mm')}">2017.09.20 15:37</span>
                         <span class="wordage">字数 1589</span>
+                        <span class="views-count">阅读 119</span>
+                        <span class="comments-count">评论 <i th:text="${post.commentCount}">7</i></span>
+                        <span class="likes-count">喜欢 6</span>
                     </div>
                 </div>
                 <!-- 如果是当前作者，加入编辑按钮 -->
@@ -192,52 +408,18 @@
 
             <!-- 文章内容 -->
             <div data-note-content class="show-content">
-                <p>文︱咖啡未冷前<br></p>
-                <p><b><br></b></p>
-                <p><b><br></b></p>
+                <p>文︱<i th:utext="${user.username}">咖啡未冷前</i><br></p>
+
                 <div class="image-package">
-                    <img src="upload_images/5929880-90a86408a66b9d3f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
-                         data-original-src="upload_images/5929880-90a86408a66b9d3f.jpg?imageMogr2/auto-orient/strip"
-                         data-image-slug="90a86408a66b9d3f" data-width="500" data-height="184"><br>
+                    <!--文章的图片-->
+                    <!--                    <img src="upload_images/5929880-90a86408a66b9d3f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"-->
+                    <!--                         data-original-src="upload_images/5929880-90a86408a66b9d3f.jpg?imageMogr2/auto-orient/strip"-->
+                    <!--                         data-image-slug="90a86408a66b9d3f" data-width="500" data-height="184">-->
                     <div class="image-caption"></div>
                 </div>
-                <p><b><br></b></p>
-                <p><b></b></p>
-                <blockquote><p><b>01.</b><b>是否还在"假装开心"</b><b></b></p></blockquote>
-                <p>工作是个较长的周期，每天都需要高强度的工作状态，会被一个经典的问题："每天上班都是坐着，为什么还是这么累？"给打败。</p>
-                <p>之前在客服学习的一段时间，同事都被"满意度"给怼了回去，每天在高强度的接听电话的服务中度过，虽然是坐着接电话，服务行业是最为考验一个人的斗智斗勇的行业。</p>
-                <p>
-                    每天上班，必须保持高度的热情，培训讲师曾经提到过"一通电话内就可以听出情绪的高低"，当时听到这句话给震惊了，的确，高兴时，声音是上扬的，受挫折时，声音是压抑的低沉，往往看似简单的接听，却给"满意度"来了满满一击。</p>
-                <p>美国社会学家Hochschild给出了他的答案：<b>因为除了体力劳动和脑力劳动之外，还有一项同样艰辛的付出，却被忽视了——这就是"情绪劳动（emotionlabor）"。</b></p>
-                <p>
-                    通常会被各种情绪所替代，护士每天都要面对病人，在服务的同时还得照顾病人的情绪，防止产生的医患关系；而设计师需要面对客户，难免有刁钻型的顾客，防止不慎产生的损失，而一旦把情绪带入劳动中，却变得一发不可收拾，需要"强颜欢笑，假装开心"。</p>
-                <p><b></b></p>
-                <p>有时候莫名成为"假装开心"的工作者。</p>
-                <p>而将情绪调节的理论引入情绪劳动的研究，不仅可以对情绪劳动有一个全新视角的理解，而且会在"做什么"问题上有更多的尝试空间。<b></b></p>
-                <p><br></p>
-                <blockquote><p><b>02.身体里住着一个魔鬼</b></p></blockquote>
-                <p>每天看新闻、刷微博，总会有不堪入目的新闻入眼入耳，常常会被负面的情绪所困扰，不得不想跳台的冲动，愿意选择屏蔽新闻。</p>
-                <p>负面情绪像小怪兽一般，涌现出来，<b>表情里往往最为简单的是：喜、怒、哀、乐，</b>特别是面部表情往往是人的神经表达最为丰富的区域，每天微博里都有很多有趣的表情包，产生带来了快乐。</p>
-                <p>现在越来越多的人开始关注"情绪管理"了，小到每天的发脾气的次数，大到对一件事的执着程度，恰恰带来了沉重的心理负担<b>，情绪是种思维的复杂表现，往往也跟心智、性格等等有关。</b></p>
-                <p><b>心理学上把焦虑、紧张、愤怒、沮丧、悲伤、痛苦等情绪统称为负性情绪（negative
-                    emotion），有时又称为负面情绪，人们之所以这样称呼这些情绪，是因为此类情绪体验是不积极的，身体也会有不适感，甚至影响工作和生活的顺利进行，进而有可能引起身心的伤害。</b></p>
-                <p>
-                    来自《生命时报》里把一种性格叫癌症性格，往往我们听到癌症，初期的认为是常见的医院癌症，而《生命时报》中对性格的负面情绪有了深刻的解读，每个人性格各不相同，常见的血型A型、B型、C型，这也是不同人的性格衍生出来的"致病因"。<b>而A型争强好胜，脾气暴躁；B型知足随和，适应力强；C型容易焦虑，爱生闷气，常常说"性格决定命运"，是尤为恰当的，古话说的好"上善若水"，好的性格，往往能八面玲珑的对待一切事物，如水一样，情绪也是如此，忽高忽低，需要慢慢的去掌控情绪。</b>
-                </p>
-                <p>
-                    比起负面情绪，还有正面情绪，正与反，总是在一段慢慢的体现，现在我们常听到周边的人说到"正能量"这个词，最早"正能量"一词来源于2012年3月，迅速膨胀的网络时代，把"正能量"一词迅速的走红，也成为"2012年的十大流行语"，如今我们激励到一个人，往往会说，"你需要告别你的负能量，给自己来点正能量吧，这样你才能振奋起来"。</p>
-                <p><br></p>
-                <blockquote><p><b>03.如何控制负面情绪</b></p></blockquote>
-                <p><b>⑴学会反思</b></p>
-                <p>当感觉到负面情绪到来了，内心需要不断的暗示自己"不要发脾气，要控制住"，<b>《论语》中有"</b><b>吾日三省吾身：为人谋而不忠乎？与朋友交而不信乎？传不习乎？</b><b>"，</b>反思很重要，有助于心智的提升。
-                </p>
-                <p>反思的方式有很多：冥想、阅读、练瑜伽等等，通过安静的方式来给自己找个突破口，慢慢梳理自己的情绪。<b></b></p>
-                <p><b>⑵学会沟通</b></p>
-                <p><b>情绪 ＝ 刺激X生理唤起X</b><b>认知标签，</b>认识到情绪后，可以适当的和家人、朋友等好好的进行沟通，通过第三方的介入，慢慢沟通，放下戒备，才能控制，认为不够还可以找相关的心理咨询师进行沟通，缓解心理压力。
-                </p>
-                <p>同样可以好好的关注自己周边的家人和朋友，拉近与家人之间的关系。</p>
-                <p><b>⑶学会自我疏导</b></p>
-                <p>自我疏导也是自我成长的过程，学会控制了情绪，也是提高情商的一种表现，用积极的心态去面对一切。</p>
+                <!--文章正文-->
+
+                <blockquote><p><b th:utext="${post.content}">02.身体里住着一个魔鬼</b></p></blockquote>
                 <p><b><br></b></p>
                 <p>-THE END -</p>
                 <p>原创文章，转载请标注来源。</p>
@@ -262,11 +444,13 @@
     <div class="follow-detail">
         <div class="info">
             <a class="avatar" href="javascript:;">
-                <img src="upload_images/0a0ce1dd-e171-4dce-a92b-4ee5873f77a8.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96"
+                <!--头像-->
+                <img th:src="${user.headerUrl}"
                      alt="96"/>
             </a>
-            <div props-data-classes="user-follow-button-footer" data-author-follow-button></div>
-            <a class="title" href="javascript:;">咖啡未冷前</a>
+<!--            <div props-data-classes="user-follow-button-footer" data-author-follow-button></div>-->
+            <a class="btn btn-success follow"><i class="iconfont ic-follow"></i><span>关注</span></a>
+            <a class="title" href="javascript:;" th:utext="${user.username}">咖啡未冷前</a>
             <i class="iconfont ic-woman"></i>
         </div>
         <div class="signature">文字是最亲切，见字如面，做文字的码字员，不做搬运工，在写作和画画上奋斗。
@@ -276,10 +460,19 @@
         </div>
     </div>
 
-    <div class="support-author"></div>
+<!--    <div class="support-author"></div>-->
 
     <div class="meta-bottom">
-        <div class="btn like-group"></div>
+        <!--下面这行代码是js注入点赞按钮的位置-->
+<!--        <div class="btn like-group"></div>-->
+        <!--点赞按钮，并显示点赞数-->
+        <div class="like">
+            <div class="btn like-group">
+                <div class="btn-like"><a href="/sign_in?utm_source=desktop&amp;utm_medium=not-signed-in-like-button"><i
+                        class="iconfont ic-like"></i>喜欢</a></div>
+                <div class="modal-wrap"><a>6</a></div>
+            </div>
+        </div>
         <div class="share-group">
             <a class="share-circle" data-action="weixin-share" data-toggle="tooltip" data-original-title="分享到微信">
                 <i class="iconfont ic-wechat"></i>
@@ -306,15 +499,58 @@
         '>更多分享</a>
         </div>
     </div>
-    <div id="vue_comment"></div>
+    <!--下面这行代码是js注入评论区代码的位置-->
+    <!--    <div id="vue_comment"></div>-->
+
+    <!--评论区-->
+    <div id="comment-list" class="comment-list">
+        <div>
+            <form class="new-comment">
+                <a class="avatar">
+                    <!--模拟头像-->
+                    <img th:src="@{/test/assets/web/1-04bbeead395d74921af6a4e8214b4f61.jpg}">
+                </a>
+                <div class="sign-container">
+                    <!--登陆链接-->
+                    <a th:href="@{/login}" class="btn btn-sign">登录</a>
+                    <span>后发表评论</span>
+                </div>
+            </form>
+        </div>
+        <!--评论栏-->
+        <div id="normal-comment-list" class="normal-comment-list">
+            <div>
+                <div>
+                    <div class="top">
+                        <span>评论</span>
+                        <a class="close-btn" style="display: none;">关闭评论</a>
+                    </div>
+
+
+                    <div class="no-comment">
+                    </div>
+                    <div class="text">
+                        智慧如你，不想
+                        <a href="/sign_in?utm_source=desktop&amp;utm_medium=not-signed-in-nocomments-text">发表一点想法</a>咩~
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+        <!---->
+        <div>
+            <!---->
+        </div>
+    </div>
 </div>
 
 <div class="vue-side-tool"></div>
 </div>
-<div class="note-bottom">
-    <div class="js-included-collections"></div>
-    <div data-vcomp="recommended-notes" data-lazy="1.5" data-note-id="17319584"></div>
-</div>
+<!--网站底部-->
+<!--<div class="note-bottom">-->
+<!--</div>-->
 
 <script type="application/json" data-name="page-data">{
     "user_signed_in": false,
@@ -342,19 +578,16 @@
         "total_rewards_count": 0,
         "is_author": false,
         "author": {
-            "nickname": "咖啡未冷前",
-            "total_wordage": 82228,
-            "followers_count": 73,
-            "total_likes_count": 139
         }
     }
 }</script>
 
-<script src="assets/babel-polyfill-8053f0c4c81c27b7aff2.js"></script>
-<script src="assets/web-base-56ae9a35f46128b5c879.js"></script>
-<script src="assets/web-6f284f71bf6839d4fe98.js"></script>
+<script th:src="@{/test/assets/babel-polyfill-8053f0c4c81c27b7aff2.js}"></script>
+<script th:src="@{/test/assets/web-base-56ae9a35f46128b5c879.js}"></script>
+<script th:src="@{/test/assets/web-6f284f71bf6839d4fe98.js}"></script>
 
-<script src="assets/web/pages/notes/show/entry-27f5a41261dc66983656.js"></script>
+<!--负责通过js在页面下面注入评论HTML模块代码-->
+<script th:src="@{/test/assets/web/pages/notes/show/entry-27f5a41261dc66983656.js}"></script>
 
 </body>
 </html>

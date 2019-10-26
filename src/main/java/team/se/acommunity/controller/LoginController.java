@@ -55,7 +55,14 @@ public class LoginController implements CommunityConstant {
     }
 
     @RequestMapping(path = "/register", method = RequestMethod.POST)
-    public String register(Model model, User user) {
+    public String register(Model model, User user, HttpSession session, String code) {
+        // 检验验证码
+        // 获取用户输入进来的验证码文本
+        String kaptcha = (String) session.getAttribute("kaptcha");      // 这个也是比较字符串是否相同的方法，但是这个方法是忽略大小写的，验证码都是忽略大小写的
+        if (StringUtils.isBlank(kaptcha) || StringUtils.isBlank(code) || !kaptcha.equalsIgnoreCase(code)) {
+            model.addAttribute("codeMsg", "验证码不正确");
+            return "/test/register";
+        }
         // user对象被自动放进了model中
         Map<String, Object> map = userService.register(user);
         if (map == null || map.isEmpty()) {

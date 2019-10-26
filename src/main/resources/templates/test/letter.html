@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--[if IE 6]>
+<html class="ie lt-ie8"><![endif]-->
+<!--[if IE 7]>
+<html class="ie lt-ie8"><![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8"><![endif]-->
+<!--[if IE 9]>
+<html class="ie ie9"><![endif]-->
+<!--[if !IE]><!-->
+<html> <!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+
+    <!-- Start of Baidu Transcode -->
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <meta http-equiv="Cache-Control" content="no-transform"/>
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="MobileOptimized" content="width"/>
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="mobile-agent" content="format=html5;url=http://www.jianshu.com/notifications">
+    <!-- End of Baidu Transcode -->
+
+
+    <meta name="360-site-verification" content="604a14b53c6b871206001285921e81d8"/>
+    <meta property="wb:webmaster" content="294ec9de89e7fadb"/>
+    <meta property="qc:admins" content="104102651453316562112116375"/>
+    <meta property="qc:admins" content="11635613706305617"/>
+    <meta property="qc:admins" content="1163561616621163056375"/>
+    <meta name="google-site-verification" content="cV4-qkUJZR6gmFeajx_UyPe47GW9vY6cnCrYtCHYNh4"/>
+    <meta name="google-site-verification" content="HF7lfF8YEGs1qtCE-kPml8Z469e2RHhGajy6JPVy5XI"/>
+    <meta http-equiv="mobile-agent" content="format=html5; url=http://www.jianshu.com/notifications">
+
+    <!-- Apple -->
+    <meta name="apple-mobile-web-app-title" content="简书">
+
+
+    <title>消息 - 惠农</title>
+
+    <meta name="csrf-param" content="authenticity_token"/>
+    <meta name="csrf-token"
+          content="83VJceaWSFPbvIf2Fe2LpViVwQ22kPprzn0L4sFFyBAiTL8mnFsQvI0PR/wbfOG7Px4ve+qb/IJr0vUiZFpvPA=="/>
+    <link rel="stylesheet" th:href="@{/test/style/letter.css}"/>
+    <link rel="stylesheet" media="all" th:href="@{/test/assets/web-e7e403d2843dd1edd8db.css}"/>
+
+    <link rel="stylesheet" media="all" th:href="@{/test/assets/web/pages/notifications/index/entry-266e0d4b3ebe57d6dd80.css}"/>
+
+    <link href="//cdn2.jianshu.io/assets/favicons/favicon-03411b154a430b85d807b4366489c21122fb983a38f3d7ca926f882e6367b13e.ico"
+          rel="icon">
+    <link rel="apple-touch-icon-precomposed"
+          href="//cdn2.jianshu.io/assets/apple-touch-icons/57-a6f1f1ee62ace44f6dc2f6a08575abd3c3b163288881c78dd8d75247682a4b27.png"
+          sizes="57x57"/>
+    <link rel="apple-touch-icon-precomposed"
+          href="//cdn2.jianshu.io/assets/apple-touch-icons/72-fb9834bcfce738fd7b9c5e31363e79443e09a81a8e931170b58bc815387c1562.png"
+          sizes="72x72"/>
+    <link rel="apple-touch-icon-precomposed"
+          href="//cdn2.jianshu.io/assets/apple-touch-icons/76-49d88e539ff2489475d603994988d871219141ecaa0b1a7a9a1914f4fe3182d6.png"
+          sizes="76x76"/>
+    <link rel="apple-touch-icon-precomposed"
+          href="//cdn2.jianshu.io/assets/apple-touch-icons/114-24252fe693524ed3a9d0905e49bff3cbd0228f25a320aa09053c2ebb4955de97.png"
+          sizes="114x114"/>
+    <link rel="apple-touch-icon-precomposed"
+          href="//cdn2.jianshu.io/assets/apple-touch-icons/120-1bb7371f5e87f93ce780a5f1a05ff1b176828ee0d1d130e768575918a2e05834.png"
+          sizes="120x120"/>
+    <link rel="apple-touch-icon-precomposed"
+          href="//cdn2.jianshu.io/assets/apple-touch-icons/152-bf209460fc1c17bfd3e2b84c8e758bc11ca3e570fd411c3bbd84149b97453b99.png"
+          sizes="152x152"/>
+
+    <link rel="icon" th:href="@{/test/images/1.png}"/>
+
+</head>
+
+<body lang="zh-CN" class="reader-black-font">
+<!-- 全局顶部导航栏 -->
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="width-limit">
+        <!-- 左上方 Logo -->
+        <a class="logo" th:href="@{/index}"><img th:src="@{/test/assets/web/44.png}" alt="Logo"/></a>
+        <!-- 右上角 -->
+        <!-- 未登录显示登录/注册/写文章 -->
+        <button type="button" class="btn write-btn" id="publish" target="_blank" data-toggle="modal"
+                data-target="#publishModal">
+            <i class="iconfont ic-write"></i>写文章
+        </button>
+        <!--发表文章文本标记器-->
+        <div role="dialog" aria-modal="true" aria-labelledby="dialog-title-k24o8wqp" id="dev"
+             class="center next-dialog next-closeable simple-form-dialog"
+             style="width: 640px;height:500px;display:none">
+
+            <div style="font-weight:700" class="next-dialog-header" id="dialog-title-k24lhv54" role="heading"
+                 aria-level="1">
+                <font face="幼圆">发布文章</font>
+            </div>
+            <hr>
+            <div class="next-dialog-body">
+                <form>
+                    <div>
+                        <div class="next-row" role="row" style="margin-top: 0px;" dir="ltr">
+                            <div style="font-size: 12px;color: #333;font-weight:700">
+                                <font face="幼圆">题目：</font>
+                            </div>
+                        </div>
+                        <div class="next-row" role="row" style="margin-top: 10px;" dir="ltr">
+                            <div class="next-col next-col-18" role="gridcell" dir="ltr">
+                        <span class="next-input next-medium"
+                              style="width: 100%;">
+                            <input
+                                    style="width: 600px;height: 30px;border-radius:3px;border:1px solid #999;"
+                                    height="100%"
+                                    value="" autocomplete="off" id="recipient-name">
+                        </span>
+                            </div>
+                        </div>
+                        <div class="next-row" role="row" style="margin-top: 10px;" dir="ltr">
+                            <div class="next-col" role="gridcell" dir="ltr">
+
+                            </div>
+                        </div>
+                        <div style="font-size: 12px;color: #333;font-weight:700">
+                            <font face="幼圆">正文：</font>
+                        </div>
+                        <div class="next-row" role="row" style="margin-top: 10px;" dir="ltr">
+
+                            <div style="width:100%;height:50%" class="next-col" role="gridcell" dir="ltr">
+                        <span class="next-input next-input-textarea"
+                              style="width: 100%;">
+                            <textarea
+                                    style="resize:none;width:600px;height:250px;border-radius:6px;border:1px solid #999;"
+                                    placeholder="" rows="4" data-real="true" id="message-text">
+                            </textarea>
+                        </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="next-dialog-footer next-align-center">
+            <span style="position:absolute; right:65px; bottom:5px;">
+                <button class="next-btn next-medium next-btn-primary next-dialog-btn" type="button" id="publishBtn">发布</button></span>
+                <span style="position:absolute; right:5px; bottom:5px;">
+                <button class="next-btn next-medium next-btn-normal next-dialog-btn" type="button"
+                        onclick="myDialog();">取消</button></span>
+            </div>
+            <a class="next-dialog-close" role="button" aria-label="关闭">
+                <button style="background-color: transparent; border: 0;" aria-label="Close" onclick="myDialog();">×
+                </button>
+            </a>
+
+        </div>
+        <!--发表文章按钮弹出框-->
+        <div role="dialog" aria-modal="true" aria-labelledby="dialog-title-k24o8wqp" id="popupDev"
+             class="center   next-dialog next-closeable simple-form-dialog" style="width: 400px;height:200px;display:none">
+        <span style="position:absolute; left:9px; top:11px;">
+            <div style="font-weight:700;font-size:14" id="dialog-title-k24lhv54" role="heading" aria-level="1">
+                <font face="幼圆">消息提示</font>
+            </div>
+        </span>
+            <div class="next-dialog-body">
+                <div>
+                    <div class="next-row" role="row" style="margin-top: 5px;" dir="ltr">
+                    </div>
+                    <div class="next-row" role="row" style="margin-top: 45px;" dir="ltr">
+                        <div class="next-col next-col-18" role="gridcell" dir="ltr">
+                            <span class="next-input next-medium" style="width: 100%;" id="hintBody">
+                                发布完毕!
+                            </span>
+                        </div>
+                    </div>
+                    <div class="next-row" role="row" style="margin-top: 10px;" dir="ltr">
+                        <div class="next-col" role="gridcell" dir="ltr">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="next-dialog-footer next-align-center">
+            <span style="position:absolute; right:200px; bottom:10px;">
+                <button class="next-btn next-medium next-btn-primary next-dialog-btn" type="button" onclick="myPopup()">确定</button></span>
+                <span style="position:absolute; right:145px; bottom:10px;">
+                <button class="next-btn next-medium next-btn-normal next-dialog-btn" type="button" onclick="myPopup()">取消</button></span>
+
+            </div>
+            <a class="next-dialog-close" role="button" aria-label="关闭">
+                <button
+                        style="background-color: transparent; border: 0;" aria-label="Close"
+                        onclick="myPopup()">×
+                </button>
+            </a>
+
+        </div>
+
+
+        <a class="btn sign-up" th:href="@{/register}" th:if="${loginUser == null}">注册</a>
+        <a class="btn log-in" th:href="@{/login}" th:if="${loginUser == null}">登录</a>
+
+        <!-- 如果用户登录，显示下拉菜单 下面这个div就是下拉菜单的位置-->
+        <div class="user" th:if="${loginUser != null}">
+            <!--用户头像-->
+            <div data-hover="dropdown">
+                <a class="avatar" href="javascript:;">
+                    <img th:src="${loginUser.headerUrl}" alt="120"/>
+                </a>
+            </div>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="javascript:;">
+                        <i class="iconfont ic-navigation-profile"></i><span>我的主页</span>
+                    </a>
+                </li>
+                <li>
+                    <!-- TODO bookmarks_path -->
+                    <a href="javascript:;">
+                        <i class="iconfont ic-navigation-mark"></i><span>收藏的文章</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="iconfont ic-navigation-like"></i><span>喜欢的文章</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="iconfont ic-navigation-wallet"></i><span>我的钱包</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/user/setting/basic}">
+                        <i class="iconfont ic-navigation-settings"></i>
+                        <span>设置</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="iconfont ic-navigation-feedback"></i><span>帮助与反馈</span>
+                    </a>
+                </li>
+                <li>
+                    <a rel="nofollow" th:href="@{/logout}">
+                        <i class="iconfont ic-navigation-signout"></i>
+                        <span>退出</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!--导航栏夜间模式按钮-->
+        <div id="view-mode-ctrl">
+        </div>
+
+        <!--这个使导航栏左边的首页，下载app按钮。没有登陆时显示-->
+        <div class="container" th:if="${loginUser == null}">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu"
+                        aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a th:href="@{/index}">
+                            <span class="menu-text">首页</span>
+                            <i class="iconfont ic-navigation-discover menu-icon"></i>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a class="app-download-btn" href="javascript:;"><span class="menu-text">下载App</span><i
+                                class="iconfont ic-navigation-download menu-icon"></i></a>
+                    </li>
+                    <!--搜索栏-->
+                    <li class="search">
+                        <form target="_blank" action="/search" accept-charset="UTF-8" method="get"><input name="utf8"
+                                                                                                          type="hidden"
+                                                                                                          value="&#x2713;"/>
+                            <input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索"
+                                   class="search-input"/>
+                            <a class="search-btn" href="javascript:void(null)"><i class="iconfont ic-search"></i></a>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--导航栏左边的发现，关注，消息按钮 登录时显示-->
+        <div class="container" th:if="${loginUser != null}">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu"
+                        aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="nav navbar-nav">
+                    <li class="">
+                        <a href="javascript:;">
+                            <span class="menu-text">发现</span>
+                            <i class="iconfont ic-navigation-discover menu-icon"></i>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="javascript:;">
+                            <span class="menu-text">关注</span>
+                            <i class="iconfont ic-navigation-follow menu-icon"></i>
+                        </a>
+                    </li>
+                    <li class="notification v-notification-dropdown-menu">
+                        <a class="notification-btn" th:href="@{/letter/list}" data-hover="dropdown">
+                            <span class="menu-text">消息</span>
+                            <i class="iconfont ic-navigation-notification menu-icon"></i>
+                            <span class="badge"></span>
+                        </a>
+                    </li>
+                    <!--导航栏搜索框-->
+                    <li class="search">
+                        <form target="_blank" action="/search" accept-charset="UTF-8" method="get">
+                            <input name="utf8" type="hidden" value="&#x2713;"/>
+                            <input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索"
+                                   class="search-input"/>
+                            <a class="search-btn" href="javascript:void(null)">
+                                <i class="iconfont ic-search"></i>
+                            </a>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container notification">
+    <div class="row">
+        <div class="aside">
+            <ul>
+                <li class=""><a href="/NOtifications/#/comments"><i class="iconfont ic-comments"></i> <span>评论</span>
+                    <!----></a></li>
+                <li class="router-link-exact-active active"><a href="/NOtifications/#/擦汗ats">
+                    <i class="iconfont ic-chats"></i> <span>简信</span> <span class="badge">1</span></a></li>
+                <li class=""><a href="/NOtifications/#/requests"><i class="iconfont ic-requests"></i> <span>投稿请求</span>
+                    <!----></a></li>
+                <li class=""><a href="/NOtifications/#/闪电kes"><i class="iconfont ic-likes"></i> <span>喜欢和赞</span>
+                    <!----></a></li>
+                <li class=""><a href="/NOtifications/#/follows"><i class="iconfont ic-follows"></i> <span>关注</span>
+                    <!----></a></li>
+                <li class=""><a href="/NOtifications/#/money"><i class="iconfont ic-money"></i> <span>赞赏</span>
+                    <!----></a></li>
+                <li class=""><a href="/NOtifications/#/others"><i class="iconfont ic-others"></i> <span>其他消息</span>
+                    <!----></a></li>
+            </ul>
+        </div>
+        <div class="col-xs-16 col-xs-offset-8 main">
+            <div class="main">
+                <div class="container">
+                    <div class="position-relative">
+                        <!-- 选项 -->
+                        <ul class="nav nav-tabs mb-3">
+                            <li class="nav-item">
+                                <a class="nav-link position-relative active" href="/ac/letter/list">
+                                    朋友私信<!--只有当未读消息不等于0的时候才显示红点-->
+
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link position-relative" href="notice.html">系统通知<span
+                                        class="badge badge-danger">27</span></a>
+                            </li>
+                        </ul>
+                        <span style="position:absolute; right:0px; top:5px;">
+					<button type="button" class="btn btn-primary btn-sm position-absolute rt-0" data-toggle="modal"
+                            data-target="#sendModal">发私信</button></span>
+                    </div>
+                    <!-- 弹出框 -->
+                    <div class="modal fade" id="sendModal" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">发私信</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">发给：</label>
+                                            <input type="text" class="form-control" id="recipient-name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">内容：</label>
+                                            <textarea class="form-control" id="message-text" rows="10"></textarea>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                    <button type="button" class="btn btn-primary" id="sendBtn">发送</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 提示框 -->
+                    <div class="modal fade" id="hintModal" tabindex="-1" role="dialog" aria-labelledby="hintModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="hintModalLabel">提示</h5>
+                                </div>
+                                <div class="modal-body" id="hintBody">
+                                    发送完毕!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 私信列表 -->
+                    <ul class="list-unstyled">
+                        <li class="media pb-3 pt-3 mb-3 border-bottom position-relative">
+                            <!--每一个会话的未读数量 z这里也需要判断没有未读的时候不显示红点-->
+
+                            <a href="profile.html">
+                                <!--显示目标用户的头像 这一点需要注意一下，虽然src里面写是是路径，但是这里的路径是从对象中取出来，所以这里不用@还是用$-->
+                                <img style=" border-radius: 50%!important;"
+                                     src="http://images.nowcoder.com/head/111t.png" class="mr-4 circle user-header"
+                                     alt="用户头像">
+                            </a>
+                            <div style="-ms-flex: 1;flex: 1;
+" class="medy">
+                                <h6 class="number number3">
+                                    <span class="text-success">aaa</span>
+                                    <span class="float-right text-muted font-size-12">2019-10-23 20:02:08</span>
+                                </h6>
+                                <div>            <!--设置好私信详细的访问路径，这个controller的访问路径是动态地，所以要拼一个变量-->
+                                    <a href="/ac/letter/detail/111_151">3254</a>
+                                    <ul class="d-inline font-size-12 float-right">
+                                        <li class="d-inline ml-2"><a href="#" class="text-primary">共<i>6</i>条会话</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- 分页 -->
+                    <nav class="mt-5" th:if="${page.rows>0}" th:fragment="pagination"> <!--当数据总数大于零才显示分页的内容-->
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item">                         <!--用()括起来就相当于用?将括号的内容拼接到path上，后面用,号连接其他变量，就相当于再用&连接-->
+                                <a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
+                            </li> <!--当当前页数为1的时候，将page-item属性设为disabled，那么这个上一页按钮就不可以点了-->
+                            <li th:class="|page-item ${page.current==1?'disabled':''}|"> <!--下面点上一页，下一页，首页，末页的操作实际上就改变了page中current当前页属性的值-->
+                                <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">上一页</a></li>
+                            <!--这里用到的循环输出了from到to的页码区间的数字-->
+                            <li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}"> <!--用到了模板提供的方法，生成一个数字范围内的连续数组-->
+                                <a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}">1</a>
+                            </li>
+                            <li th:class="|page-item ${page.current==page.total?'disabled':''}|">
+                                <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">下一页</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" th:href="@{${page.path}(current=${page.total})}">末页</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="application/json" data-name="page-data">{
+    "user_signed_in": true,
+    "locale": "zh-CN",
+    "os": "windows",
+    "read_mode": "day",
+    "read_font": "font2",
+    "current_user": {
+        "id": 6630618,
+        "nickname": "素材火",
+        "slug": "118bc51c1554",
+        "avatar": "http://cdn2.jianshu.io/assets/default_avatar/1-04bbeead395d74921af6a4e8214b4f61.jpg",
+        "unread_counts": {
+            "chats": 1,
+            "total": 1
+        }
+    }
+}</script>
+
+<script src="assets/babel-polyfill-8053f0c4c81c27b7aff2.js"></script>
+<script src="assets/web-base-56ae9a35f46128b5c879.js"></script>
+<script src="assets/web-6f284f71bf6839d4fe98.js"></script>
+
+<script src="assets/web/pages/notifications/index/entry-7bd9187a31dda8f7560c.js"></script>
+
+</body>
+</html>

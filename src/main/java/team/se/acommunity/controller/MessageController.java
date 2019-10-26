@@ -69,7 +69,7 @@ public class MessageController {
         int letterUnreadCount = messageService.countUnreadLetter(user.getId(), null);
         model.addAttribute("letterUnreadCount", letterUnreadCount);
 
-        return "/site/letter";
+        return "/test/letter";
     }
 
     /**

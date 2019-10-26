@@ -12,7 +12,7 @@
 <body>	
 	<div class="nk-container">
 		<!-- 头部 -->                     <!--下面这个header标签表示的就是整个页面的顶部导航栏，这个其实是可以复用的，因为每个页面都有，thymeleaf模板也是支持这个功能的，所以就现在这个header标签上使用fragment给他起一个名字-->
-		<header class="bg-dark sticky-top" ><!--th:fragment="header"-->
+		<header class="bg-dark sticky-top" th:fragment="header"><!---->
 			<div class="container">
 				<!-- 导航 -->
 				<nav class="navbar navbar-expand-lg navbar-dark">

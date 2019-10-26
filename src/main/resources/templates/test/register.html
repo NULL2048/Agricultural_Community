@@ -64,7 +64,7 @@
 					</div>
 
 					<div class="group-ipt verify">
-						<input type="text" name="verify" id="verify" th:class="|ipt ${codeMsg!=null?'is-invalid':''}|" placeholder="输入验证码" required>
+						<input type="text" name="code" id="verify" th:class="|ipt ${codeMsg!=null?'is-invalid':''}|" placeholder="输入验证码" required>
 						<div class="hello invalid-feedback" th:text="${codeMsg}">
 							验证码不正确!
 						</div>

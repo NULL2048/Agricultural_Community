@@ -15,15 +15,125 @@
 	<div class="nk-container">
 		<!-- 全局顶部导航栏 -->
 
-		<nav class="navbar navbar-default navbar-fixed-top" role="navigation" th:replace="index::header1">
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 			<div class="width-limit">
 				<!-- 左上方 Logo -->
 				<a class="logo" th:href="@{/index}"><img th:src="@{/test/assets/web/44.png}" alt="Logo"/></a>
 				<!-- 右上角 -->
 				<!-- 未登录显示登录/注册/写文章 -->
-				<a class="btn write-btn" target="_blank" href="javascript:;">
+				<button type="button" class="btn write-btn" id="publish" target="_blank" data-toggle="modal"
+						data-target="#publishModal">
 					<i class="iconfont ic-write"></i>写文章
-				</a>
+				</button>
+				<!--发表文章文本标记器-->
+				<div role="dialog" aria-modal="true" aria-labelledby="dialog-title-k24o8wqp" id="dev"
+					 class="center next-dialog next-closeable simple-form-dialog"
+					 style="width: 640px;height:500px;display:none">
+
+					<div style="font-weight:700" class="next-dialog-header" id="dialog-title-k24lhv54" role="heading"
+						 aria-level="1">
+						<font face="幼圆">发布文章</font>
+					</div>
+					<hr>
+					<div class="next-dialog-body">
+						<form>
+							<div>
+								<div class="next-row" role="row" style="margin-top: 0px;" dir="ltr">
+									<div style="font-size: 12px;color: #333;font-weight:700">
+										<font face="幼圆">题目：</font>
+									</div>
+								</div>
+								<div class="next-row" role="row" style="margin-top: 10px;" dir="ltr">
+									<div class="next-col next-col-18" role="gridcell" dir="ltr">
+                        <span class="next-input next-medium"
+							  style="width: 100%;">
+                            <input
+									style="width: 600px;height: 30px;border-radius:3px;border:1px solid #999;"
+									height="100%"
+									value="" autocomplete="off" id="recipient-name">
+                        </span>
+									</div>
+								</div>
+								<div class="next-row" role="row" style="margin-top: 10px;" dir="ltr">
+									<div class="next-col" role="gridcell" dir="ltr">
+
+									</div>
+								</div>
+								<div style="font-size: 12px;color: #333;font-weight:700">
+									<font face="幼圆">正文：</font>
+								</div>
+								<div class="next-row" role="row" style="margin-top: 10px;" dir="ltr">
+
+									<div style="width:100%;height:50%" class="next-col" role="gridcell" dir="ltr">
+                        <span class="next-input next-input-textarea"
+							  style="width: 100%;">
+                            <textarea
+									style="resize:none;width:600px;height:250px;border-radius:6px;border:1px solid #999;"
+									placeholder="" rows="4" data-real="true" id="message-text">
+                            </textarea>
+                        </span>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="next-dialog-footer next-align-center">
+            <span style="position:absolute; right:65px; bottom:5px;">
+                <button class="next-btn next-medium next-btn-primary next-dialog-btn" type="button" id="publishBtn">发布</button></span>
+						<span style="position:absolute; right:5px; bottom:5px;">
+                <button class="next-btn next-medium next-btn-normal next-dialog-btn" type="button"
+						onclick="myDialog();">取消</button></span>
+					</div>
+					<a class="next-dialog-close" role="button" aria-label="关闭">
+						<button style="background-color: transparent; border: 0;" aria-label="Close" onclick="myDialog();">×
+						</button>
+					</a>
+
+				</div>
+				<!--发表文章按钮弹出框-->
+				<div role="dialog" aria-modal="true" aria-labelledby="dialog-title-k24o8wqp" id="popupDev"
+					 class="center   next-dialog next-closeable simple-form-dialog" style="width: 400px;height:200px;display:none">
+        <span style="position:absolute; left:9px; top:11px;">
+            <div style="font-weight:700;font-size:14" id="dialog-title-k24lhv54" role="heading" aria-level="1">
+                <font face="幼圆">消息提示</font>
+            </div>
+        </span>
+					<div class="next-dialog-body">
+						<div>
+							<div class="next-row" role="row" style="margin-top: 5px;" dir="ltr">
+							</div>
+							<div class="next-row" role="row" style="margin-top: 45px;" dir="ltr">
+								<div class="next-col next-col-18" role="gridcell" dir="ltr">
+                            <span class="next-input next-medium" style="width: 100%;" id="hintBody">
+                                发布完毕!
+                            </span>
+								</div>
+							</div>
+							<div class="next-row" role="row" style="margin-top: 10px;" dir="ltr">
+								<div class="next-col" role="gridcell" dir="ltr">
+
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<div class="next-dialog-footer next-align-center">
+            <span style="position:absolute; right:200px; bottom:10px;">
+                <button class="next-btn next-medium next-btn-primary next-dialog-btn" type="button" onclick="myPopup()">确定</button></span>
+						<span style="position:absolute; right:145px; bottom:10px;">
+                <button class="next-btn next-medium next-btn-normal next-dialog-btn" type="button" onclick="myPopup()">取消</button></span>
+
+					</div>
+					<a class="next-dialog-close" role="button" aria-label="关闭">
+						<button
+								style="background-color: transparent; border: 0;" aria-label="Close"
+								onclick="myPopup()">×
+						</button>
+					</a>
+
+				</div>
+
+
 				<a class="btn sign-up" th:href="@{/register}" th:if="${loginUser == null}">注册</a>
 				<a class="btn log-in" th:href="@{/login}" th:if="${loginUser == null}">登录</a>
 
@@ -141,7 +251,7 @@
 								</a>
 							</li>
 							<li class="notification v-notification-dropdown-menu">
-								<a class="notification-btn" href="javascript:;" data-hover="dropdown">
+								<a class="notification-btn" th:href="@{/letter/list}" data-hover="dropdown">
 									<span class="menu-text">消息</span>
 									<i class="iconfont ic-navigation-notification menu-icon"></i>
 									<span class="badge"></span>
