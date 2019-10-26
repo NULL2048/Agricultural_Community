@@ -757,92 +757,92 @@ button {
     padding: 0;
 }
 
-@media (min-width: 1200px)
-    .container {
-        max-width: 1140px;
-    }
+/*@media (min-width: 1200px)*/
+/*    .container {*/
+/*        max-width: 1140px;*/
+/*    }*/
 
-    @media (min-width: 992px)
-        .container {
-            max-width: 960px;
-        }
+/*    @media (min-width: 992px)*/
+/*        .container {*/
+/*            max-width: 960px;*/
+/*        }*/
 
-        @media (min-width: 768px)
-            .container {
-                max-width: 720px;
-            }
+/*        @media (min-width: 768px)*/
+/*            .container {*/
+/*                max-width: 720px;*/
+/*            }*/
 
-            @media (min-width: 576px)
-                .container {
-                    max-width: 540px;
-                }
+/*            @media (min-width: 576px)*/
+/*                .container {*/
+/*                    max-width: 540px;*/
+/*                }*/
 
-                .container {
-                    width: 100%;
-                    padding-right: 15px;
-                    padding-left: 15px;
-                    margin-right: auto;
-                    margin-left: auto;
-                }
+/*                .container {*/
+/*                    width: 100%;*/
+/*                    padding-right: 15px;*/
+/*                    padding-left: 15px;*/
+/*                    margin-right: auto;*/
+/*                    margin-left: auto;*/
+/*                }*/
 
-                .rt-0 {
-                    right: 0;
-                    top: 0;
-                }
+/*                .rt-0 {*/
+/*                    right: 0;*/
+/*                    top: 0;*/
+/*                }*/
 
-                .position-absolute {
-                    position: absolute !important;
-                }
+/*                .position-absolute {*/
+/*                    position: absolute !important;*/
+/*                }*/
 
-                .btn-group-sm > .btn, .btn-sm {
-                    padding: .25rem .5rem;
-                    font-size: .875rem;
-                    line-height: 1.5;
-                    border-radius: .2rem;
-                }
+/*                .btn-group-sm > .btn, .btn-sm {*/
+/*                    padding: .25rem .5rem;*/
+/*                    font-size: .875rem;*/
+/*                    line-height: 1.5;*/
+/*                    border-radius: .2rem;*/
+/*                }*/
 
-                .btn-primary {
+                .btn-primaryer {
                     color: #fff;
-                    background-color: #007bff;
-                    border-color: #007bff;
+                    background-color: #66c644;
+                    border-color: #ffffff00;
                 }
 
-                .btn {
-                    display: inline-block;
-                    font-weight: 400;
-                    color: #212529;
-                    text-align: center;
-                    vertical-align: middle;
-                    -webkit-user-select: none;
-                    -moz-user-select: none;
-                    -ms-user-select: none;
-                    user-select: none;
-                    background-color: transparent;
-                    border: 1px solid transparent;
-                    padding: .375rem .75rem;
-                    font-size: 1rem;
-                    line-height: 1.5;
-                    border-radius: .25rem;
-                    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-                }
+/*                .btn {*/
+/*                    display: inline-block;*/
+/*                    font-weight: 400;*/
+/*                    color: #212529;*/
+/*                    text-align: center;*/
+/*                    vertical-align: middle;*/
+/*                    -webkit-user-select: none;*/
+/*                    -moz-user-select: none;*/
+/*                    -ms-user-select: none;*/
+/*                    user-select: none;*/
+/*                    background-color: transparent;*/
+/*                    border: 1px solid transparent;*/
+/*                    padding: .375rem .75rem;*/
+/*                    font-size: 1rem;*/
+/*                    line-height: 1.5;*/
+/*                    border-radius: .25rem;*/
+/*                    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;*/
+/*                }*/
 
-                .btn-primary:hover {
-                    color: #fff;
-                    background-color: #0069d9;
-                    border-color: #0062cc;
-                }
+/*                .btn-primary:hover {*/
+/*                    color: #fff;*/
+/*                    background-color: #0069d9;*/
+/*                    border-color: #0062cc;*/
+/*                }*/
 
-                .btn:hover {
-                    color: #212529;
-                    text-decoration: none;
-                }
+/*                .btn:hover {*/
+/*                    color: #212529;*/
+/*                    text-decoration: none;*/
+/*                }*/
 
-                .btn-primary {
-                    color: #fff;
-                    background-color: #007bff;
-                    border-color: #007bff;
-                }
+/*                .btn-primary {*/
+/*                    color: #fff;*/
+/*                    background-color: #007bff;*/
+/*                    border-color: #007bff;*/
+/*                }*/
 
-                .rounded-circle {
-                    border-radius: 50% !important;
-                }
+/*                .rounded-circle {*/
+/*                    border-radius: 50% !important;*/
+/*                }*/

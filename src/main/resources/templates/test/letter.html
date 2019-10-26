@@ -364,7 +364,7 @@
                         <!-- 选项 -->
                         <ul class="nav nav-tabs mb-3">
                             <li class="nav-item">
-                                <a class="nav-link position-relative active" href="/ac/letter/list">
+                                <a class="nav-link position-relative active" th:href="@{/letter/list}">
                                     朋友私信<!--只有当未读消息不等于0的时候才显示红点-->
 
                                 </a>
@@ -375,7 +375,7 @@
                             </li>
                         </ul>
                         <span style="position:absolute; right:0px; top:5px;">
-					<button type="button" class="btn btn-primary btn-sm position-absolute rt-0" data-toggle="modal"
+					<button type="button" class="btn btn-primaryer btn-sm position-absolute rt-0" data-toggle="modal"
                             data-target="#sendModal">发私信</button></span>
                     </div>
                     <!-- 弹出框 -->
