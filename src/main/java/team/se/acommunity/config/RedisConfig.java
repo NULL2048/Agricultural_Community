@@ -10,7 +10,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 @Configuration
 public class RedisConfig {
     // 使用bean标注，定义第三方bean，他会自动把自定义的bean装载入spring容器中
-    // 写这个方法取得到数据库连接对象，通过RedisConnectionFactory这个类来获得，这个类已经被spring容器装配了
+    // 覆写这个方法通过RedisTemplate这个类取得到数据库连接对象，通过RedisConnectionFactory这个类来获得，这个类已经被spring容器装配了
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
