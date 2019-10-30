@@ -9,7 +9,10 @@ import team.se.acommunity.entity.DiscussPost;
 import team.se.acommunity.entity.Page;
 import team.se.acommunity.entity.User;
 import team.se.acommunity.service.DiscussPostService;
+import team.se.acommunity.service.LikeService;
 import team.se.acommunity.service.UserService;
+import team.se.acommunity.util.CommunityConstant;
+import team.se.acommunity.util.CommunityUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,11 +21,13 @@ import java.util.Map;
 
 // controller也是可以不用写访问路径的，如果不写controller的访问路径的话，到时候可以直接跳过controller路径，直接访问里面的方法的路径就行
 @Controller
-public class HomeController {
+public class HomeController implements CommunityConstant {
     @Autowired
     private DiscussPostService discussPostService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private LikeService likeService;
 
     @RequestMapping(path = "/index", method = RequestMethod.GET)
     public String getIndexPage(Model model, Page page) {
@@ -40,6 +45,9 @@ public class HomeController {
 
                 User user = userService.getUserById(post.getUserId());
                 map.put("user", user);
+                // 查询当前帖子点赞数量
+                long likeCount = likeService.countEntityLike(ENTITY_TYPE_POST, post.getId());
+                map.put("likeCount", likeCount);
                 discussPosts.add(map);
             }
         }

@@ -13,6 +13,7 @@ import team.se.acommunity.entity.Page;
 import team.se.acommunity.entity.User;
 import team.se.acommunity.service.CommentService;
 import team.se.acommunity.service.DiscussPostService;
+import team.se.acommunity.service.LikeService;
 import team.se.acommunity.service.UserService;
 import team.se.acommunity.util.CommunityConstant;
 import team.se.acommunity.util.CommunityUtil;
@@ -33,6 +34,9 @@ public class DiscussPostController implements CommunityConstant {
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private LikeService likeService;
 
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     @ResponseBody // 不是返回网页，所以加上ResponseBody标签
@@ -63,7 +67,13 @@ public class DiscussPostController implements CommunityConstant {
         //作者
         User user = userService.getUserById(post.getUserId());
         model.addAttribute("user", user);
-
+        // 点赞数量
+        long likeCount = likeService.countEntityLike(ENTITY_TYPE_POST, discussPostId);
+        model.addAttribute("likeCount", likeCount);
+        // 点赞状态 检查当前用户是否对这个文章点过赞   这里要先判断用户是否登录，如果登陆了再进行相关查询，如果没有登陆就直接赋值成0，因为没有登陆也是要显示点赞数量的，只不过是没有点赞状态
+        int likeStatus = hostHolder.getUser() == null ? 0 :
+                likeService.getEntityLikeStatus(hostHolder.getUser().getId(), ENTITY_TYPE_POST, discussPostId);
+        model.addAttribute("likeStatus", likeStatus);
         // 评论分页信息
         page.setLimit(5);
         page.setPath("/discuss/detail/" + discussPostId);
@@ -83,6 +93,13 @@ public class DiscussPostController implements CommunityConstant {
                 commentVO.put("comment", comment);
                 // 评论作者
                 commentVO.put("user", userService.getUserById(comment.getUserId()));
+                // 点赞数量
+                likeCount = likeService.countEntityLike(ENTITY_TYPE_COMMENT, comment.getId());
+                commentVO.put("likeCount", likeCount);
+                // 点赞状态 检查当前用户是否对这个文章点过赞   这里要先判断用户是否登录，如果登陆了再进行相关查询，如果没有登陆就直接赋值成0，因为没有登陆也是要显示点赞数量的，只不过是没有点赞状态
+                likeStatus = hostHolder.getUser() == null ? 0 :
+                        likeService.getEntityLikeStatus(hostHolder.getUser().getId(), ENTITY_TYPE_COMMENT, comment.getId());
+                commentVO.put("likeStatus", likeStatus);
 
                 // 回复列表                                                                         // 这个标识最大值，也就是有多少条查多少条，不做分页了,然后在界面通过循环实现分页显示
                 List<Comment> replyList = commentService.listCommentsByEntity(ENTITY_TYPE_COMMENT, comment.getId(), 0, Integer.MAX_VALUE);
@@ -96,6 +113,14 @@ public class DiscussPostController implements CommunityConstant {
                         // 回复的目标
                         User target = reply.getTargetId() == 0 ? null : userService.getUserById(reply.getTargetId());
                         replyVO.put("target", target);
+
+                        // 点赞数量
+                        likeCount = likeService.countEntityLike(ENTITY_TYPE_COMMENT, reply.getId());
+                        replyVO.put("likeCount", likeCount);
+                        // 点赞状态 检查当前用户是否对这个文章点过赞   这里要先判断用户是否登录，如果登陆了再进行相关查询，如果没有登陆就直接赋值成0，因为没有登陆也是要显示点赞数量的，只不过是没有点赞状态
+                        likeStatus = hostHolder.getUser() == null ? 0 :
+                                likeService.getEntityLikeStatus(hostHolder.getUser().getId(), ENTITY_TYPE_COMMENT, reply.getId());
+                        replyVO.put("likeStatus", likeStatus);
 
                         replyVoList.add(replyVO);
                     }
