@@ -25,11 +25,11 @@ public class LikeController {
     @RequestMapping(path = "/like", method = RequestMethod.POST)
     // 因为这里的点赞操作时异步请求，所以必须加上ResponseBody这个标签，通过这个路径发送请求的时候都是异步请求，不会刷新原有界面
     @ResponseBody // 加上他就表示是异步请求，从浏览器传过来的是json格式数据，他会自动根据key将json中的值取出来，赋值给这个方法的参数
-    public String like(int entityType, int entityId) {
+    public String like(int entityType, int entityId, int entityUserId) {
         User user = hostHolder.getUser();
 
         // 点赞
-        likeService.saveLike(user.getId(), entityType, entityId);
+        likeService.saveLike(user.getId(), entityType, entityId, entityUserId);
 
         // 获得点赞数量
         long likeCount = likeService.countEntityLike(entityType, entityId);

@@ -152,7 +152,7 @@ public class RedisTests {
     public void testTransactional() {
         // 要覆写这个SessionCallback类，将这个类通过execute方法传入redisTemplate，当执行redis命令的时候他会自动执行
         Object obj = redisTemplate.execute(new SessionCallback() {
-            // redisOperations这个对象就是redis命令执行对象
+            // redisOperations这个对象就是redis命令执行对象,下面就不用redisOperations这个来执行命令了，而是直接用redisOperations这个对象来执行
             @Override
             public Object execute(RedisOperations redisOperations) throws DataAccessException {
                 String redisKey = "test:tx";

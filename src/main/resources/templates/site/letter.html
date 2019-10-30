@@ -125,7 +125,7 @@
 					<li class="media pb-3 pt-3 mb-3 border-bottom position-relative" th:each="map:${conversations}">
 						<!--每一个会话的未读数量 z这里也需要判断没有未读的时候不显示红点-->
 						<span class="badge badge-danger" th:text="${map.unreadCount}" th:if="${map.unreadCount != 0}">3</span>
-						<a href="profile.html">
+						<a th:href="@{|/user/profile/${map.target.id}|}">
 							<!--显示目标用户的头像 这一点需要注意一下，虽然src里面写是是路径，但是这里的路径是从对象中取出来，所以这里不用@还是用$-->
 							<img th:src="${map.target.headerUrl}" class="mr-4 rounded-circle user-header" alt="用户头像" >
 						</a>

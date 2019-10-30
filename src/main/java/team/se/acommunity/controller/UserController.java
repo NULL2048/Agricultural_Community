@@ -1,5 +1,6 @@
 package team.se.acommunity.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import team.se.acommunity.annotation.LoginRequired;
 import team.se.acommunity.entity.User;
+import team.se.acommunity.service.LikeService;
 import team.se.acommunity.service.UserService;
 import team.se.acommunity.util.CommunityUtil;
 import team.se.acommunity.util.HostHolder;
@@ -42,6 +44,9 @@ public class UserController {
 
     @Autowired
     private HostHolder hostHolder;
+
+    @Autowired
+    private LikeService likeService;
 
     @LoginRequired
     @RequestMapping(path = "/setting", method = RequestMethod.GET)
@@ -122,5 +127,30 @@ public class UserController {
         } catch (IOException e) {
             logger.error("读取头像失败：" + e.getMessage());
         }
+    }
+
+    /**
+     * 个人主页
+     * @param userId
+     * @param model
+     * @return
+     */
+    @RequestMapping(path = "/profile/{userId}", method = RequestMethod.GET)
+    public String getProfilePage(@PathVariable("userId") int userId, Model model) {
+        // 因为用户主页页面所有的账号都可以看，所以获得user对象不能用过hostHold
+        User user = userService.getUserById(userId);
+
+        // 为了防止恶意攻击，防止恶意注入，黑客从地址栏填入id来检查这个id存不存在，所以在这里要判断这个user查没查到，没查到直接抛出异常
+        if (user == null) {
+            throw new RuntimeException("给用户不存在！");
+        }
+
+        // 将用户信息传给界面
+        model.addAttribute("user", user);
+        // 点赞数量
+        int likeCount = likeService.countUserLike(userId);
+        model.addAttribute("likeCount", likeCount);
+
+        return "/site/profile";
     }
 }
