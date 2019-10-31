@@ -8,6 +8,13 @@ public class RedisKeyUtil {
     // 若A关注了B，则A是B的Follower（粉丝），B是A的Followee（目标）
     private static final String PREFIX_FOLLOWEE = "followee";
     private static final String PREFIX_FOLLOWER = "follower";
+    // 验证码的Key
+    private static final String PREFIX_KAPTCHA = "kaptcha";
+    // 登陆凭证的key
+    private static final String PREFIX_TICKET = "ticket";
+    // 用户信息的Key
+    private static final String PREFIX_USER = "user";
+
 
     // 某个实体的赞
     // like:entity:entityType:entityId -> set(userId)      这里的value最好是存入set集合，因为这样的话这个功能不光能统计赞的数量，还能统计哪些用户给了赞，这样系统能更方便地进行功能扩充
@@ -53,5 +60,32 @@ public class RedisKeyUtil {
      */
     public static String getFollowerKey(int entityType, int entityId) {
         return PREFIX_FOLLOWER + SPLIT + entityType + SPLIT + entityId;
+    }
+
+    /**
+     * 登录验证码
+     * @param owner 用户的临时凭证，用来将验证码与用户绑定在一起,生成一个Key，这样能方便去比对输入的验证码一不一致，owner就是一个临时的随机字符串
+     * @return
+     */
+    public static String getKaptchaKay(String owner) {
+        return PREFIX_KAPTCHA + SPLIT + owner;
+    }
+
+    /**
+     * 登录凭证
+     * @param ticket
+     * @return
+     */
+    public static String getTicketKey(String ticket) {
+        return PREFIX_TICKET + SPLIT + ticket;
+    }
+
+    /**
+     * 用户信息
+     * @param userId
+     * @return
+     */
+    public static String getUserKey(int userId) {
+        return PREFIX_USER + SPLIT +userId;
     }
 }

@@ -4,6 +4,8 @@ import org.apache.ibatis.annotations.*;
 import team.se.acommunity.entity.LoginTicket;
 
 @Mapper
+// 这个注解的意思是这个接口不推荐使用了，因为ticket已经存到了redis当中了
+@Deprecated
 public interface LoginTicketMapper {
     // 以前去实现mapper借口就是再写一个mapper实现文件XML，其实还可以直接在这个接口里面通过注解取实现这个mapper接口
     // 这些个标签里面都可以写很多字符串，他会自己给你拼接，你可以选择把一整段sql命令写成一个字符串，也可以选择拆分成多个让他自动拼接。但是要记住，分割出来的字符串之间要用空格分隔，否则拼接起来会连在一起，容易出错
