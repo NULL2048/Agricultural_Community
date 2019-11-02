@@ -90,6 +90,11 @@
 			<version>2.2.0.RELEASE</version>
 		</dependency>
 
+		<!--这个也是直接将版本标签删掉，直接用父标签中写好的版本来配置环境，这样才是对spring兼容性最好的kafka版本-->
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
