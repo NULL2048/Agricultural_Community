@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <contextName>acommunity</contextName>
-    <property name="LOG_PATH" value="C:/Users/97307/Desktop"/>
+    <property name="LOG_PATH" value="E:/Agricultural_Community"/>
     <property name="APPDIR" value="acommunity"/>
 
     <!-- error file -->
