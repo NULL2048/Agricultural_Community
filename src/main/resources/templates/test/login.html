@@ -47,6 +47,12 @@
 			white-space:nowrap;
 		}
 	</style>
+	<!--控制cookie填充后的背景填充-->
+	<style type="text/css">
+            input:-webkit-autofill {
+                  box-shadow: 0 0 0px 1000px white inset !important;
+            }
+    </style>
 	<script th:src='@{/test/js/jquery.min.js}' type="text/javascript"></script>
 	<script>
 		$(document).ready(function () {
@@ -77,12 +83,12 @@
 			</div>
 		</div>
 
-		<form class="login form" method="post" th:action="@{/login}">
+		<form class="login form" method="post" th:action="@{/login}" >
 			<div class="group">
 				<div class="group-ipt email">
-					<input type="text" name="username" id="email" th:class="|ipt ${usernameMsg!=null?'is-invalid':''}|"
+					<input class="input:-webkit-autofill" type="text" name="username" id="email" th:class="|ipt ${usernameMsg!=null?'is-invalid':''}|"
 						   th:value="${param.username}"
-						   placeholder="请输入您的账号" required>
+						   placeholder="请输入您的账号" required >
 					<div class="hello invalid-feedback" th:text="${usernameMsg}" >
 						该账号不存在!
 					</div>

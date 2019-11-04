@@ -13,7 +13,16 @@
 			/*height:15px;*/
 			font-size:12px
 		}
+		.he{
+		    border:1px solid #eee;
+		}
 	</style>
+	<!--控制cookie填充后的背景填充-->
+	<style type="text/css">
+            input:-webkit-autofill {
+                  box-shadow: 0 0 0px 1000px white inset !important;
+            }
+    </style>
 </head>
 <body>
 <div id="box"></div>
@@ -36,7 +45,7 @@
 			<div class="login form">
 				<div class="group">
 					<div class="group-ipt email">
-						<input type="email" name="email" id="email" th:value="${user!=null?user.email:''}" th:class="|ipt ${emailMsg!=null?'is-invalid':''}|" placeholder="邮箱地址" required>
+						<input class="input:-webkit-autofill" type="email" name="email" id="email" th:value="${user!=null?user.email:''}" th:class="|ipt ${emailMsg!=null?'is-invalid':''}|" placeholder="邮箱地址" required >
 					</div>
 					<div class="hello invalid-feedback" th:text="${emailMsg}">
 						该邮箱已注册!
@@ -56,7 +65,7 @@
 						密码长度不能小于8位!
 					</div>
 <!--					id="confirm-password"-->
-					<div class="group-ipt password1">
+					<div  class="group-ipt password1 he">
 						<input type="password" name="confirmPassword"  th:class="|ipt ${passwordMsg1!=null?'is-invalid':''}|" placeholder="重复密码" required>
 					</div>
 					<div class="hello invalid-feedback" th:text="${passwordMsg1}">
