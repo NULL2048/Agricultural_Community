@@ -49,4 +49,8 @@ public class MessageService {
         // 将消息状态改为已读
         return messageMapper.updateStatus(ids, 1);
     }
+
+    public Message getLastedNotice(int userId, String topic) {
+        return null;
+    }
 }

@@ -22,4 +22,10 @@ public interface MessageMapper {
     // 更改消息状态
     int updateStatus(List<Integer> ids, int status);
 
+    // 查询某个主题下最新的通知  查询某个用户的某个主题的通知
+    Message getLastedNotice(int userId, String topic);
+    // 查询某个主题所包含的通知数量
+    int countNotice(int userId, String topic);
+    // 查询未读的通知的数量
+    int countNoticeUnread(int userId, String topic);
 }

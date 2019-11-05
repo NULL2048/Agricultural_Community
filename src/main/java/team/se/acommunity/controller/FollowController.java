@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import team.se.acommunity.annotation.LoginRequired;
+import team.se.acommunity.entity.Event;
 import team.se.acommunity.entity.Page;
 import team.se.acommunity.entity.User;
+import team.se.acommunity.event.EventProducer;
 import team.se.acommunity.service.FollowService;
 import team.se.acommunity.service.UserService;
 import team.se.acommunity.util.CommunityConstant;
@@ -30,6 +32,10 @@ public class FollowController implements CommunityConstant {
     @Autowired
     private UserService userService;
 
+    // 将生产者事件注入
+    @Autowired
+    private EventProducer eventProducer;
+
     @LoginRequired
     @RequestMapping(path = "/follow", method = RequestMethod.POST)
     @ResponseBody
@@ -40,6 +46,16 @@ public class FollowController implements CommunityConstant {
         User user = hostHolder.getUser();
 
         followService.follow(user.getId(), entityType, entityId);
+
+        // 触发关注事件
+        Event event = new Event()
+                .setTopic(TOPIC_FOLLOW) // 设置主题
+                .setUserId(hostHolder.getUser().getId()) // 设置触发这个事件的用户
+                .setEntityType(entityType) // 设置这个实体的类型
+                .setEntityId(entityId) // 设置这个实体的id
+                .setEntityUserId(entityId); // 设置被关注实体的所有者id
+
+        eventProducer.fireEvent(event);
 
         return CommunityUtil.getJSONString(0, "已关注");
     }

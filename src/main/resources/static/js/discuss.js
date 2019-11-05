@@ -1,10 +1,10 @@
 // 这个方法就是一个ajax方法
-function like(btn, entityType, entityId, entityUserId) {
+function like(btn, entityType, entityId, entityUserId, postId) {
     $.post(
         // 数据要传送给的地址
         CONTEXT_PATH + "/like",
         // 要传给服务器的数据
-        {"entityType":entityType,"entityId":entityId,"entityUserId":entityUserId},
+        {"entityType":entityType,"entityId":entityId,"entityUserId":entityUserId,"postId":postId},
         // 接收服务器响应数据
         function(data) {
             // 将json格式转化为js对象

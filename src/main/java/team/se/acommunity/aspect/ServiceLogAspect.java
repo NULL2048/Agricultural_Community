@@ -31,6 +31,10 @@ public class ServiceLogAspect {
         // 从request对象中获取用户ip
         // 获取request对象
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        // 下面这一句是写完了消息队列消费者之后加的，因为类就是去监听所有的service方法，然后从中取得调用这个service的controller中的request对象那个，以前所有的service方法都是controller调用，所以不会出现问题，一定能取到request，但是消费者这个里面也调用了service方法，但是这个消费者方法中是没有request对象的，所以就要在这里判断一下，如果没有的话直接结束方法，避免出现空指针错误
+        if (attributes == null) { // 表示这一次调用service不是通过controller调用的，是一次非常规调用
+            return;
+        }
         HttpServletRequest request = attributes.getRequest();
         // 获取ip
         String ip = request.getRemoteHost();
