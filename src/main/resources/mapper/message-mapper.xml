@@ -104,7 +104,7 @@
         and conversation_id = #{topic}
     </select>
 
-    <select id="countNoticeUnread" resultType="int">
+    <select id="countUnreadNotice" resultType="int">
         select count(id)
         from message
         where status = 0
@@ -113,5 +113,16 @@
         <if test="topic!=null"> <!--因为希望不过是求某一个主题的未读数量，还需要求所有主题未读数量的和，这里就可以判断一下如果传入的topic为null就直接求所有主题的未读数量-->
             and conversation_id = #{topic}
         </if>
+    </select>
+
+    <select id="listNotices" resultType="Message">
+        select <include refid="selectFields"></include>
+        from message
+        where status != 2
+        and from_id = 1
+        and to_id = #{userId}
+        and conversation_id = #{topic}
+        order by create_time desc
+        limit #{offset}, #{limit}
     </select>
 </mapper>

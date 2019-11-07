@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.thymeleaf.context.Context;
 import team.se.acommunity.entity.User;
+import team.se.acommunity.service.MessageService;
 import team.se.acommunity.service.UserService;
 import team.se.acommunity.util.CommunityConstant;
 import team.se.acommunity.util.CommunityUtil;
@@ -36,6 +37,9 @@ import java.util.concurrent.TimeUnit;
 @Controller
 public class LoginController implements CommunityConstant {
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+
+    @Autowired
+    private MessageService messageService;
 
     @Autowired
     private UserService userService;
@@ -184,6 +188,7 @@ public class LoginController implements CommunityConstant {
             resp.addCookie(cookie);
             // 重定向到主页
             logger.info(username + ":登陆成功");
+
             return "redirect:/index";
         } else {
             // 登录不成功返回错误信息

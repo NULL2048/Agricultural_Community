@@ -51,6 +51,18 @@ public class MessageService {
     }
 
     public Message getLastedNotice(int userId, String topic) {
-        return null;
+        return messageMapper.getLastedNotice(userId, topic);
+    }
+
+    public int countNotice(int userId, String topic) {
+        return messageMapper.countNotice(userId, topic);
+    }
+
+    public int countUnreadNotice(int userId, String topic) {
+        return messageMapper.countUnreadNotice(userId, topic);
+    }
+
+    public List<Message> listNotices(int userId, String topic, int offset, int limit) {
+        return messageMapper.listNotices(userId, topic, offset, limit);
     }
 }

@@ -27,5 +27,8 @@ public interface MessageMapper {
     // 查询某个主题所包含的通知数量
     int countNotice(int userId, String topic);
     // 查询未读的通知的数量
-    int countNoticeUnread(int userId, String topic);
+    int countUnreadNotice(int userId, String topic);
+
+    // 查询某个主题所包含的通知列表
+    List<Message> listNotices(int userId, String topic, int offset, int limit);
 }

@@ -29,8 +29,8 @@
 							</li>
 							<li class="nav-item ml-3 btn-group-vertical" th:if="${loginUser != null}">
 								<a class="nav-link position-relative" th:href="@{/letter/list}">
-									消息
-									<span class="badge badge-danger" th:text="${letterUnreadCount}" th:if="${letterUnreadCount != 0} ">12</span>
+									消息                                                <!--这种写法就挺好的，如果这个值是0就什么也不显示，就不用再写一个if判断要不要显示这个标签了-->
+									<span class="badge badge-danger" th:text="${allUnreadCount!=0?allUnreadCount:''}">12</span>
 								</a>
 							</li>
 							<li class="nav-item ml-3 btn-group-vertical" th:if="${loginUser == null}">
