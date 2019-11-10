@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import team.se.acommunity.entity.Comment;
-import team.se.acommunity.entity.DiscussPost;
-import team.se.acommunity.entity.Page;
-import team.se.acommunity.entity.User;
+import team.se.acommunity.entity.*;
+import team.se.acommunity.event.EventProducer;
 import team.se.acommunity.service.CommentService;
 import team.se.acommunity.service.DiscussPostService;
 import team.se.acommunity.service.LikeService;
@@ -38,6 +36,9 @@ public class DiscussPostController implements CommunityConstant {
     @Autowired
     private LikeService likeService;
 
+    @Autowired
+    private EventProducer eventProducer;
+
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     @ResponseBody // 不是返回网页，所以加上ResponseBody标签
 
@@ -54,6 +55,14 @@ public class DiscussPostController implements CommunityConstant {
         post.setContent(content);
         post.setCreateTime(new Date());
         discussPostService.insertDiscussPost(post);
+
+        // 将文章发表存入mysql数据库之后，就要再将这篇文章存入es服务器，要触发发表文章事件
+        Event event = new Event()
+                .setTopic(TOPIC_PUBLISH) // 设置事件主题
+                .setUserId(user.getId()) // 设置谁触发了这个事件
+                .setEntityType(ENTITY_TYPE_POST) // 设置事件主体类型
+                .setEntityId(post.getId()); // 设置事件主体id
+        eventProducer.fireEvent(event);
 
         // 报错的情况将来统一处理
         return CommunityUtil.getJSONString(0, "发布成功！");

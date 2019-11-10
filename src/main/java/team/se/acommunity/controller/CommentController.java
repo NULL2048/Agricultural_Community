@@ -63,6 +63,16 @@ public class CommentController implements CommunityConstant {
         // 触发事件  触发了之后剩下的工作就是消息队列在别的线程中进行了，这个线程会直接接着像后面执行，进行跳转页面。这是一个并发的操作，两种操作一起执行，效率更高，如果这个文章热度比较高，评论多他们就直接将评论事件放到消息队列中了，起到了一个缓冲作用，这就是消息队列的好处，提高系统支持高并发能力
         eventProducer.fireEvent(event);
 
+        // 当文章有了评论之后，文章的评论数量就变了，它的排名分数也就变了，就相当于这篇文章有了修改，所以要重新修改es服务器中的文章数据
+        // 只有评论给帖子的时候才需要触发发帖事件
+        if (comment.getEntityType() == ENTITY_TYPE_POST) {
+            event = new Event()
+                    .setTopic(TOPIC_PUBLISH) // 设置事件主题
+                    .setUserId(comment.getUserId()) // 设置谁触发了这个事件
+                    .setEntityType(ENTITY_TYPE_POST) // 设置事件主体类型
+                    .setEntityId(discussPostId); // 设置事件主体id
+            eventProducer.fireEvent(event);
+        }
         // 结束本次请求，重定向到评论的帖子界面。因为这个方法不需要想别的页面返回什么信息了，因为在这里重定向本次请求就结束了，所以这个方法就没有model这个对象
         return "redirect:/discuss/detail/" + discussPostId;
     }
