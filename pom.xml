@@ -101,6 +101,13 @@
 			<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
 		</dependency>
 
+		<!--导入了spring security这个包之后他会马上对系统起作用-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>

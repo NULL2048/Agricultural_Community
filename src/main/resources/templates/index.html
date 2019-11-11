@@ -3,6 +3,14 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!--访问该页面时，在此处生成CSRF令牌-->
+	<!--将tocken的value存到这个meta标签中-->
+	<meta name="_csrf" th:content="${_csrf.token}">
+	<!--将tocken的key存到这个meta标签中-->
+	<meta name="_csrf_header" th:content="${_csrf.headerName}">
+	<!--这样如果是异步请求向要在请求中携带tocken的话，直接去获取这两个标签的key和value就行了-->
+
 	<link rel="icon" href="https://static.nowcoder.com/images/logo_87_87.png"/>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
 	<!--这里要注意的一点就是用相对路径都不是很安全，所以要转成绝对路径，可以用Thymeleaf模板来实现，所有用到Thymeleaf模板功能的地方都要在前面加上th:,这里把他变成绝对路径，就是在外面加一个@{}，然后里面写上绝对路径-->
