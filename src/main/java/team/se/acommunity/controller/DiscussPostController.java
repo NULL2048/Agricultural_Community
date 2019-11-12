@@ -147,4 +147,56 @@ public class DiscussPostController implements CommunityConstant {
         model.addAttribute("comments", commentVoList);
         return "/site/discuss-detail";
     }
+
+    // 置顶  是一个异步请求
+    @RequestMapping(path = "/top", method = RequestMethod.POST)
+    @ResponseBody
+    public String setTop(int id) {
+        discussPostService.updateType(id, 1);
+
+        // 触发贴子发布时间，将贴子添加到es服务器中
+        Event event = new Event()
+                .setTopic(TOPIC_PUBLISH) // 设置事件主题
+                .setUserId(hostHolder.getUser().getId()) // 设置谁触发了这个事件
+                .setEntityType(ENTITY_TYPE_POST) // 设置事件主体类型
+                .setEntityId(id); // 设置事件主体id
+        eventProducer.fireEvent(event);
+
+        return CommunityUtil.getJSONString(0);
+    }
+
+    // 加精
+    @RequestMapping(path = "/wonderful", method = RequestMethod.POST)
+    @ResponseBody
+    public String setWonderful(int id) {
+        discussPostService.updateStatus(id, 1);
+
+        // 触发贴子发布时间，将贴子添加到es服务器中
+        Event event = new Event()
+                .setTopic(TOPIC_PUBLISH) // 设置事件主题
+                .setUserId(hostHolder.getUser().getId()) // 设置谁触发了这个事件
+                .setEntityType(ENTITY_TYPE_POST) // 设置事件主体类型
+                .setEntityId(id); // 设置事件主体id
+        eventProducer.fireEvent(event);
+
+        return CommunityUtil.getJSONString(0);
+    }
+
+    // 删除帖子
+    @RequestMapping(path = "/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public String setDelete(int id) {
+        // 这里的删除只是状态改变，并没有将贴子在数据库中删除
+        discussPostService.updateStatus(id, 2);
+
+        // 触发一个删帖事件
+        Event event = new Event()
+                .setTopic(TOPIC_DELETE) // 设置事件主题
+                .setUserId(hostHolder.getUser().getId()) // 设置谁触发了这个事件
+                .setEntityType(ENTITY_TYPE_POST) // 设置事件主体类型
+                .setEntityId(id); // 设置事件主体id
+        eventProducer.fireEvent(event);
+
+        return CommunityUtil.getJSONString(0);
+    }
 }

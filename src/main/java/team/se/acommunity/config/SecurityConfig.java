@@ -50,7 +50,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
                         AUTHORITY_USER,
                         AUTHORITY_MODERATOR
                 )
-                .anyRequest().permitAll(); // 除了上面的那些请求之外，其他的请求全部允许
+                .antMatchers( // 配置版主权限
+                        "/discuss/top",
+                        "/discuss/wonderful"
+                )
+                .hasAnyAuthority(
+                        AUTHORITY_MODERATOR
+                )
+                .antMatchers( // 设置管理员权限
+                        "/discuss/delete"
+                )
+                .hasAnyAuthority(
+                        AUTHORITY_ADMIN
+                )
+                .anyRequest().permitAll() // 除了上面的那些请求之外，其他的请求全部允许
+                .and().csrf().disable(); // 关掉security默认开启的自动生成csrf凭证，这样就不用把所有的页面重新翻新了，但实际是开了更好
 
         // 权限不够时的处理
         http.exceptionHandling()
@@ -79,7 +93,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
                             response.setContentType("application/plain;charset=utf-8");
                             PrintWriter writer = response.getWriter();
                             // 一般没有登陆的状态码就是403
-                            writer.write(CommunityUtil.getJSONString(403, "你们有访问此功能的权限"));
+                            writer.write(CommunityUtil.getJSONString(403, "你没有访问此功能的权限"));
                         } else {
                             // 不是异步请求直接重定向
                             response.sendRedirect(request.getContextPath() + "/denied");

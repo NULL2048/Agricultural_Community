@@ -81,7 +81,7 @@ public class EventConsumer implements CommunityConstant {
         messageService.saveMessage(message);
     }
 
-    // 消费发帖时间
+    // 消费发帖事件
     @KafkaListener(topics = {TOPIC_PUBLISH})
     public void handlePublishMessage(ConsumerRecord record) {
         if (record == null || record.value() == null) {
@@ -101,5 +101,25 @@ public class EventConsumer implements CommunityConstant {
         DiscussPost post = discussPostService.getDiscussPostById(event.getEntityId());
         // 存入es服务器当中
         elasticsearchService.saveDiscussPost(post);
+    }
+
+    // 消费删帖事件
+    @KafkaListener(topics = {TOPIC_DELETE})
+    public void handleDeleteMessage(ConsumerRecord record) {
+        if (record == null || record.value() == null) {
+            logger.error("消息的内容为空！");
+            return;
+        }
+
+        // 将json字符串转换为原有的对象，因为json字符串只是为了方便传输，提高传输效率用的
+        Event event = JSONObject.parseObject(record.value().toString(), Event.class);
+
+        if (event == null) {
+            logger.error("消息格式错误");
+            return;
+        }
+
+        // 从es中删除
+        elasticsearchService.removeDiscussPost(event.getEntityId());
     }
 }

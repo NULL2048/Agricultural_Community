@@ -21,4 +21,9 @@ public interface DiscussPostMapper {
     DiscussPost getDiscussPostById(int id);
 
     int updateCommentCount(int id, int commentCount);
+
+    // 修改帖子类型  普通帖子还是置顶帖子
+    int updateType(int id, int type);
+    // 修改帖子状态  正常贴子，拉黑帖子，加精帖子
+    int updateStatus(int id, int status);
 }

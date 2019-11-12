@@ -9,13 +9,13 @@ function publish() {
 
 	// 发送ajax请求之前，将CSRF令牌设置到请求的消息头中
 	// 下面的意思是获取name为_csrf的meta标签，并且获取content属性的值
-	var token = $("meta[name='_csrf']").attr("content");
-	var header = $("meta[name='_csrf_header']").attr("content");
-	// 设置ajax的请求头
-	$(document).ajaxSend(function (e, xhr, options) {
-		// xhr是ajax的核心实现对象，通过它来设置请求头，设置为key是header  value是token
-		xhr.setRequestHeader(header, token);
-	});
+	// var token = $("meta[name='_csrf']").attr("content");
+	// var header = $("meta[name='_csrf_header']").attr("content");
+	// // 设置ajax的请求头
+	// $(document).ajaxSend(function (e, xhr, options) {
+	// 	// xhr是ajax的核心实现对象，通过它来设置请求头，设置为key是header  value是token
+	// 	xhr.setRequestHeader(header, token);
+	// });
 
 	// 获取标题和内容
 	// 取标题的标签 这里使用的是jquery的ID选择器，将界面中id值是recipient-name的标签获取，然后用val方法获取标签的value值
