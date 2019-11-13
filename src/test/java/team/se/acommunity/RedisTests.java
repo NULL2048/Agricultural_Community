@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataAccessException;
-import org.springframework.data.redis.core.BoundValueOperations;
-import org.springframework.data.redis.core.RedisOperations;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.SessionCallback;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.RedisStringCommands;
+import org.springframework.data.redis.core.*;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import team.se.acommunity.util.SensitiveFilter;
@@ -173,6 +172,121 @@ public class RedisTests {
             }
         });
         // 这个输出的前三个数据，是每一条命令影响的行数
+        System.out.println(obj);
+    }
+
+    // 统计20万个重复数据的独立总数
+    @Test
+    public void testHyperLogLog() {
+        String redisKey = "test:hll:01";
+
+        for (int i = 1; i <= 100000; i++) {
+            redisTemplate.opsForHyperLogLog().add(redisKey, i);
+        }
+
+        for (int i = 1; i <= 100000; i++) {
+            int r = (int) (Math.random() * 100000 + 1);
+            redisTemplate.opsForHyperLogLog().add(redisKey, r);
+        }
+        // 最后的去重结果一定是100000，因为求得随机数就是100000范围内的，去重之后一定就是第一次循环插入的那100000个数据，不会超出这个范围
+        long size = redisTemplate.opsForHyperLogLog().size(redisKey);
+        // 得到了一个估值，但是误差很小 结果是99553
+        System.out.println(size);
+    }
+
+    // 将三组数据合并，再统计合并后的重复数据的独立总数
+    @Test
+    public void testHyperLogLogUnion() {
+        String redisKey2 = "test:hll:02";
+        for (int i = 1; i <= 10000; i++) {
+            redisTemplate.opsForHyperLogLog().add(redisKey2, i);
+        }
+
+        String redisKey3 = "test:hll:03";
+        for (int i = 5001; i <= 15000; i++) {
+            redisTemplate.opsForHyperLogLog().add(redisKey3, i);
+        }
+
+        String redisKey4 = "test:hll:04";
+        for (int i = 10001; i <= 20000; i++) {
+            redisTemplate.opsForHyperLogLog().add(redisKey4, i);
+        }
+
+        // 上面数据的范围是1-20000，所以最后合并完统计的的独立总数一定是20000
+        // redis对HtperLogLog合并就是将要合并的数据合并之后再存入到一个新的HtperLogLog数据中，所以要再创建一个新的key
+        String unionKey = "test:hll:union";
+        redisTemplate.opsForHyperLogLog().union(unionKey, redisKey2, redisKey3, redisKey4);
+
+        long size = redisTemplate.opsForHyperLogLog().size(unionKey);
+        // 结果也是不精确的19833
+        System.out.println(size);
+    }
+
+    // 统计一组数据的布尔值
+    @Test
+    public void testBitMap() {
+        String redisKey = "test:bm:01";
+
+        // 记录
+        // BiMap并不是一个独立的数据类型，他其实就是一个数组，只不过是按位存储
+        // 他是一个变长的数组，根据传入的值进行动态扩充，默认数组元素是false，注意虽然传入的值是一个逻辑值true/false，但实际存储的时候就是按01存储的
+        // 下面第二个参数是索引位置（数组下表位置），存入的是true
+        redisTemplate.opsForValue().setBit(redisKey, 1, true);
+        redisTemplate.opsForValue().setBit(redisKey, 4, true);
+        redisTemplate.opsForValue().setBit(redisKey, 7, true);
+
+        // 查询
+        System.out.println(redisTemplate.opsForValue().getBit(redisKey, 0));
+        System.out.println(redisTemplate.opsForValue().getBit(redisKey, 1));
+        System.out.println(redisTemplate.opsForValue().getBit(redisKey, 2));
+
+        // 统计
+        // 统计的方法没有封装在对象中，要通过获取redis底层连接来进行统计
+        // 执行execute方法的时候他会自动创建RedisCallback，然后就会自动执行doInRedis这个方法
+        Object obj = redisTemplate.execute(new RedisCallback() {
+            @Override
+            public Object doInRedis(RedisConnection redisConnection) throws DataAccessException {
+                // redisConnection传入的这个参数就是redis连接
+                // 直接调用连接对象中的bitCount这个方法，传入的key规定要转为byte，他会统计这个bitmap数组中值为1的元素个数
+                return redisConnection.bitCount(redisKey.getBytes());
+            }
+        });
+        System.out.println(obj);
+    }
+
+    // 统计3组数据的布尔值，并对这3组数据做or运算
+    @Test
+    public void testBitMapOperation() {
+        String redisKey2 = "test:bm:02";
+        redisTemplate.opsForValue().setBit(redisKey2, 1, true);
+        redisTemplate.opsForValue().setBit(redisKey2, 2, true);
+        redisTemplate.opsForValue().setBit(redisKey2, 3, true);
+
+        String redisKey3 = "test:bm:03";
+        redisTemplate.opsForValue().setBit(redisKey2, 2, true);
+        redisTemplate.opsForValue().setBit(redisKey2, 3, true);
+        redisTemplate.opsForValue().setBit(redisKey2, 4, true);
+
+        String redisKey4 = "test:bm:04";
+        redisTemplate.opsForValue().setBit(redisKey2, 4, true);
+        redisTemplate.opsForValue().setBit(redisKey2, 5, true);
+        redisTemplate.opsForValue().setBit(redisKey2, 6, true);
+
+        // 和上面那个合并的方法类此，他们求or运算后会将结果存放到一个新的key中，所以要声明一个新key
+        String redisKey = "test:bm:or";
+        Object obj = redisTemplate.execute(new RedisCallback() {
+            @Override
+            public Object doInRedis(RedisConnection redisConnection) throws DataAccessException {
+                // 是将三组数据合并起来，对应的位置一一做或运算
+                // 需要调用链接对象中的运算符方法bitOp   第一个参数传入的是要进行什么运算  第二个参数是将结果存到哪个key中，后面就是要参加运算的值的key，注意全部要转换成byte传入
+                redisConnection.bitOp(RedisStringCommands.BitOperation.OR,
+                        redisKey.getBytes(), redisKey2.getBytes(), redisKey3.getBytes(), redisKey4.getBytes());
+                // 返回统计结果
+                return redisConnection.bitCount(redisKey.getBytes());
+            }
+        });
+
+        // 取或运算结果一定是6，因为每一个位置都有true,就算是和false取或结果结果还是true
         System.out.println(obj);
     }
 }
