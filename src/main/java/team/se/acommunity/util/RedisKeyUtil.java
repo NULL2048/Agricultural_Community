@@ -14,7 +14,10 @@ public class RedisKeyUtil {
     private static final String PREFIX_TICKET = "ticket";
     // 用户信息的Key
     private static final String PREFIX_USER = "user";
-
+    // 独立访客
+    private static final String PREFIX_UV = "uv";
+    // 日活跃用户
+    private static final String PREFIX_DAU = "dau";
 
     // 某个实体的赞
     // like:entity:entityType:entityId -> set(userId)      这里的value最好是存入set集合，因为这样的话这个功能不光能统计赞的数量，还能统计哪些用户给了赞，这样系统能更方便地进行功能扩充
@@ -87,5 +90,43 @@ public class RedisKeyUtil {
      */
     public static String getUserKey(int userId) {
         return PREFIX_USER + SPLIT +userId;
+    }
+
+    /**
+     * 单日UV的key
+     * @param date
+     * @return
+     */
+    public static String getUVKey(String date) {
+        return PREFIX_UV + SPLIT + date;
+    }
+
+    /**
+     * 某一个区间UV的key
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    public static String getUVKey(String startDate, String endDate) {
+        return PREFIX_UV + SPLIT + startDate + SPLIT +endDate;
+    }
+
+    /**
+     * 单日活跃用户
+     * @param date
+     * @return
+     */
+    public static String getDAUKey(String date) {
+        return PREFIX_DAU + SPLIT + date;
+    }
+
+    /**
+     * 区间活跃用户
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    public static String getDAUKey(String startDate, String endDate) {
+        return PREFIX_DAU + SPLIT + startDate + SPLIT + endDate;
     }
 }

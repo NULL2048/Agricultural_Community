@@ -58,7 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
                         AUTHORITY_MODERATOR
                 )
                 .antMatchers( // 设置管理员权限
-                        "/discuss/delete"
+                        "/discuss/delete",
+                        "/data/**"
                 )
                 .hasAnyAuthority(
                         AUTHORITY_ADMIN
@@ -95,7 +96,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
                             // 一般没有登陆的状态码就是403
                             writer.write(CommunityUtil.getJSONString(403, "你没有访问此功能的权限"));
                         } else {
-                            // 不是异步请求直接重定向
+                            // 不是异步请求直接重定向   这个路径是跳转到404界面
                             response.sendRedirect(request.getContextPath() + "/denied");
                         }
                     }

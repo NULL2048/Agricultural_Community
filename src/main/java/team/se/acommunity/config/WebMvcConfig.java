@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import team.se.acommunity.controller.interceptor.AlphaInterceptor;
-import team.se.acommunity.controller.interceptor.LoginRequiredInterceptor;
-import team.se.acommunity.controller.interceptor.LoginTicketInterceptor;
-import team.se.acommunity.controller.interceptor.MessageInterceptor;
+import team.se.acommunity.controller.interceptor.*;
+import team.se.acommunity.service.DataService;
 
 @Configuration
 public class WebMvcConfig  implements WebMvcConfigurer {
@@ -17,6 +15,9 @@ public class WebMvcConfig  implements WebMvcConfigurer {
 
     @Autowired
     private LoginTicketInterceptor loginTicketInterceptor;
+
+    @Autowired
+    private DataInterceptor dataInterceptor;
 
     // 引入security后就不用以前写的这个权限控制了，把这个拦截器注释掉就行了
 //    @Autowired
@@ -36,13 +37,16 @@ public class WebMvcConfig  implements WebMvcConfigurer {
                 .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg")// 静态资源都是放在templates中二级目录下，所以直接把所有二级目录的.css和.js全部排除就可以了
                 .addPathPatterns("/register", "/login"); // 设置拦截器指定拦截那些路径
 
-        registry.addInterceptor(loginTicketInterceptor)
+        registry.addInterceptor(loginTicketInterceptor) // 不指定拦截器路径他就会所有的路径都拦截
                 .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg");
 
 //        registry.addInterceptor(loginRequiredInterceptor)
 //                .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg");
 
         registry.addInterceptor(messageInterceptor)
+                .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg");
+
+        registry.addInterceptor(dataInterceptor)
                 .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg");
     }
 }

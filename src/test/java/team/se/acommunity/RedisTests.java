@@ -247,7 +247,7 @@ public class RedisTests {
             @Override
             public Object doInRedis(RedisConnection redisConnection) throws DataAccessException {
                 // redisConnection传入的这个参数就是redis连接
-                // 直接调用连接对象中的bitCount这个方法，传入的key规定要转为byte，他会统计这个bitmap数组中值为1的元素个数
+                // 直接调用连接对象中的bitCount这个方法，传入的key规定要转为byte数组类型，他会统计这个bitmap数组中值为1的元素个数
                 return redisConnection.bitCount(redisKey.getBytes());
             }
         });
