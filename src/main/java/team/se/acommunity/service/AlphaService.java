@@ -1,7 +1,11 @@
 package team.se.acommunity.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
@@ -27,6 +31,7 @@ import java.util.Date;
 // 默认参数是singleton,单例
 @Scope("prototype") // 这个属性表示这个bean可以在spring容器中有多个，每次访问这个bean，都会生成一个bean对象，也不会调用完自己就销毁了
 public class AlphaService {
+    private static final Logger logger = LoggerFactory.getLogger(AlphaService.class);
     // 将dao层的bean依赖注入给service
     @Autowired
     private AlphaDao alphaDao;
@@ -126,5 +131,18 @@ public class AlphaService {
                 return "ok";
             }
         });
+    }
+
+    // 让该方法在多线程环境下，被异步调用
+    @Async
+    public void execute1() {
+        logger.debug("execute1");
+    }
+
+    // 注解定期执行任务的线程体
+    // 第一个设置线程多久执行，第二个设置执行周期  单位都是毫秒
+    @Scheduled(initialDelay = 10000, fixedRate = 1000)
+    public void execute2() {
+        logger.debug("execute2");
     }
 }
