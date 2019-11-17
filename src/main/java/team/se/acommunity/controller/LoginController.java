@@ -10,10 +10,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.context.Context;
 import team.se.acommunity.entity.User;
 import team.se.acommunity.service.MessageService;
@@ -32,6 +29,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -212,33 +210,18 @@ public class LoginController implements CommunityConstant {
     }
 
     @RequestMapping(path = "/forget", method = RequestMethod.GET)
-    public String getForgetPage(HttpServletRequest request) {
-//        Class cla = null;
-//        Method met = null;
-//        // 将要在页面调用的getCode方法放入request对象中
-//        try {
-//            cla = Class.forName("team.se.acommunity.controller.LoginController");
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//        try {
-//            met = cla.getMethod("getCode", HttpSession.class);
-//        } catch (NoSuchMethodException e) {
-//            e.printStackTrace();
-//        }
-//        request.setAttribute("codeAndMail", met);
-        // 返回忘记密码界面
+    public String getForgetPage() {
         return "/site/forget";
     }
 
-    @RequestMapping("/code")
-    public void getCode(HttpSession session, Model model) {
-        // 将验证码存入session中，用来以后和用户输入的内容比较验证
-        String text = kaptchaProducer.createText();
-        session.setAttribute("code", text);
+    @RequestMapping(path = "/code", method = RequestMethod.POST)
+    @ResponseBody
+    public String sendCode(String email, HttpSession session, Model model) {
+        String code = userService.forget(email);
 
-        // 发送验证码邮件
-        //userService.getUserByEmail(model)
+        session.setAttribute("code", code);
+        session.setMaxInactiveInterval(300);
+        return CommunityUtil.getJSONString(0);
     }
 
     @RequestMapping(path = "/forgetPwd", method = RequestMethod.POST)
@@ -259,12 +242,15 @@ public class LoginController implements CommunityConstant {
             return "/site/forget";
         }
 
-
-        if (userService.updatePassword(user.getId(), pwd) == 0) {
+        if (userService.updatePassword(user.getId(), CommunityUtil.md5(pwd + user.getSalt())) == 0) {
             model.addAttribute("pwdMsg", "修改密码失败");
             return "/site/forget";
         }
 
-        return "redirect:/login";
+        model.addAttribute("msg", "您的账号修改密码成功!");
+        // 放的是controller访问路径
+        model.addAttribute("target", "/login");
+
+        return "/site/operate-result";
     }
 }

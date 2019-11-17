@@ -1,6 +1,7 @@
 package team.se.acommunity.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import team.se.acommunity.service.CommentService;
 import team.se.acommunity.service.DiscussPostService;
 import team.se.acommunity.util.CommunityConstant;
 import team.se.acommunity.util.HostHolder;
+import team.se.acommunity.util.RedisKeyUtil;
 
 import java.util.Date;
 
@@ -33,6 +35,9 @@ public class CommentController implements CommunityConstant {
 
     @Autowired
     private DiscussPostService discussPostService;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     // 因为添加评论之后希望重定向到当前的文章页面，但是文章页面的访问路径中有动态变量帖子id，所以添加评论的访问地址也需要将文章id传进来
     @RequestMapping(path = "add/{discussPostId}", method = RequestMethod.POST)
@@ -72,6 +77,11 @@ public class CommentController implements CommunityConstant {
                     .setEntityType(ENTITY_TYPE_POST) // 设置事件主体类型
                     .setEntityId(discussPostId); // 设置事件主体id
             eventProducer.fireEvent(event);
+
+            // 只有对帖子评论才要进行计算分数，所以写到这个if代码块中
+            String redisKey = RedisKeyUtil.getPostScoreKey();
+            // 存入要计算分数的帖子id
+            redisTemplate.opsForSet().add(redisKey, discussPostId);
         }
         // 结束本次请求，重定向到评论的帖子界面。因为这个方法不需要想别的页面返回什么信息了，因为在这里重定向本次请求就结束了，所以这个方法就没有model这个对象
         return "redirect:/discuss/detail/" + discussPostId;

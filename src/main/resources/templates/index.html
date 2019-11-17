@@ -77,11 +77,12 @@
 				<div class="position-relative">
 					<!-- 筛选条件 -->
 					<ul class="nav nav-tabs mb-3">
-						<li class="nav-item">
-							<a class="nav-link active" href="#">最新</a>
+						<li class="nav-item">                   <!--括号中存放的是用问号拼接在链接后面的值-->
+							<a th:class="|nav-link ${orderMode==0?'active':''}|" th:href="@{/index(orderMode=0)}">最新</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">最热</a>
+							<!--要动态判断一下要点亮哪一个标签-->
+							<a th:class="|nav-link ${orderMode==1?'active':''}|" th:href="@{/index(orderMode=1)}">最热</a>
 						</li>
 					</ul>                                                                                                                       <!--当用户登录之后才显示我要发布这个按钮-->
 					<button type="button" class="btn btn-primary btn-sm position-absolute rt-0" data-toggle="modal" data-target="#publishModal" th:if="${loginUser!=null}">我要发布</button>

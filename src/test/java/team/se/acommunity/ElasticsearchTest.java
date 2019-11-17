@@ -57,11 +57,11 @@ public class ElasticsearchTest {
     // 添加多个数据
     @Test
     public void testInsertList() {
-        discussPostRepository.saveAll(discussPostMapper.listDiscussPosts(101, 0, 100));
-        discussPostRepository.saveAll(discussPostMapper.listDiscussPosts(102, 0, 100));
-        discussPostRepository.saveAll(discussPostMapper.listDiscussPosts(103, 0, 100));
-        discussPostRepository.saveAll(discussPostMapper.listDiscussPosts(111, 0, 100));
-        discussPostRepository.saveAll(discussPostMapper.listDiscussPosts(112, 0, 100));
+        discussPostRepository.saveAll(discussPostMapper.listDiscussPosts(101, 0, 100, 0));
+        discussPostRepository.saveAll(discussPostMapper.listDiscussPosts(102, 0, 100, 0));
+        discussPostRepository.saveAll(discussPostMapper.listDiscussPosts(103, 0, 100, 0));
+        discussPostRepository.saveAll(discussPostMapper.listDiscussPosts(111, 0, 100, 0));
+        discussPostRepository.saveAll(discussPostMapper.listDiscussPosts(112, 0, 100, 0));
     }
 
     // 修改数据

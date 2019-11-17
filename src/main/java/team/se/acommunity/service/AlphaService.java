@@ -140,8 +140,8 @@ public class AlphaService {
     }
 
     // 注解定期执行任务的线程体
-    // 第一个设置线程多久执行，第二个设置执行周期  单位都是毫秒
-    @Scheduled(initialDelay = 10000, fixedRate = 1000)
+    // 第一个设置线程多久开始执行，第二个设置执行周期  单位都是毫秒
+    // @Scheduled(initialDelay = 10000, fixedRate = 1000)
     public void execute2() {
         logger.debug("execute2");
     }

@@ -18,6 +18,8 @@ public class RedisKeyUtil {
     private static final String PREFIX_UV = "uv";
     // 日活跃用户
     private static final String PREFIX_DAU = "dau";
+    // 在缓存中存放帖子的key
+    private static final String PREFIX_POST = "post";
 
     // 某个实体的赞
     // like:entity:entityType:entityId -> set(userId)      这里的value最好是存入set集合，因为这样的话这个功能不光能统计赞的数量，还能统计哪些用户给了赞，这样系统能更方便地进行功能扩充
@@ -128,5 +130,15 @@ public class RedisKeyUtil {
      */
     public static String getDAUKey(String startDate, String endDate) {
         return PREFIX_DAU + SPLIT + startDate + SPLIT + endDate;
+    }
+
+    /**
+     * 返回要存放计算分数帖子的key
+     * 这里不用传帖子的id了，因为这个key中的值存放的是多个数据，而不是一个数据，将所有要计算分数的帖子都存到这个key中，也就是说value中存放多个帖子id
+     * 之将有变化的帖子，如有点赞，有评论的帖子放到缓存中去定时计算分数，这样就能大大降低计算量，而不用将所有的帖子每一次定时执行都计算一遍
+     * @return
+     */
+    public static String getPostScoreKey() {
+        return PREFIX_POST + SPLIT + "score";
     }
 }

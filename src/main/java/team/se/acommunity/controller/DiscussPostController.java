@@ -1,6 +1,8 @@
 package team.se.acommunity.controller;
 
+import io.lettuce.core.RedisURI;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,7 @@ import team.se.acommunity.service.UserService;
 import team.se.acommunity.util.CommunityConstant;
 import team.se.acommunity.util.CommunityUtil;
 import team.se.acommunity.util.HostHolder;
+import team.se.acommunity.util.RedisKeyUtil;
 
 import java.util.*;
 
@@ -38,6 +41,9 @@ public class DiscussPostController implements CommunityConstant {
 
     @Autowired
     private EventProducer eventProducer;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     @ResponseBody // 不是返回网页，所以加上ResponseBody标签
@@ -63,6 +69,14 @@ public class DiscussPostController implements CommunityConstant {
                 .setEntityType(ENTITY_TYPE_POST) // 设置事件主体类型
                 .setEntityId(post.getId()); // 设置事件主体id
         eventProducer.fireEvent(event);
+
+        // 计算帖子的分数
+        // 先将这个帖子放到redis数据库中，以后用来标记哪些帖子有过变化，需要重新计算分数
+        // 最好使用set这种能去重的结构，因为如果使用普通的表结构，他是存储，如果同一时间文章A被点了3次赞，就会被存入表3次，显然是重复的，因为我们只需要知道那些文章有变化，而不去关注被点赞评论的多少次，更不去关注其中的顺序，所以就可以采用自动去重并且无需的set数据结构来存储
+        // 上面这个也是选用set数据结构时的一个判定标准
+        String redisKey = RedisKeyUtil.getPostScoreKey();
+        // 存入要计算分数的帖子id
+        redisTemplate.opsForSet().add(redisKey, post.getId());
 
         // 报错的情况将来统一处理
         return CommunityUtil.getJSONString(0, "发布成功！");
@@ -178,6 +192,10 @@ public class DiscussPostController implements CommunityConstant {
                 .setEntityType(ENTITY_TYPE_POST) // 设置事件主体类型
                 .setEntityId(id); // 设置事件主体id
         eventProducer.fireEvent(event);
+
+        String redisKey = RedisKeyUtil.getPostScoreKey();
+        // 存入要计算分数的帖子id
+        redisTemplate.opsForSet().add(redisKey, id);
 
         return CommunityUtil.getJSONString(0);
     }

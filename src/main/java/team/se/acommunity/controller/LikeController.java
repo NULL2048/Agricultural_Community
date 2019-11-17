@@ -1,6 +1,7 @@
 package team.se.acommunity.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +14,7 @@ import team.se.acommunity.service.LikeService;
 import team.se.acommunity.util.CommunityConstant;
 import team.se.acommunity.util.CommunityUtil;
 import team.se.acommunity.util.HostHolder;
+import team.se.acommunity.util.RedisKeyUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +30,9 @@ public class LikeController implements CommunityConstant {
     // 将生产者事件注入
     @Autowired
     private EventProducer eventProducer;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     // 这个注释表明这个请求需要有登陆凭证，拦截器会拦截它
     @LoginRequired
@@ -63,6 +68,13 @@ public class LikeController implements CommunityConstant {
                     .setEntityUserId(entityUserId); // 设置被点赞实体的所有者id
 
             eventProducer.fireEvent(event);
+        }
+
+        // 只有当点赞的是文章才计算分数
+        if (entityType == ENTITY_TYPE_POST) {
+            String redisKey = RedisKeyUtil.getPostScoreKey();
+            // 存入要计算分数的帖子id
+            redisTemplate.opsForSet().add(redisKey, postId);
         }
 
         // 因为这里是异步请求，所以就不能跳转页面了，要返回JSON数据，就跟ajax一样，在浏览器端它会将这段ajax数据给解析出来，状态码0表示相应成功

@@ -205,6 +205,28 @@ public class UserService implements CommunityConstant {
         map.put("ticket", loginTicket.getTicket());
         return map;
     }
+
+    // 忘记密码
+    public String forget(String email) {
+        // 生成6位随机码
+        String code = CommunityUtil.generateUUID().substring(0, 6);
+
+        // 发送激活邮件
+        // 设置要传送的模板内容,这个Context对象是用来存储键值对的
+        Context context = new Context();
+        context.setVariable("email", email);
+        context.setVariable("code", code);
+
+        // content才是真正要通过邮件发送出去的内容  通过模板引擎对象将context键值对传送给HTML静态模板，并且解析出来给context字符串
+        String content = templateEngine.process("/mail/forget", context);
+
+        // 将content字符串通过邮箱发送
+        mailClient.sendMail(email, "惠农网找回密码", content);
+        // 返回的map是空的就表示注册成功
+
+        return code;
+    }
+
     // 账号退出
     public void logout(String ticket) {
         // 将登陆凭证修改为无效
