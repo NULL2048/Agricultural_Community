@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import team.se.acommunity.annotation.LoginRequired;
 import team.se.acommunity.entity.User;
@@ -53,12 +54,53 @@ public class UserController implements CommunityConstant {
     @Autowired
     private FollowService followService;
 
+    // 注入用户密钥
+    @Value("${aliyun.key.access}")
+    private String accessKey;
+
+    // 注入加密密钥
+    @Value("${aliyun.key.secret}")
+    private String secretKey;
+
+    // 注入存储空间的名字
+    @Value("${aliyun.bucket.header.name}")
+    private String headerBucketName;
+
+    // 注入存储空间的访问路径
+    @Value("${aliyun.bucket.header.url}")
+    private String headerBucketUrl;
+
     @LoginRequired
     @RequestMapping(path = "/setting", method = RequestMethod.GET)
-    public String getSettingPage() {
+    public String getSettingPage(Model model) {
+        // 上传文件名称
+        // 最好使用随机文件名，因为这样用户上传过的所有头像都会保留，方便以后开发历史查询功能，并且因为服务器都有缓存，可能上传同名文件虽然会覆盖原文件，但是不会马上生效，所以避免这种问题及直接用随机文件名，因为对象存储空间比较便宜，所以也不会加大太多成本
+        String fileName = CommunityUtil.generateUUID();
+        String url = headerBucketUrl + "/" + fileName;
+
+        model.addAttribute("fileName", fileName);
+        model.addAttribute("url", url);
+
         return "/site/setting";
     }
 
+    // 更新数据库中的头像路径
+    @RequestMapping(path = "/header/url", method = RequestMethod.POST)
+    @ResponseBody
+    public String updateHeaderUrl(String fileName) {
+        if (StringUtils.isBlank(fileName)) {
+            return CommunityUtil.getJSONString(1, "文件名不能为空");
+        }
+
+        // 设置文件的访问路径  访问路径就是OSS空间的域名 + /文件名   就是上传文件的访问路径
+        String url = headerBucketUrl + "/" + headerBucketName + "/" + fileName;
+        userService.updateHeader(hostHolder.getUser().getId(), url);
+
+        // 返回数据，告知修改成功
+        return CommunityUtil.getJSONString(0);
+    }
+
+    // 将数据迁移到云数据库中，这个方法作废
     // 上传的时候表单方法必须为post
     @LoginRequired
     @RequestMapping(path = "/upload", method = RequestMethod.POST)
@@ -101,6 +143,7 @@ public class UserController implements CommunityConstant {
     * return "redirect:/index"是重定向，表示本次请求已经处理完毕，但是没有什么合适的数据展现给客户端，建议客户端再发一次请求，访问"/index"以获得合适的数据。
     * */
 
+    // 将数据迁移到云数据库中，这个方法作废
     // 获取图片的方法，路径要按照上面那个方法设置的那样，在这里用{}引入一个变量，这个方法用get就行
     @RequestMapping(path = "/header/{fileName}", method = RequestMethod.GET)
     // 这个方法不是向浏览器放回一个字符串也不是像浏览器返回一个页面，而是返回一个二进制数据，所以这里的返回值类型用void就可以，利用responese就可以把数据传过去
