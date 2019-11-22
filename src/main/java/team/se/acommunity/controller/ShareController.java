@@ -39,6 +39,14 @@ public class ShareController implements CommunityConstant {
     @Value("${wk.image.storage}")
     private String wkImageStorage;
 
+    // 注入存储空间的名字
+    @Value("${aliyun.bucket.share.name}")
+    private String shareBucketName;
+
+    // 注入存储空间的访问路径
+    @Value("${aliyun.bucket.share.url}")
+    private String shareBucketUrl;
+
     /**
      * 分享操作
      * @param htmlUrl 要生成图片的网页的url
@@ -63,12 +71,15 @@ public class ShareController implements CommunityConstant {
 
         // 返回访问路径，这个访问路径就是显示生成的长图
         Map<String, Object> map = new HashMap<>();
-        // 将访问路径放在map中传回去
-        map.put("shareUrl", domain + contextPath + "/share/image/" + fileName);
+        // 将访问路径放在map中传回去  这里的访问路径是阿里云OSS中文件的访问路径
+        // map.put("shareUrl", domain + contextPath + "/share/image/" + fileName);
+        String url = shareBucketUrl + "/" + shareBucketName + "/" + fileName + ".png";
+        map.put("shareUrl", url);
 
         return CommunityUtil.getJSONString(0, null, map);
     }
 
+    // 这个方法废用，因为数据已经迁移到了阿里云中
     // 获取长图  返回类型void表示不进行任何跳转了，操作完之后自己返回一个response对象
     @RequestMapping(path = "/share/image/{fileName}", method = RequestMethod.GET)
     public void getShareImage(@PathVariable("fileName") String fileName, HttpServletResponse response) {

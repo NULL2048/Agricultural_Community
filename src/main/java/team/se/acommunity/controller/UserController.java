@@ -92,7 +92,8 @@ public class UserController implements CommunityConstant {
             return CommunityUtil.getJSONString(1, "文件名不能为空");
         }
 
-        // 设置文件的访问路径  访问路径就是OSS空间的域名 + /文件名   就是上传文件的访问路径
+        // 设置文件的访问路径  访问路径就是OSS空间的域名 + /存储对象名 + /文件名   就是上传文件的访问路径
+        // 这里的文件名必须是带文件后缀的，否则访问不到
         String url = headerBucketUrl + "/" + headerBucketName + "/" + fileName;
         userService.updateHeader(hostHolder.getUser().getId(), url);
 

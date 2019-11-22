@@ -7,9 +7,11 @@ $(function () {
 function upload() {
     // 生成上传凭证
     var client = new OSS.Wrapper({
+        // OSS所在区域
         region : 'oss-cn-beijing',
         accessKeyId : 'LTAI4Fv3hoH1iLTT2zQ2em5H',
         accessKeySecret : 'GpU9U3IVaT7SZXimMXotayqmfcp7g3',
+        // 存储对象名
         bucket : 'acommunity-header'
     });
 
