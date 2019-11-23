@@ -13,7 +13,6 @@ import team.se.acommunity.service.DiscussPostService;
 import team.se.acommunity.service.LikeService;
 import team.se.acommunity.service.UserService;
 import team.se.acommunity.util.CommunityConstant;
-import team.se.acommunity.util.CommunityUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +37,7 @@ public class HomeController implements CommunityConstant {
         // 这个分页的时候要加上排序规则，否则分页切换页的时候就有跳转到别的页了，因为排序原则参数使用过?拼接过来的
         page.setPath("/index?orderMode=" + orderMode); // 页面的访问路径
 
-        List<DiscussPost> list = discussPostService.listDiscussPost(0, page.getOffset(), page.getLimit(), orderMode);
+        List<DiscussPost> list = discussPostService.listDiscussPosts(0, page.getOffset(), page.getLimit(), orderMode);
         List<Map<String, Object>> discussPosts = new ArrayList<>();
         if (list != null) {
             for (DiscussPost post : list) {
