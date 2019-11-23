@@ -129,6 +129,14 @@
 			<version>2.8.0</version>
 		</dependency>
 
+		<!--导了包之后，他就将spring内置的20多个端点除了一个之外就全都开启了，没开启的端点是通过该端点关闭服务器-->
+		<!--虽然启动了很多端点，但是先只暴露出来两个端点，actuator/info和actuator/health  一个是显示项目信息，一个是显示项目的健康状态-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>

@@ -59,7 +59,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
                 )
                 .antMatchers( // 设置管理员权限
                         "/discuss/delete",
-                        "/data/**"
+                        "/data/**",
+                        "/actuator/**"    // 将断电路径设置访问权限，只能让管理员访问，不能谁都可以访问，不安全
                 )
                 .hasAnyAuthority(
                         AUTHORITY_ADMIN
