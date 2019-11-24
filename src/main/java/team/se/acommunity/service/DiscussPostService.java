@@ -99,23 +99,26 @@ public class DiscussPostService {
                 .build(new CacheLoader<Integer, Integer>() {
                     @Nullable
                     @Override
-                    public Integer load(@NonNull Integer key) throws Exception {
-                        if (key == null) {
+                    public Integer load(@NonNull Integer k) throws Exception {
+                        if (k == null) {
                             throw new IllegalArgumentException("参数不允许为空");
                         }
+
+                        // 这里一定要注意，redis中的key必须是String，所以要先把这个int型的转成String型的才可以
+                        String key = String.valueOf(k);
 
                         // 先查一下二级缓存
                         if (redisTemplate.opsForValue().get(key) == null) {
                             logger.debug("load post rows from DB.");
-                            int rows = discussPostMapper.getDiscussPostRows(key);
+                            int rows = discussPostMapper.getDiscussPostRows(k);
 
-                            // 将数据插到redis中，然后再返回
+                            // 将数据插到redis中，然后再返回  key必须是String,但是value可以是各种类型
                             redisTemplate.opsForValue().set(key, rows);
                             return rows;
                         } else {
                             logger.debug("load post rows from Redis.");
-                            // 如果能在二级缓存中找到，则直接将redis中的值返回
-                            return Integer.valueOf((String) redisTemplate.opsForValue().get(key));
+                            // 如果能在二级缓存中找到，则直接将redis中的值返回   这里返回的数据是一个int数据，但是这个方法返回的时候没有将他向下转型，而是统一返回的Object类型，所以这里把他向下转型一下，变成Integer，int和Integer是可以相互转型的
+                            return (Integer) redisTemplate.opsForValue().get(key);
                         }
                     }
                 });
